@@ -46,6 +46,48 @@ nav.tabs button.on{color:var(--ink);border-bottom-color:var(--ink);}
 .fw .trap{background:var(--soft);border-left:3px solid var(--c);padding:10px 12px;border-radius:3px;}
 .fw .ex{background:var(--soft);padding:10px 12px;border-radius:3px;font-size:13.8px;line-height:1.6;color:var(--muted);}
 .fw .ex b{color:var(--c);}
+/* glossari */
+.gl{border-bottom:1.5px dotted var(--val);cursor:pointer;}
+.gl:active{background:var(--soft);}
+#glmodal{position:fixed;inset:0;background:rgba(26,29,33,.55);display:none;align-items:flex-end;
+  justify-content:center;z-index:99;padding:0;}
+#glmodal.on{display:flex;}
+#glbox{background:var(--card);border-radius:14px 14px 0 0;padding:22px 20px calc(24px + env(safe-area-inset-bottom));
+  width:100%;max-width:520px;max-height:80vh;overflow-y:auto;}
+@media(min-width:600px){#glmodal{align-items:center;}#glbox{border-radius:10px;}}
+#glbox h4{font-family:var(--serif);font-size:21px;font-weight:400;margin:0 0 4px;}
+#glbox .cat{font-family:var(--mono);font-size:10px;letter-spacing:.7px;text-transform:uppercase;color:var(--val);margin-bottom:12px;}
+#glbox p{font-size:14.5px;line-height:1.65;margin:0 0 11px;}
+#glbox .form{background:var(--soft);border-radius:4px;padding:11px 13px;font-family:var(--mono);
+  font-size:13px;line-height:1.7;margin:0 0 11px;}
+#glbox .why{background:var(--soft);border-left:3px solid var(--val);border-radius:3px;padding:11px 13px;
+  font-size:13.5px;line-height:1.6;color:var(--muted);margin:0;}
+#glclose{margin-top:16px;width:100%;}
+/* panell d'estat */
+.dash{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;}
+.dash .m{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:9px 8px;text-align:center;}
+.dash .m small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.5px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:3px;}
+.dash .m b{font-family:var(--serif);font-size:15px;font-weight:400;display:block;line-height:1.1;}
+.dash .m .bar{height:4px;border-radius:2px;background:var(--soft);margin-top:5px;overflow:hidden;}
+.dash .m .bar i{display:block;height:100%;border-radius:2px;}
+.delta{font-family:var(--mono);font-size:11px;margin-top:8px;color:var(--muted);}
+.delta b{font-family:var(--mono);font-weight:400;}
+.up{color:var(--fin);} .down{color:var(--cli);}
+.turn{font-family:var(--mono);font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);
+  text-align:center;margin-bottom:14px;}
+.locked{opacity:.45;}
+.lockmsg{font-family:var(--mono);font-size:10.5px;color:var(--cli);margin-top:5px;display:block;}
+/* recorregut de l'arbre */
+.crumbs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;}
+.crumb{font-family:var(--mono);font-size:10.5px;background:var(--soft);border:1px solid var(--line);
+  border-radius:4px;padding:5px 9px;color:var(--muted);}
+.crumb b{color:var(--ink);font-weight:400;}
+.treset{font-family:var(--mono);font-size:10.5px;color:var(--muted);background:none;border:1px solid var(--line);
+  border-radius:4px;padding:5px 9px;cursor:pointer;margin-left:auto;}
+.note{background:var(--soft);border-left:3px solid var(--c);border-radius:3px;padding:10px 12px;
+  font-size:13.3px;line-height:1.55;color:var(--muted);margin:12px 0 0;font-style:italic;}
+.endpath{text-align:center;margin-top:18px;}
 /* selector de cas */
 .casesel{display:flex;gap:9px;margin-bottom:18px;flex-wrap:wrap;}
 .cbtn{flex:1;min-width:150px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:11px 13px;cursor:pointer;font-family:inherit;}
@@ -127,6 +169,10 @@ footer.tip{margin-top:30px;font-family:var(--mono);font-size:10.5px;color:var(--
   </header>
   <nav class="tabs" id="tabs"></nav>
   <main id="view"></main>
+  <div id="glmodal"><div id="glbox">
+    <div class="cat" id="glcat"></div><h4 id="gltitle"></h4><p id="gldef"></p>
+    <div class="form" id="glform"></div><div class="why" id="glwhy"></div>
+    <button class="btn" id="glclose">Tanca</button></div></div>
   <footer class="tip">El progrés es desa al teu dispositiu · funciona sense connexió<br>No constitueix assessorament financer ni jurídic professional</footer>
 </div>
 
@@ -632,7 +678,165 @@ bioma:{name:"Bioma", tag:"Cria d'insectes · actius pesants",
      "El VAN directe de l'etapa intermèdia probablement no és espectacular. No importa: el que compra no són ingressos, és la resolució de la incertesa clau del negoci. Això és una opció real, i només val si esteu genuïnament disposats a aturar-vos si el resultat és dolent.",
      "Un premortem aquí és barat i brutal: imagineu que d'aquí tres anys la planta gran ha fracassat, i escriviu per què. Les respostes previsibles (el cost no va baixar tant, el preu del pet food es va erosionar amb l'entrada de capacitat, el substrat va pujar) ja són visibles avui i totes són quantificables."],
  lesson:"Quan tota la tesi depèn d'una corba de costos que ningú ha demostrat encara a la teva escala, el moviment amb més valor no és escalar: és comprar la prova al preu més baix possible."}
-]}
+]},
+arbre:{name:"Additiva Vallès", tag:"Fabricació additiva · model d'estat", type:"state",
+ intro:"Sou dos enginyers amb un taller de fabricació additiva al Vallès. Aquí no hi ha un guió: cada decisió modifica l'estat de l'empresa (caixa, reputació, capacitat, deute) i és aquest estat el que determina quines situacions et trobaràs després i quines opcions tindràs disponibles. Sis torns. Les xifres i el context del sector són realistes. Toca qualsevol terme subratllat per veure'n l'explicació.",
+ turns:6,
+ init:{caixa:45000, reput:3, capac:20, deute:0, seg:null},
+ events:[
+ {id:"posicionament", first:true, mod:"Estratègia", c:"var(--est)", t:"On us poseu",
+  set:st=>["El sector ha canviat de naturalesa: els serveis de fabricació ja són el segment més gran del mercat mundial, per davant de la venda de màquines. Les empreses ja no volen comprar impressores, volen rebre peces. Això obre la porta a tallers com el vostre, però també ha omplert el mercat de proveïdors competint per quota.",
+      "Teniu una màquina FDM industrial, una de resina, i coneixement d'enginyeria de materials. El Vallès i el seu entorn us posen a prop d'automoció, maquinària d'envasat i dispositius mèdics."],
+  figs:st=>[["Capital","45.000 €"],["Màquines","2 (FDM + resina)"],["Equip","2 enginyers"],["Utilització actual","20%"]],
+  q:"Quin posicionament trieu?",
+  opts:[
+   {l:"Prototipatge ràpid per a enginyeries i disseny",
+    ef:{seg:"proto", capac:25, reput:1},
+    o:"Entra feina de seguida i és tècnicament variada. Però cada encàrrec és petit i puntual, el client no torna de manera previsible, i competiu amb desenes de tallers que fan el mateix. És, de fet, un mercat proper a la commodity on el preu i el termini manen."},
+   {l:"Sèries curtes de peces d'ús final amb materials tècnics certificats",
+    ef:{seg:"series", capac:10, caixa:-8000, reput:2},
+    o:"Invertiu 8.000 € en material certificat i validació de processos. La venda és més lenta —cal passar per qualitat del client— però quan una peça teva entra en un producte en producció, treure-te'n costa car: hi ha cost de canvi real."},
+   {l:"Inventari digital de recanvis per a maquinària industrial",
+    ef:{seg:"recanvis", capac:5, caixa:-5000, reput:1},
+    o:"Aposta pel model que més creix: fabricar sota demanda recanvis que el client hauria de tenir emmagatzemats. Requereix digitalitzar catàlegs de peces i molta feina comercial prèvia, però genera relacions llargues i previsibles."}
+  ]},
+
+ {id:"encarrec_gran", cond:st=>st.capac<75 && st.reput>=3, mod:"Operacions", c:"var(--ope)", t:"L'encàrrec que us omple la planta",
+  set:st=>["Un proveïdor de segon nivell d'automoció us proposa un encàrrec continuat que ocuparia bona part de la vostra capacitat durant sis mesos. Paga bé i és estable.",
+      "El detall que us fa dubtar: mentre dura, no podreu atendre gairebé cap altre client, i alguns dels que teniu ara fa mesos que us donen feina petita però constant."],
+  figs:st=>[["Caixa","" + fmtE(st.caixa)],["Utilització actual",st.capac+"%"],["L'encàrrec ocuparia","+55% de capacitat"],["Durada","6 mesos"]],
+  q:"Accepteu l'encàrrec?",
+  opts:[
+   {l:"Acceptar-lo sencer: omple la planta i dona estabilitat",
+    ef:{capac:55, caixa:14000, reput:1, conc:1},
+    o:"La planta va plena i la caixa millora molt. Però ara depeneu d'un sol client per a la major part de la vostra facturació, i els clients petits que heu hagut d'aparcar han buscat un altre taller. Heu comprat estabilitat a curt termini amb concentració de clients a llarg termini."},
+   {l:"Acceptar-ne només la meitat i mantenir la cartera petita",
+    ef:{capac:28, caixa:7000, reput:1},
+    o:"Renuncieu a la meitat del volum però manteniu viva la cartera diversificada. El client d'automoció ho accepta a contracor i us avisa que la resta la donarà a un competidor, que ara coneixerà el seu procés."},
+   {l:"Rebutjar-lo: no voleu dependre d'automoció",
+    ef:{capac:5, reput:-1},
+    o:"Protegiu la independència, però deixeu passar l'oportunitat més gran que heu tingut i la planta continua infrautilitzada, amb els costos fixos corrent igual. La BATNA és bona només si tens on anar."}
+  ]},
+
+ {id:"segona_maquina", cond:st=>st.capac>=70 && st.caixa>=20000, mod:"Finances", c:"var(--fin)", t:"La segona màquina",
+  set:st=>["Aneu al límit de capacitat i esteu rebutjant feina. Una màquina de sinteritzat (SLS) us obriria producció de sèries més grans i materials tècnics, però costa diners de veritat.",
+      "L'alternativa és subcontractar els pics a un taller amic, guanyant menys per peça però sense comprometre res."],
+  figs:st=>[["Caixa","" + fmtE(st.caixa)],["Utilització",st.capac+"%"],["Cost de la màquina","38.000 €"],["Increment de capacitat","+60%"]],
+  q:"Com absorbiu la demanda?",
+  opts:[
+   {l:"Comprar la màquina amb finançament a 5 anys",
+    ef:{capac:-35, deute:30000, caixa:-8000, reput:1},
+    o:"Guanyeu capacitat i control total del procés, però heu pujat el palanquejament operatiu de cop: ara hi ha una quota fixa cada mes passi el que passi. Si la demanda es manté, és la millor decisió; si cau un trimestre, la quota no cau amb ella."},
+   {l:"Subcontractar els pics a un taller col·laborador",
+    ef:{capac:-25, caixa:4000},
+    o:"El cost és variable i s'ajusta sol, però guanyeu menys per peça i, sobretot, el control de qualitat deixa de ser vostre en aquestes peces. Si en surt una malament, el client us reclama a vosaltres, no a ells."},
+   {l:"No créixer: pujar preus i seleccionar millor la feina",
+    ef:{capac:-12, caixa:6000, reput:1},
+    o:"Pujar preus filtra la feina de menys marge i millora el resultat sense capex. Perdeu clients sensibles al preu —que probablement no eren els vostres— però consolideu la posició amb els que valoren el criteri tècnic."}
+  ]},
+
+ {id:"peca_fallida", cond:st=>st.capac>=65, mod:"Persones", c:"var(--per)", t:"La peça que ha fallat en client",
+  set:st=>["Una sèrie de 400 peces ha fallat en muntatge al client: tolerància fora de rang en un 12% de les unitats. La causa sembla una combinació de lot de material nou i paràmetres ajustats a corre-cuita per servir a temps.",
+      "El client és important i la reclamació és formal."],
+  figs:st=>[["Peces afectades","48 de 400"],["Cost de refer-les","3.200 €"],["Utilització quan va passar",st.capac+"%"],["Reputació actual",st.reput+"/10"]],
+  q:"Com hi responeu?",
+  opts:[
+   {l:"Refer-ho tot gratis i implantar control dimensional sistemàtic",
+    ef:{caixa:-6500, reput:2, capac:-5},
+    o:"Costa diners i temps de màquina, però convertiu un incident en una demostració de seriositat. El control dimensional us frena una mica la producció i es converteix en un argument de venda: podeu documentar tolerància peça a peça."},
+   {l:"Refer les peces afectades i seguir com fins ara",
+    ef:{caixa:-3200},
+    o:"Resoleu l'incident al mínim cost i el client ho accepta. Però la causa arrel —treballar a alta utilització sense marge ni control de procés— continua allà, i la variabilitat tornarà a aparèixer quan torneu a anar justos."},
+   {l:"Negociar un descompte i repartir el cost amb el client",
+    ef:{caixa:-1500, reput:-2},
+    o:"Estalvieu diners a curt termini, però el client interpreta que no assumiu la responsabilitat del vostre procés. En fabricació industrial, la fiabilitat és el producte: qui no la garanteix, competeix només per preu."}
+  ]},
+
+ {id:"competidor", cond:st=>st.torn>=3, mod:"Estratègia", c:"var(--est)", t:"El competidor que baixa preus",
+  set:st=>["Un taller nou de la comarca, ben finançat i amb quatre màquines d'alta velocitat, entra al mercat amb preus un 30% per sota dels vostres. La proliferació de proveïdors ja havia intensificat la lluita per quota, i ara la teniu a casa.",
+      "Dos clients us han preguntat si podeu igualar el preu."],
+  figs:st=>[["Preu del competidor","−30%"],["La vostra reputació",st.reput+"/10"],["Utilització",st.capac+"%"],["Caixa","" + fmtE(st.caixa)]],
+  q:"Com hi responeu?",
+  opts:[
+   {l:"Igualar preus per no perdre volum",
+    ef:{caixa:-4000, capac:8, reput:-1},
+    o:"Manteniu els clients però entreu en una guerra de preus contra algú amb més esquena financera i més capacitat instal·lada. En un mercat que tendeix a la commodity, aquesta guerra la guanya qui pot aguantar més temps amb marge zero."},
+   {l:"Mantenir preu i competir amb servei d'enginyeria",
+    ef:{reput:2, capac:-8, caixa:-1000},
+    o:"Deixeu de vendre hores de màquina i comenceu a vendre criteri: assessorament de materials, redisseny per a fabricació additiva, validació. Perdeu els clients que només miren el preu i us quedeu amb els que tenen un problema tècnic de veritat."},
+   {l:"Especialitzar-vos en el que ell no pot fer: materials certificats",
+    ef:{caixa:-7000, reput:2, capac:-5},
+    o:"Invertiu en certificació de materials tècnics (ignífugs, ESD, biocompatibles). Us tanca part del mercat generalista i us obre el que té barreres d'entrada — precisament on una màquina ràpida i barata no és suficient."}
+  ]},
+
+ {id:"certificacio", cond:st=>st.reput>=5, mod:"Operacions", c:"var(--ope)", t:"La porta del sector mèdic",
+  set:st=>["Un fabricant de dispositius mèdics de Barcelona us ofereix entrar com a proveïdor. Els volums són petits però els preus, molt superiors: paguen per traçabilitat i garantia, no per grams de material.",
+      "La condició és implantar un sistema de qualitat i traçabilitat complet, amb auditoria externa."],
+  figs:st=>[["Inversió en sistema de qualitat","16.000 €"],["Temps fins a certificar","8-11 mesos"],["Preu mitjà vs. actual","+120%"],["Caixa","" + fmtE(st.caixa)]],
+  q:"Hi entreu?",
+  opts:[
+   {l:"Sí: invertir en el sistema de qualitat complet",
+    ef:{caixa:-16000, reput:3, capac:-10},
+    o:"És car i lent, i durant mesos no en veureu ni un euro de retorn. Però la certificació és una barrera d'entrada que us separa dels tallers generalistes de manera permanent, i els clients certificats no canvien de proveïdor per un 5%."},
+   {l:"Fer-ho per etapes: primer traçabilitat, després auditoria",
+    ef:{caixa:-7000, reput:1},
+    o:"Repartiu la inversió i compreu informació sobre si aquest mercat us encaixa abans de comprometre-ho tot. És una opció real de manual: pagueu una mica avui pel dret, no l'obligació, d'entrar-hi del tot demà."},
+   {l:"No: el retorn triga massa i la caixa fa falta ara",
+    ef:{caixa:2000, reput:-1},
+    o:"Decisió defensable si la caixa va justa, però heu deixat passar l'única porta que us treia del mercat on es competeix per preu. El client anirà a un altre taller, que en dos anys tindrà una posició que ja no podreu disputar."}
+  ]},
+
+ {id:"crisi_caixa", cond:st=>st.caixa<12000, mod:"Finances", c:"var(--fin)", t:"El mes que no quadra",
+  set:st=>["La caixa s'ha aprimat. Els clients industrials paguen a 90 dies, els proveïdors de material cobren a 30, i el material tècnic s'ha de pagar per avançat. Teniu feina i teniu marge, però no teniu diners al banc aquest mes.",
+      "És el problema clàssic: sou rendibles sobre el paper i il·líquids a la pràctica."],
+  figs:st=>[["Caixa","" + fmtE(st.caixa)],["Deute actual","" + fmtE(st.deute)],["Cobrament mitjà","90 dies"],["Pagament a proveïdors","30 dies"]],
+  q:"Com ho resoleu?",
+  opts:[
+   {l:"Pòlissa de crèdit per cobrir el desfasament",
+    ef:{caixa:15000, deute:15000},
+    o:"Resol el problema immediat i és el que fa tothom. Però no toca la causa: un cicle de caixa de 60 dies que xucla diners cada cop que creixeu. D'aquí sis mesos hi tornareu a ser, amb més deute."},
+   {l:"Renegociar terminis: anticipar percentatge a l'inici de cada comanda",
+    ef:{caixa:9000, reput:-1, capac:-5},
+    o:"És l'arrel del problema i l'única solució estructural. Alguns clients ho accepten amb un petit descompte, un parell s'ho prenen malament i us baixen el volum. A canvi, el creixement deixa de consumir caixa."},
+   {l:"Frenar comandes noves fins a normalitzar la caixa",
+    ef:{capac:-20, caixa:4000},
+    o:"Sona prudent i és exactament al revés del que cal: el problema no és vendre massa, és cobrar tard. Frenar redueix ingressos futurs sense arreglar el cicle, i deixeu espai al competidor."}
+  ]},
+
+ {id:"soci", cond:st=>st.reput>=6 && st.torn>=4, mod:"Valoració", c:"var(--val)", t:"L'oferta del grup industrial",
+  set:st=>["Un grup industrial del sector de l'envasat us proposa entrar al capital: 350.000 € per un 40%, amb un contracte de subministrament associat i accés a la seva xarxa comercial.",
+      "És molt més diner del que heu vist mai i us obriria portes que trigaríeu anys a obrir sols."],
+  figs:st=>[["Oferta","350.000 € pel 40%"],["Valoració implícita","875.000 €"],["Caixa actual","" + fmtE(st.caixa)],["Reputació",st.reput+"/10"]],
+  q:"Què feu amb l'oferta?",
+  opts:[
+   {l:"Acceptar: capital, contracte i xarxa comercial de cop",
+    ef:{caixa:200000, reput:1, conc:1},
+    o:"Entra molt capital i s'obren portes reals. Però un accionista que a la vegada és client té un conflicte d'interès estructural: li convé que li venguis barat. I amb un 40% i drets de veto, moltes decisions ja no són només vostres."},
+   {l:"Negociar-ho: menys percentatge, sense exclusivitat i drets clars",
+    ef:{caixa:120000, reput:2},
+    o:"Costa tres mesos de negociació i alguna tensió, però tanqueu un 22% sense exclusivitat comercial i amb els drets de veto acotats. La valoració baixa una mica i el que us emporteu val molt més: la dilució importa menys que les condicions."},
+   {l:"Rebutjar i créixer amb deute i recursos propis",
+    ef:{reput:1, capac:-5},
+    o:"Conserveu el control complet i el ritme és vostre. El cost és l'opcionalitat: si el mercat es consolida i els competidors es capitalitzen, la finestra per posicionar-se pot tancar-se abans que hi arribeu pel vostre compte."}
+  ]},
+
+ {id:"talent", cond:st=>st.torn>=3 && st.capac>=50, mod:"Persones", c:"var(--per)", t:"Qui entra a l'equip",
+  set:st=>["Necessiteu una tercera persona i la caixa dona per a una sola contractació. Els perfils són molt diferents i condicionen en què us convertiu.",
+      "En un equip de dos, una contractació errònia no és un terç del problema: és tot el vostre temps dedicat a gestionar-la."],
+  figs:st=>[["Cost anual","~38.000 €"],["Utilització actual",st.capac+"%"],["Caixa","" + fmtE(st.caixa)],["Reputació",st.reput+"/10"]],
+  q:"A qui contracteu?",
+  opts:[
+   {l:"Tècnic de procés i qualitat",
+    ef:{caixa:-9000, reput:2, capac:-8},
+    o:"No genera ingressos directes i el primer any sembla un cost pur. Però estabilitza el procés, redueix el retreball i és el coneixement que després no us poden copiar ni endur-se: control industrial, no receptes."},
+   {l:"Comercial amb cartera al sector industrial",
+    ef:{caixa:-6000, capac:20, reput:-1},
+    o:"Omple l'agenda ràpid, i això alleuja la caixa. Compte amb l'incentiu: si el bonus va lligat a comandes tancades, us portarà feina que no encaixa amb el vostre procés i el problema apareixerà a taller, no a la seva nòmina."},
+   {l:"Enginyer de disseny per a fabricació additiva",
+    ef:{caixa:-8000, reput:2, capac:-3},
+    o:"Us permet vendre redisseny de peça, que és el servei de més marge i el que us allunya de competir per hores de màquina. Triga més a rendir que un comercial, però mou el negoci cap amunt a la cadena de valor."}
+  ]}
+ ]}
 };
 
 /* ============================ CALCULADORES ============================ */
@@ -717,17 +921,172 @@ const DIAG = [
  "Què faria un analista: renegociar terminis de cobrament (anticipar percentatges a l'inici del projecte, facturació per fites, descompte per pagament ràpid), instal·lar un pressupost de tresoreria setmanal a 13 setmanes, contractar una pòlissa ABANS de necessitar-la (es negocia molt millor amb caixa que sense), i posar un objectiu explícit de baixar el client principal per sota del 25% en dos anys, encara que això signifiqui créixer més lentament."]}
 ];
 
+/* ============================ GLOSSARI ============================ */
+const GLOSSARY = {
+ capex:{t:"Capex (inversió en actius)",c:"Finances",
+  d:"Els diners que gastes en comprar coses que duraran anys: maquinària, instal·lacions, vehicles. Es diferencia de la despesa corrent (opex) perquè no es consumeix en un exercici.",
+  f:"Ràtio clau: capex / vendes anuals",
+  w:"En negocis intensius en capital, la ràtio capex/vendes decideix la viabilitat. Si necessites invertir 4 € per cada 1 € que facturaràs l'any, cada creixement et xucla caixa abans de donar-te'n."},
+ marge_contribucio:{t:"Marge de contribució",c:"Finances",
+  d:"El que queda de cada venda després de restar-hi només els costos variables (els que pugen quan produeixes més). És el que serveix per anar cobrint els costos fixos.",
+  f:"Marge de contribució = preu − cost variable unitari",
+  w:"És la xifra que decideix preus i volum, més que el marge brut. Si no la coneixes, no pots saber quantes vendes necessites per no perdre diners."},
+ punt_equilibri:{t:"Punt d'equilibri (break-even)",c:"Finances",
+  d:"El volum de vendes a partir del qual els ingressos cobreixen tots els costos. Abans d'aquest punt perds diners; a partir d'aquí, cada venda aporta marge net.",
+  f:"Punt d'equilibri = costos fixos / marge de contribució unitari",
+  w:"Calcular-lo abans de començar t'estalvia il·lusions. Si el número surt per damunt de la teva capacitat màxima, el model no tanca a cap nivell d'ocupació."},
+ palanquejament_operatiu:{t:"Palanquejament operatiu",c:"Finances",
+  d:"La proporció de costos fixos respecte als variables. Com més fixos tens, més s'amplifica cada variació de vendes sobre el benefici.",
+  f:"Grau = marge de contribució total / benefici",
+  w:"És simètric i per això és perillós: la mateixa estructura que multiplica el benefici quan puges, multiplica les pèrdues quan baixes. Contractar plantilla és pujar el palanquejament; subcontractar és baixar-lo."},
+ fons_maniobra:{t:"Fons de maniobra",c:"Finances",
+  d:"Els diners atrapats en el funcionament diari: el que et deuen els clients i les existències, menys el que deus als proveïdors.",
+  f:"Cicle de caixa = dies de cobrament − dies de pagament",
+  w:"Quan creixes, el fons de maniobra creix amb tu i xucla caixa. Per això hi ha empreses que fan fallida CREIXENT: cada venda nova necessita diners abans de generar-ne."},
+ ebitda:{t:"EBITDA",c:"Finances",
+  d:"El resultat abans d'interessos, impostos, depreciacions i amortitzacions. Vol aproximar el benefici que genera l'operació sense els efectes del finançament ni de la comptabilitat d'actius.",
+  f:"EBITDA = benefici + interessos + impostos + amortitzacions",
+  w:"Es va popularitzar perquè afavoreix empreses molt endeutades i intensives en capital: ignora precisament els seus dos grans costos. Munger deia que quan sentis EBITDA hi substitueixis mentalment «benefici de mentida»."},
+ cac:{t:"CAC (cost d'adquisició de client)",c:"Clients",
+  d:"Quant et costa, de mitjana, aconseguir un client nou. Hi ha d'anar TOTA la despesa de captació, no només la publicitat: també el temps comercial.",
+  f:"CAC = despesa total en captació / clients nous",
+  w:"Sol créixer a mesura que creixes, perquè primer captes els clients fàcils. Un CAC baix als primers mesos gairebé mai es manté."},
+ ltv:{t:"LTV (valor de vida del client)",c:"Clients",
+  d:"Els diners que et deixa un client durant tota la relació. S'ha de calcular sobre MARGE, no sobre ingrés: és l'error més freqüent i infla molt el resultat.",
+  f:"LTV = contribució mensual × vida mitjana del client",
+  w:"La referència habitual és LTV/CAC per damunt de 3. Però l'LTV es basa en supòsits sobre el futur i és facilíssim d'inflar assumint un churn optimista."},
+ churn:{t:"Churn (taxa d'abandonament)",c:"Clients",
+  d:"El percentatge de clients que cancel·len cada període. La seva inversa dona la vida mitjana del client.",
+  f:"Vida mitjana = 100 / churn(%)",
+  w:"És la variable que més mou l'LTV i la que menys es toca. Baixar-lo millora TOTES les mètriques alhora sense tocar ni el preu ni el CAC: no té contrapartida."},
+ moat:{t:"Fossat competitiu (moat)",c:"Estratègia",
+  d:"Allò que protegeix el negoci de ser copiat: marca, coneixement únic, efectes de xarxa, cost de canvi per al client, o accés privilegiat a un recurs.",
+  f:"Prova VRIO: Valuós · Rar · Inimitable · Organització",
+  w:"La pregunta útil no és si es POT copiar, sinó quant costaria i quant trigarien. Si la resposta és «un cap de setmana», no és un fossat."},
+ cost_canvi:{t:"Cost de canvi (switching cost)",c:"Estratègia",
+  d:"El que li costa a un client canviar-te per un competidor: diners, temps, risc, tornar a formar el personal o revalidar un procés.",
+  f:"—",
+  w:"És una de les defenses més sòlides i més barates de construir. Un client que ha validat el teu procés amb el seu departament de qualitat no marxa per un 5% de preu."},
+ commodity:{t:"Commodity",c:"Estratègia",
+  d:"Un producte indiferenciat on el comprador només mira el preu perquè totes les opcions li semblen equivalents.",
+  f:"—",
+  w:"En un mercat de commodity ets preu-acceptant: el preu te'l fixa el mercat i cap eficiència operativa et salva d'una diferència gran. La sortida és trobar un atribut pel qual et paguin, no vendre quilos."},
+ cost_enfonsat:{t:"Cost enfonsat",c:"Decisió",
+  d:"Diners o temps ja gastats que no recuperaràs facis el que facis. No haurien de pesar en cap decisió sobre el futur.",
+  f:"—",
+  w:"L'aversió a la pèrdua fa que continuar «per no perdre el que hi hem posat» sembli raonable. És la trampa que allarga projectes morts durant anys."},
+ cost_oportunitat:{t:"Cost d'oportunitat",c:"Decisió",
+  d:"El valor de la millor alternativa a què renuncies quan tries una opció.",
+  f:"—",
+  w:"Cada «sí» és un «no» a una altra cosa. En un projecte propi, les hores que hi dediques tenen un cost real encara que no aparegui en cap factura."},
+ opcio_real:{t:"Opció real",c:"Decisió",
+  d:"El valor de poder decidir més endavant amb més informació: ampliar si va bé, abandonar si va malament, esperar fins que s'aclareixi la incertesa.",
+  f:"—",
+  w:"Una inversió petita amb VAN negatiu pot ser excel·lent si compra informació que evita una inversió gran equivocada. Però només val si de veritat estàs disposat a aturar-te segons el resultat."},
+ batna:{t:"BATNA",c:"Negociació",
+  d:"La teva millor alternativa si no hi ha acord. És la font real del teu poder negociador.",
+  f:"—",
+  w:"Qui no té alternativa no té poder per molt fort que parli, i normalment es nota. Millorar la BATNA ABANS de seure a la taula val més que qualsevol tàctica un cop hi ets."},
+ concentracio:{t:"Concentració de clients",c:"Risc",
+  d:"Quin pes té un sol client sobre la teva facturació total.",
+  f:"Alerta habitual: cap client per damunt del 15-20%",
+  w:"Un client que és el 70% de la teva facturació no és un client: és un soci que pot fixar-te el preu. La concentració converteix cada negociació en una amenaça existencial."},
+ taxa_base:{t:"Taxa base (visió exterior)",c:"Decisió",
+  d:"La freqüència amb què casos comparables al teu han acabat bé. És el punt de partida honest d'una previsió.",
+  f:"—",
+  w:"Tots creiem que el nostre cas és especial (fal·làcia de la planificació). La correcció és partir de la taxa base i ajustar-la lleugerament, no partir del teu optimisme."},
+ restriccio:{t:"Restricció (coll d'ampolla)",c:"Operacions",
+  d:"L'element que limita el rendiment de tot el sistema. Millorar qualsevol altra part no millora el resultat global.",
+  f:"Identificar · explotar · subordinar · ampliar",
+  w:"Mantenir tothom ocupat al 100% sol empitjorar el sistema: genera treball en curs acumulat davant del coll d'ampolla. Contraintuïtiu, però és així."},
+ utilitzacio:{t:"Utilització de capacitat",c:"Operacions",
+  d:"El percentatge de la teva capacitat productiva que està realment ocupada.",
+  f:"—",
+  w:"Quan s'acosta al 100%, els temps d'espera no creixen de manera proporcional sinó exponencial. Planificar al 70-80% no és malbaratar: és deixar marge per a la variabilitat, que sempre arriba."},
+ principal_agent:{t:"Problema principal-agent",c:"Persones",
+  d:"Qui pren la decisió (l'agent) i qui en suporta les conseqüències (el principal) no són la mateixa persona, i els seus interessos divergeixen.",
+  f:"—",
+  w:"Quan un equip fa massivament una cosa que perjudica l'empresa, mira primer el sistema d'incentius. Gairebé sempre la gent fa racionalment el que li has demanat sense adonar-te'n."},
+ due_diligence:{t:"Due diligence",c:"Inversió",
+  d:"El procés de verificar la realitat d'un negoci abans de comprar-lo o invertir-hi: números, contractes, riscos i dependències.",
+  f:"—",
+  w:"La regla d'or és no acceptar mai dades que no puguis verificar en directe. Les captures de pantalla no són verificació."},
+ dilucio:{t:"Dilució",c:"Inversió",
+  d:"La reducció del teu percentatge de propietat quan entren nous accionistes o es crea un pool d'opcions.",
+  f:"% després = valor teu / valoració post-money",
+  w:"La valoració és el titular, però les condicions (preferències de liquidació, quan es crea el pool) determinen qui cobra què. En sortides moderades pesen molt més que el preu per acció."},
+ roic:{t:"ROIC (retorn sobre capital invertit)",c:"Finances",
+  d:"Quant benefici operatiu genera cada euro de capital invertit al negoci, independentment de com s'hagi finançat.",
+  f:"ROIC = benefici operatiu net / capital invertit",
+  w:"Prefereix-lo al ROE quan comparis negocis: el ROE es pot inflar simplement endeutant-se més, i llavors mesura exposició al risc, no qualitat."}
+};
+const GLPAT = {
+ capex:["capex"], marge_contribucio:["marge de contribució"], punt_equilibri:["punt d'equilibri","break-even"],
+ palanquejament_operatiu:["palanquejament operatiu"], fons_maniobra:["fons de maniobra","cicle de caixa"],
+ ebitda:["EBITDA"], cac:["CAC"], ltv:["LTV"], churn:["churn"], moat:["moat","fossat competitiu"],
+ cost_canvi:["cost de canvi"], commodity:["commodity"], cost_enfonsat:["cost enfonsat"],
+ cost_oportunitat:["cost d'oportunitat"], opcio_real:["opció real","opcions reals"], batna:["BATNA"],
+ concentracio:["concentració de clients"], taxa_base:["taxa base","visió exterior"],
+ restriccio:["coll d'ampolla","restricció"], utilitzacio:["utilització"],
+ principal_agent:["principal-agent"], due_diligence:["due diligence"], dilucio:["dilució"], roic:["ROIC"]
+};
+const GLORDER = Object.keys(GLPAT).sort((a,b)=>
+  Math.max(...GLPAT[b].map(x=>x.length)) - Math.max(...GLPAT[a].map(x=>x.length)));
+
+function gloss(txt){
+ if(!txt) return txt;
+ const used=new Set();
+ GLORDER.forEach(id=>{
+  if(used.has(id)) return;
+  for(const pat of GLPAT[id]){
+   const esc=pat.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+   const re=new RegExp("(^|[\\s(,;:—·])("+esc+")([\\s.,;:)!?—]|$)","i");
+   const m=txt.match(re);
+   if(m && txt.indexOf('data-gl')===-1 || m){
+    // evita reemplaçar dins d'atributs ja inserits
+    const before=txt.slice(0,m.index);
+    if((before.split('<span').length-1)!==(before.split('</span>').length-1)) continue;
+    txt=txt.replace(re,(f,a,b,c)=>a+'<span class="gl" data-gl="'+id+'">'+b+'</span>'+c);
+    used.add(id); break;
+   }
+  }
+ });
+ return txt;
+}
+const G = s => gloss(esc(s));
+
+function glModal(){
+ return '<div id="glmodal"><div id="glbox">'+
+  '<div class="cat" id="glcat"></div><h4 id="gltitle"></h4><p id="gldef"></p>'+
+  '<div class="form" id="glform"></div><div class="why" id="glwhy"></div>'+
+  '<button class="btn" id="glclose">Tanca</button></div></div>';
+}
+function openGl(id){
+ const g=GLOSSARY[id]; if(!g) return;
+ document.getElementById("glcat").textContent=g.c;
+ document.getElementById("gltitle").textContent=g.t;
+ document.getElementById("gldef").textContent=g.d;
+ const f=document.getElementById("glform");
+ if(g.f && g.f!=="—"){f.textContent=g.f;f.style.display="";}else{f.style.display="none";}
+ document.getElementById("glwhy").textContent=g.w;
+ document.getElementById("glmodal").classList.add("on");
+}
+
 /* ============================ ESTAT ============================ */
 const store={get(k,d){try{const v=localStorage.getItem("mba_"+k);return v===null?d:JSON.parse(v);}catch(e){return d;}},
  set(k,v){try{localStorage.setItem("mba_"+k,JSON.stringify(v));}catch(e){}}};
 let picks=store.get("picks",{}), dnotes=store.get("dnotes",{}), caseSel=store.get("caseSel","aula");
+let arbreState=store.get("arbre",{});
+function saveArbre(){store.set("arbre",arbreState);}
 let tab="moduls", modOpen={}, anOpen={}, diagOpen={};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 document.getElementById("sub").textContent="Vuit mòduls amb el nucli d'una escola de negocis, dos casos reals que els travessen tots i les eines de càlcul que es fan servir de veritat. Rigorós, aplicat i sense pretendre que substitueix un màster: el que dona un MBA i això no dona és la xarxa de contactes i la credencial.";
 
 const TABS=[["moduls","Mòduls"],["cas","El cas"],["calc","Calculadores"],["diag","Diagnòstic"]];
 function renderTabs(){document.getElementById("tabs").innerHTML=TABS.map(([k,l])=>`<button class="${k===tab?'on':''}" data-tab="${k}">${l}</button>`).join("");}
-document.getElementById("tabs").addEventListener("click",e=>{const b=e.target.closest("button[data-tab]");if(!b)return;tab=b.dataset.tab;renderTabs();render();window.scrollTo(0,0);});
+document.getElementById("tabs").addEventListener("click",e=>{const b=e.target.closest("button[data-tab]");if(!b)return;tab=b.dataset.tab;document.getElementById("glclose").addEventListener("click",()=>document.getElementById("glmodal").classList.remove("on"));
+document.getElementById("glmodal").addEventListener("click",e=>{if(e.target.id==="glmodal")e.currentTarget.classList.remove("on");});
+renderTabs();render();window.scrollTo(0,0);});
 
 /* ---------- MÒDULS ---------- */
 function renderMods(){
@@ -739,10 +1098,10 @@ function renderMods(){
    <span class="caret">▼</span></button><div class="bodyw">`;
   m.fw.forEach(f=>{
    o+=`<div class="fw"><h4>${esc(f.n)}</h4>
-    <div class="row"><b>Què és</b>${esc(f.what)}</div>
-    <div class="row"><b>Quan serveix</b>${esc(f.when)}</div>
-    <div class="row trap"><b>Quan enganya</b>${esc(f.trap)}</div>
-    <div class="ex" style="margin-top:9px"><b>Aplicat a Aula Viva · </b>${esc(f.ex)}</div></div>`;
+    <div class="row"><b>Què és</b>${G(f.what)}</div>
+    <div class="row"><b>Quan serveix</b>${G(f.when)}</div>
+    <div class="row trap"><b>Quan enganya</b>${G(f.trap)}</div>
+    <div class="ex" style="margin-top:9px"><b>Aplicat a Aula Viva · </b>${G(f.ex)}</div></div>`;
   });
   o+='</div></section>';
  });
@@ -750,8 +1109,105 @@ function renderMods(){
 }
 
 /* ---------- CAS ---------- */
+function fmtE(n){return nf.format(Math.round(n))+" €";}
+
+function stApply(st,ef){
+ const n=Object.assign({},st);
+ for(const k in ef){
+  if(k==="seg"){n.seg=ef.seg;}
+  else if(k==="conc"){n.conc=(n.conc||0)+ef.conc;}
+  else{n[k]=(n[k]||0)+ef[k];}
+ }
+ n.capac=Math.max(0,Math.min(100,n.capac));
+ n.reput=Math.max(0,Math.min(10,n.reput));
+ n.caixa=Math.max(0,n.caixa);
+ return n;
+}
+function pickEvent(cs,st,seen){
+ if(st.torn===1) return cs.events.find(e=>e.first);
+ const cand=cs.events.filter(e=>!e.first && !seen.includes(e.id) && (!e.cond || e.cond(st)));
+ if(cand.length) return cand[0];
+ const fb=cs.events.filter(e=>!e.first && !seen.includes(e.id));
+ return fb.length?fb[0]:null;
+}
+function dash(st,prev){
+ const d=(k)=>prev?st[k]-prev[k]:0;
+ const arrow=(v,inv)=>{ if(!v) return ""; const good=inv?v<0:v>0;
+  return ' <span class="'+(good?"up":"down")+'">'+(v>0?"+":"")+(Math.abs(v)>=1000?nf.format(v):nf1.format(v))+'</span>';};
+ return '<div class="dash">'+
+  '<div class="m"><small>Caixa</small><b>'+fmtE(st.caixa)+'</b></div>'+
+  '<div class="m"><small>Reputació</small><b>'+st.reput+'/10</b><div class="bar"><i style="width:'+(st.reput*10)+'%;background:var(--fin)"></i></div></div>'+
+  '<div class="m"><small>Utilització</small><b>'+Math.round(st.capac)+'%</b><div class="bar"><i style="width:'+st.capac+'%;background:'+(st.capac>85?"var(--cli)":"var(--est)")+'"></i></div></div>'+
+  '<div class="m"><small>Deute</small><b>'+fmtE(st.deute)+'</b></div>'+
+  '</div>';
+}
+function stSynth(cs,st){
+ const seg={proto:"prototipatge ràpid",series:"sèries curtes certificades",recanvis:"inventari digital de recanvis"}[st.seg]||"sense posicionament clar";
+ let ps=[];
+ ps.push("Heu acabat amb "+fmtE(st.caixa)+" de caixa, "+fmtE(st.deute)+" de deute, una reputació de "+st.reput+"/10 i una utilització del "+Math.round(st.capac)+"%. El posicionament que vau triar al principi ("+seg+") ha condicionat gairebé totes les situacions que us han anat apareixent després — aquesta és la primera lliçó del format.");
+ if(st.reput>=7) ps.push("La reputació alta és el resultat més valuós que us emporteu. En fabricació industrial, la fiabilitat documentada és el producte: és el que genera cost de canvi i el que us treu de competir per preu. És també l'actiu que més triga a construir-se i el que ningú us pot copiar.");
+ else if(st.reput<=3) ps.push("La reputació baixa és el senyal preocupant. En un mercat amb proliferació de proveïdors, un taller sense reputació diferencial és intercanviable, i això vol dir competir en preu contra qui tingui més capacitat instal·lada i més esquena financera.");
+ if(st.capac>=88) ps.push("Aneu al límit de capacitat, i això no és una bona notícia sinó un risc: quan la utilització s'acosta al 100%, els temps d'espera creixen de manera exponencial i qualsevol imprevist es propaga a tots els terminis alhora. Sense folgança no hi ha fiabilitat.");
+ else if(st.capac<=30) ps.push("La planta va molt buida i els costos fixos corren igualment. En un negoci amb palanquejament operatiu, la infrautilització es menja el marge en silenci: no perdeu diners per cap decisió dolenta visible, sinó per la que no heu pres.");
+ if(st.deute>25000) ps.push("El nivell de deute us ha comprat capacitat, però ha convertit una part dels vostres costos en obligacions fixes. Mentre la demanda es mantingui, funciona; el dia que caigui un trimestre, la quota no cau amb ella.");
+ if(st.conc) ps.push("Heu acabat amb una concentració de clients elevada. És el risc que menys es nota mentre les coses van bé i el que més mal fa quan la relació canvia: amb un client que pesa massa, cada renovació és una negociació on no teniu BATNA.");
+ if(st.caixa<10000) ps.push("Acabeu amb la caixa molt justa, i això limita la vostra capacitat de decidir: qui no té caixa no tria, accepta. La liquiditat no és rendibilitat, però és el que et permet seguir jugant prou temps perquè la rendibilitat arribi.");
+ ps.push("El que hauria de quedar d'aquesta partida no és si heu «guanyat», sinó veure que les decisions no s'avaluen d'una en una: el que decidiu al torn 1 determina quins problemes existeixen al torn 4. Torna-hi amb un posicionament diferent i comprova com canvien les situacions que et surten.");
+ return ps;
+}
+
+function renderTree(cs){
+ let stt=arbreState;
+ if(!stt.st){ stt={st:Object.assign({},cs.init,{torn:1}), seen:[], picked:null, log:[], prev:null, done:false}; arbreState=stt; }
+ let o='<div class="narrow"><div class="casesel">'+
+  Object.keys(CASES).map(k=>`<button class="cbtn ${k===caseSel?'on':''}" data-case="${k}"><b>${esc(CASES[k].name)}</b><span>${esc(CASES[k].tag)}</span></button>`).join("")+
+  '</div>';
+ o+=`<p class="lead">${G(cs.intro)}</p>`;
+
+ if(stt.done){
+  o+=dash(stt.st,null);
+  o+='<section class="step" style="--c:var(--dec)"><div class="meta"><span class="badge">Final</span><span class="modlab">Síntesi</span></div><h3>On heu acabat</h3>';
+  o+='<div class="analysis open">'+stSynth(cs,stt.st).map(x=>`<p>${G(x)}</p>`).join("")+'</div>';
+  if(stt.log.length) o+='<div class="crumbs" style="margin-top:14px">'+stt.log.map((l,i)=>`<span class="crumb">${i+1} · <b>${esc(l)}</b></span>`).join("")+'</div>';
+  o+='<div class="endpath"><button class="btn" data-treset="1">↻ Torna a jugar amb una altra estratègia</button></div></section></div>';
+  return o;
+ }
+
+ const ev=pickEvent(cs,stt.st,stt.seen);
+ if(!ev){ stt.done=true; saveArbre(); return renderTree(cs); }
+
+ o+=`<div class="turn">Torn ${stt.st.torn} de ${cs.turns}</div>`;
+ o+=dash(stt.st, stt.prev);
+ o+=`<section class="step" style="--c:${ev.c}"><div class="meta"><span class="badge">Decisió</span><span class="modlab">${esc(ev.mod)}</span></div>
+  <h3>${esc(ev.t)}</h3>`;
+ ev.set(stt.st).forEach(pp=>o+=`<p class="set">${G(pp)}</p>`);
+ o+='<div class="figs">'+ev.figs(stt.st).map(f=>`<div><span>${esc(f[0])}</span><b>${esc(f[1])}</b></div>`).join("")+'</div>';
+ o+=`<p class="q">${esc(ev.q)}</p><div class="choices">`;
+ ev.opts.forEach((op,k)=>{
+  const lock = op.need && !op.need(stt.st);
+  o+=`<button class="choice ${stt.picked===k?'picked':''} ${lock?'locked':''}" ${lock?'disabled':''} data-spick="${k}">
+   <span class="k">${"ABC"[k]}</span><span>${esc(op.l)}${lock?'<span class="lockmsg">No disponible amb l\'estat actual</span>':''}</span></button>`;
+ });
+ o+='</div>';
+ if(stt.picked!==null){
+  const op=ev.opts[stt.picked];
+  o+=`<div class="outcome"><b>Conseqüència</b>${G(typeof op.o==="function"?op.o(stt.st):op.o)}</div>`;
+  const nx=stApply(stt.st,op.ef||{});
+  let dl=[];
+  if(nx.caixa!==stt.st.caixa) dl.push("Caixa <b class='"+(nx.caixa>stt.st.caixa?"up":"down")+"'>"+(nx.caixa>stt.st.caixa?"+":"−")+fmtE(Math.abs(nx.caixa-stt.st.caixa))+"</b>");
+  if(nx.reput!==stt.st.reput) dl.push("Reputació <b class='"+(nx.reput>stt.st.reput?"up":"down")+"'>"+(nx.reput>stt.st.reput?"+":"")+(nx.reput-stt.st.reput)+"</b>");
+  if(nx.capac!==stt.st.capac) dl.push("Utilització <b class='"+(nx.capac>stt.st.capac?"up":"down")+"'>"+(nx.capac>stt.st.capac?"+":"")+Math.round(nx.capac-stt.st.capac)+"%</b>");
+  if(nx.deute!==stt.st.deute) dl.push("Deute <b class='down'>+"+fmtE(nx.deute-stt.st.deute)+"</b>");
+  if(dl.length) o+=`<div class="delta">Efecte sobre l'estat: ${dl.join(" · ")}</div>`;
+  o+=`<div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn" data-snext="1">${stt.st.torn>=cs.turns?"Veure el resultat":"Torn següent →"}</button></div>`;
+ }
+ o+='</section></div>';
+ return o;
+}
+
 function renderCase(){
  const cs=CASES[caseSel];
+ if(cs.type==="tree"||cs.type==="state") return renderTree(cs);
  let o='<div class="narrow"><div class="casesel">'+
   Object.keys(CASES).map(k=>`<button class="cbtn ${k===caseSel?'on':''}" data-case="${k}"><b>${esc(CASES[k].name)}</b><span>${esc(CASES[k].tag)}</span></button>`).join("")+
   '</div>';
@@ -760,7 +1216,7 @@ function renderCase(){
   const key=caseSel+"-"+i, pick=picks[key];
   o+=`<section class="step" style="--c:${s.c}"><div class="meta"><span class="badge">Decisió ${i+1}</span><span class="modlab">${esc(s.mod)}</span></div>
    <h3>${esc(s.t)}</h3>`;
-  s.set.forEach(p=>o+=`<p class="set">${esc(p)}</p>`);
+  s.set.forEach(p=>o+=`<p class="set">${G(p)}</p>`);
   o+='<div class="figs">'+s.figs.map(f=>`<div><span>${esc(f[0])}</span><b>${esc(f[1])}</b></div>`).join("")+'</div>';
   o+=`<p class="q">${esc(s.q)}</p><div class="choices">`;
   s.opts.forEach((op,k)=>{
@@ -768,11 +1224,11 @@ function renderCase(){
   });
   o+='</div>';
   if(pick!==undefined){
-   o+=`<div class="outcome"><b>Conseqüència de la teva decisió</b>${esc(s.opts[pick].o)}</div>`;
+   o+=`<div class="outcome"><b>Conseqüència de la teva decisió</b>${G(s.opts[pick].o)}</div>`;
    o+=`<div style="margin-top:13px"><button class="btn ${anOpen[key]?'ghost':''}" data-an="${key}">${anOpen[key]?"Amaga l'anàlisi":"Anàlisi completa"}</button></div>`;
    if(anOpen[key]){
-    o+='<div class="analysis open">'+s.an.map(p=>`<p>${esc(p)}</p>`).join("")+
-       `<div class="lesson"><b>La lliçó · </b>${esc(s.lesson)}</div></div>`;
+    o+='<div class="analysis open">'+s.an.map(p=>`<p>${G(p)}</p>`).join("")+
+       `<div class="lesson"><b>La lliçó · </b>${G(s.lesson)}</div></div>`;
    }
   }
   o+='</section>';
@@ -961,7 +1417,7 @@ function renderDiag(){
   o+=`<label>Què li passa a aquesta empresa? Escriu el teu diagnòstic abans de mirar</label>
    <textarea rows="4" data-dn="${i}" placeholder="Ex.: el problema real és…">${esc(dnotes[i]||"")}</textarea>
    <div style="margin-top:12px"><button class="btn ${diagOpen[i]?'ghost':''}" data-diag="${i}">${diagOpen[i]?"Amaga l'anàlisi":"Veure l'anàlisi completa"}</button></div>`;
-  if(diagOpen[i])o+='<div class="analysis open">'+d.points.map(p=>`<p>${esc(p)}</p>`).join("")+'</div>';
+  if(diagOpen[i])o+='<div class="analysis open">'+d.points.map(p=>`<p>${G(p)}</p>`).join("")+'</div>';
   o+='</section>';});
  return o+'</div>';
 }
@@ -976,6 +1432,25 @@ document.getElementById("view").addEventListener("click",e=>{
  const t=e.target;
  const m=t.closest("[data-mod]"); if(m){modOpen[m.dataset.mod]=!modOpen[m.dataset.mod];render();return;}
  const cse=t.closest("[data-case]"); if(cse){caseSel=cse.dataset.case;store.set("caseSel",caseSel);render();window.scrollTo(0,0);return;}
+ const gg=t.closest("[data-gl]"); if(gg){openGl(gg.dataset.gl);return;}
+ const sp=t.closest("[data-spick]"); if(sp){arbreState.picked=+sp.dataset.spick;saveArbre();render();return;}
+ const sn=t.closest("[data-snext]"); if(sn){
+  const cs=CASES[caseSel]; const stt=arbreState;
+  const ev=pickEvent(cs,stt.st,stt.seen); const op=ev.opts[stt.picked];
+  stt.prev=Object.assign({},stt.st);
+  stt.st=stApply(stt.st,op.ef||{});
+  stt.seen.push(ev.id); stt.log.push(op.l);
+  if(stt.st.torn>=cs.turns){ stt.done=true; } else { stt.st.torn++; }
+  stt.picked=null; saveArbre(); render(); window.scrollTo(0,0); return;
+ }
+ const tp=t.closest("[data-tpick]"); if(tp){arbreState.picked=+tp.dataset.tpick;saveArbre();render();return;}
+ const tc=t.closest("[data-tcontinue]"); if(tc){
+  const cs=CASES[caseSel]; const nodeId=arbreState.node||cs.root; const node=cs.nodes[nodeId];
+  const op=node.opts[arbreState.picked];
+  arbreState.path.push({title:node.t, label:op.l});
+  arbreState.node=tc.dataset.tcontinue; arbreState.picked=null; saveArbre(); render(); window.scrollTo(0,0); return;
+ }
+ const tr=t.closest("[data-treset]"); if(tr){arbreState={};saveArbre();render();window.scrollTo(0,0);return;}
  const p=t.closest("[data-pick]"); if(p){picks[p.dataset.pick]=+p.dataset.k;store.set("picks",picks);render();return;}
  const a=t.closest("[data-an]"); if(a){anOpen[a.dataset.an]=!anOpen[a.dataset.an];render();return;}
  const d=t.closest("[data-diag]"); if(d){diagOpen[d.dataset.diag]=!diagOpen[d.dataset.diag];render();return;}
@@ -985,6 +1460,8 @@ document.getElementById("view").addEventListener("input",e=>{
  const sl=e.target.closest("input[data-calc]");
  if(sl){CV[sl.dataset.calc][sl.dataset.p]=parseFloat(sl.value);refreshCalc(sl.dataset.calc);}
 });
+document.getElementById("glclose").addEventListener("click",()=>document.getElementById("glmodal").classList.remove("on"));
+document.getElementById("glmodal").addEventListener("click",e=>{if(e.target.id==="glmodal")e.currentTarget.classList.remove("on");});
 renderTabs();render();
 </script>
 </body>
