@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#EDEBE4">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>MBA Essencial — el contingut, sense el màster</title>
+<style>
+:root{
+  --paper:#EDEBE4; --card:#FCFBF8; --ink:#1A1D21; --muted:#66625B; --line:#DCD7CB; --soft:#F4F2EB;
+  --est:#1F4E79; --fin:#14663F; --cli:#A0431E; --val:#5B3E86; --org:#8A6212;
+  --ope:#106A6A; --per:#8A6212; --neg:#94304F; --dec:#40506B;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%;}
+.wrap{max-width:960px;margin:0 auto;padding:22px 16px calc(64px + env(safe-area-inset-bottom));}
+header .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px;}
+header h1{font-family:var(--serif);font-size:31px;line-height:1.1;font-weight:400;margin:0 0 8px;letter-spacing:-0.4px;}
+header p{margin:0;font-size:14.5px;color:var(--muted);max-width:620px;}
+nav.tabs{display:flex;gap:18px;overflow-x:auto;border-bottom:1px solid var(--line);margin:20px 0 22px;scrollbar-width:none;}
+nav.tabs::-webkit-scrollbar{display:none;}
+nav.tabs button{background:none;border:none;font-family:var(--serif);font-size:16px;color:var(--muted);padding:9px 2px;margin-bottom:-1px;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;}
+nav.tabs button.on{color:var(--ink);border-bottom-color:var(--ink);}
+.narrow{max-width:700px;margin:0 auto;}
+.lead{font-size:14.5px;color:var(--muted);margin:0 0 20px;line-height:1.6;}
+.mod{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:4px;margin-bottom:14px;overflow:hidden;}
+.mod>.head{width:100%;text-align:left;background:none;border:none;padding:16px 17px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;font-family:inherit;}
+.mod .num{font-family:var(--serif);font-size:26px;color:var(--c);line-height:1;flex:0 0 auto;opacity:.5;}
+.mod .t{flex:1;}
+.mod .t strong{display:block;font-family:var(--serif);font-size:19px;font-weight:400;line-height:1.2;margin-bottom:4px;}
+.mod .t small{display:block;font-size:13px;color:var(--muted);line-height:1.5;}
+.caret{flex:0 0 auto;color:var(--muted);font-size:12px;margin-top:6px;transition:transform .2s;}
+.mod.open .caret{transform:rotate(180deg);}
+.mod .bodyw{display:none;padding:0 17px 18px;}
+.mod.open .bodyw{display:block;}
+.fw{border-top:1px solid var(--line);padding-top:15px;margin-top:2px;}
+.fw h4{font-family:var(--serif);font-size:17px;font-weight:400;margin:0 0 9px;}
+.fw .row{margin-bottom:9px;font-size:14.3px;line-height:1.6;}
+.fw .row b{font-family:var(--mono);font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--c);display:block;margin-bottom:3px;}
+.fw .trap{background:var(--soft);border-left:3px solid var(--c);padding:10px 12px;border-radius:3px;}
+.fw .ex{background:var(--soft);padding:10px 12px;border-radius:3px;font-size:13.8px;line-height:1.6;color:var(--muted);}
+.fw .ex b{color:var(--c);}
+/* selector de cas */
+.casesel{display:flex;gap:9px;margin-bottom:18px;flex-wrap:wrap;}
+.cbtn{flex:1;min-width:150px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:11px 13px;cursor:pointer;font-family:inherit;}
+.cbtn b{display:block;font-family:var(--serif);font-size:16px;font-weight:400;margin-bottom:2px;}
+.cbtn span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);}
+.cbtn.on{border-color:var(--ink);border-width:2px;padding:10px 12px;}
+.cbtn.on b{font-weight:400;}
+/* cas */
+.step{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:19px 17px;margin-bottom:16px;}
+.step .meta{display:flex;align-items:center;gap:9px;margin-bottom:11px;flex-wrap:wrap;}
+.step .badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:#fff;background:var(--c);padding:3px 9px;border-radius:3px;}
+.step .modlab{font-family:var(--mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;}
+.step h3{font-family:var(--serif);font-size:20px;font-weight:400;margin:0 0 11px;line-height:1.25;}
+.step p.set{font-size:15px;line-height:1.65;margin:0 0 11px;}
+.figs{background:var(--soft);border-radius:3px;padding:11px 13px;margin:0 0 14px;}
+.figs div{display:flex;justify-content:space-between;gap:12px;font-size:13.3px;padding:3px 0;border-bottom:1px dotted var(--line);}
+.figs div:last-child{border-bottom:none;}
+.figs b{font-family:var(--mono);font-size:13px;white-space:nowrap;}
+.q{font-family:var(--serif);font-size:17px;margin:0 0 12px;}
+.choices{display:flex;flex-direction:column;gap:9px;}
+.choice{text-align:left;font-family:inherit;font-size:14.5px;line-height:1.45;padding:13px 14px;border-radius:4px;border:1px solid var(--line);background:var(--soft);color:var(--ink);cursor:pointer;display:flex;gap:10px;align-items:flex-start;}
+.choice .k{font-family:var(--mono);font-size:12px;color:var(--c);flex:0 0 auto;padding-top:1px;}
+.choice.picked{border-color:var(--c);border-width:2px;background:var(--card);}
+.outcome{margin-top:14px;border-left:3px solid var(--c);padding:11px 13px;background:var(--soft);border-radius:3px;font-size:14.2px;line-height:1.6;}
+.outcome b{font-family:var(--mono);font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--c);display:block;margin-bottom:4px;}
+.analysis{display:none;margin-top:13px;border-top:1px solid var(--line);padding-top:13px;}
+.analysis.open{display:block;}
+.analysis p{font-size:14.2px;line-height:1.65;margin:0 0 10px;}
+.analysis .lesson{background:var(--soft);border-radius:3px;padding:11px 13px;font-size:13.8px;line-height:1.6;}
+.analysis .lesson b{color:var(--c);}
+.btn{font-family:var(--mono);font-size:12px;letter-spacing:.4px;color:#fff;background:var(--ink);border:none;padding:11px 16px;border-radius:4px;cursor:pointer;}
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line);}
+.btn[disabled]{opacity:.45;cursor:default;}
+/* calculadores */
+.calc{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:4px;padding:18px 16px;margin-bottom:16px;}
+.calc h3{font-family:var(--serif);font-size:19px;font-weight:400;margin:0 0 5px;}
+.calc .clead{font-size:13.5px;color:var(--muted);margin:0 0 16px;line-height:1.55;}
+.ctrl{margin-bottom:13px;}
+.ctrl .lab{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:5px;}
+.ctrl .lab span{font-size:13px;color:var(--muted);}
+.ctrl .lab b{font-family:var(--mono);font-size:13.5px;white-space:nowrap;}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;background:transparent;margin:0;padding:6px 0;}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:var(--line);}
+input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:var(--line);}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-10px;border-radius:50%;background:var(--c);border:3px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3);cursor:pointer;}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--c);border:3px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3);cursor:pointer;}
+.out{border-top:1px solid var(--line);padding-top:14px;}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.kpi{background:var(--soft);border-radius:3px;padding:10px 11px;}
+.kpi small{display:block;font-size:10.8px;color:var(--muted);margin-bottom:3px;line-height:1.3;}
+.kpi strong{font-family:var(--serif);font-size:19px;font-weight:400;display:block;line-height:1.15;}
+.kpi.wide{grid-column:1/-1;}
+.pos{color:var(--fin);} .neg{color:var(--cli);}
+.chart{width:100%;height:auto;display:block;margin:2px 0 8px;}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:11.5px;color:var(--muted);margin-bottom:9px;}
+.legend i{display:inline-block;width:11px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle;}
+.verdict{font-size:13.6px;line-height:1.6;background:var(--soft);border-radius:3px;padding:11px 12px;border-left:3px solid var(--c);margin:0;}
+/* diagnòstic */
+.diag{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:19px 17px;margin-bottom:16px;}
+.diag h3{font-family:var(--serif);font-size:20px;font-weight:400;margin:0 0 10px;}
+.diag textarea{width:100%;font-family:inherit;font-size:14px;background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:10px 12px;resize:vertical;outline:none;color:var(--ink);}
+.diag textarea:focus{border-color:var(--val);}
+.diag label{font-family:var(--mono);font-size:11px;color:var(--muted);display:block;margin-bottom:6px;}
+.tbl{width:100%;border-collapse:collapse;font-size:13.2px;margin:0 0 14px;}
+.tbl td{padding:6px 8px;border-bottom:1px solid var(--line);}
+.tbl td:last-child{text-align:right;font-family:var(--mono);white-space:nowrap;}
+.tbl tr.h td{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);background:var(--soft);}
+button:focus-visible,textarea:focus-visible{outline:2px solid var(--est);outline-offset:2px;}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+footer.tip{margin-top:30px;font-family:var(--mono);font-size:10.5px;color:var(--muted);text-align:center;line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Programa d'autoformació</span>
+    <h1>MBA Essencial</h1>
+    <p id="sub"></p>
+  </header>
+  <nav class="tabs" id="tabs"></nav>
+  <main id="view"></main>
+  <footer class="tip">El progrés es desa al teu dispositiu · funciona sense connexió<br>No constitueix assessorament financer ni jurídic professional</footer>
+</div>
+
+<script>
+/* ============================ MÒDULS ============================ */
+const MODS = [
+{id:"est", n:"I", c:"var(--est)", t:"Estratègia competitiva",
+ sub:"Per què algunes empreses guanyen diners de manera sostinguda i d'altres no. La pregunta central de tot l'MBA.",
+ fw:[
+ {n:"Les cinc forces de Porter",
+  what:"Analitza l'atractiu d'un sector segons cinc pressions: rivalitat entre competidors, amenaça de nous entrants, amenaça de substituts, poder de negociació dels proveïdors i poder de negociació dels clients.",
+  when:"Abans d'entrar en un mercat nou, o per entendre per què els marges d'un sector són estructuralment prims. La tesi clau de Porter és que la rendibilitat depèn més del SECTOR on competeixes que de com de bo ets.",
+  trap:"És una foto estàtica d'un moment concret, i tendeix a ignorar la tecnologia i els efectes de xarxa, que poden redibuixar un sector en pocs anys. Tampoc contempla bé els complementadors (empreses que fan el teu producte més valuós sense competir-hi). Fer-la servir com a predicció en lloc de com a diagnòstic és l'error més comú.",
+  ex:"L'EdTech per a escoles té barreres d'entrada baixes (qualsevol pot fer una web), substituts molt potents (materials gratuïts, ChatGPT, el que ja fa el docent) i clients amb poder alt (les escoles compren per concurs i comparen preus). Un sector estructuralment difícil. La conseqüència pràctica: cal buscar una posició defensable des del primer dia, no confiar que el creixement ja arribarà."},
+ {n:"Avantatge competitiu: costos o diferenciació",
+  what:"Només hi ha dues maneres genèriques de guanyar: oferir el mateix més barat, o oferir alguna cosa diferent per la qual el client pagui més. Es poden aplicar a tot el mercat o a un nínxol.",
+  when:"Per decidir on competeixes i, sobretot, on NO. Serveix per detectar l'error d'intentar ser barat i premium alhora.",
+  trap:"Porter deia que qui es queda al mig ho perd tot, però hi ha excepcions reals i documentades (IKEA, Toyota) que combinen costos baixos amb valor percebut alt. La lliçó útil no és que sigui impossible, sinó que és difícil i requereix un sistema d'activitats molt afinat, no bones intencions.",
+  ex:"Una EdTech petita no pot guanyar per costos: els gegants tenen escala i poden regalar el producte. Li queda la diferenciació de nínxol: currículum català, LOMLOE, compliment de protecció de dades europeu. És més petit, però és defensable."},
+ {n:"Cadena de valor",
+  what:"Descompon l'empresa en activitats (logística, operacions, màrqueting, servei, més les de suport) per veure on es crea valor de veritat i on només es consumeixen recursos.",
+  when:"Per decidir què fas tu i què externalitzes, i per trobar on tens marge de millora real. També per entendre on captura el valor cadascú dins d'un sector.",
+  trap:"Pensada per a la indústria manufacturera dels vuitanta. En negocis digitals les activitats no van en fila índia sinó en paral·lel i en bucle, i el valor sovint el crea l'usuari (contingut, dades, comunitat), cosa que la cadena clàssica no recull.",
+  ex:"A Aula Viva, la creació de contingut curricular és l'activitat que crea valor de veritat; l'allotjament i la facturació són commodities que convé externalitzar. Dedicar hores a muntar infraestructura pròpia és treballar en la part que no diferencia."},
+ {n:"VRIO",
+  what:"Un recurs dona avantatge sostenible només si és Valuós, Rar, Inimitable i l'Organització el sap explotar. Si falla algun dels quatre, no és un avantatge.",
+  when:"Per posar a prova amb honestedat allò que creus que és el teu punt fort. És l'antídot contra confondre «se'm dona bé» amb «tinc un avantatge».",
+  trap:"S'avalua sempre en retrospectiva i és fàcil racionalitzar que un recurs és inimitable quan simplement encara no l'han imitat. La pregunta útil no és si es POT copiar, sinó quant costaria i quant trigarien.",
+  ex:"Saber IA no passa el filtre: és valuós però ni rar ni inimitable. Dominar el currículum català de drets humans amb un doctorat sí que passa els tres primers filtres. La qüestió oberta és la O: hi ha organització per explotar-ho comercialment, o es queda en coneixement sense monetitzar?"},
+ {n:"Matriu d'Ansoff",
+  what:"Quatre vies de creixement segons si el producte i el mercat són nous o existents: penetració, desenvolupament de producte, desenvolupament de mercat i diversificació. El risc creix en aquest ordre.",
+  when:"Quan hi ha diverses opcions de creixement sobre la taula i cal ordenar-les per risc abans de discutir-les per il·lusió.",
+  trap:"Les caselles semblen igual de fàcils dibuixades en un quadrat de 2×2. La diversificació té una taxa de fracàs molt més alta que la penetració, i el quadre no ho comunica visualment. També ignora la competència i la capacitat d'execució.",
+  ex:"Aula Viva pot vendre més a les escoles que ja té (penetració, risc baix), llançar un producte nou per als mateixos centres (producte), obrir Mèxic amb el mateix producte (mercat) o muntar formació presencial (diversificació, risc alt). Fer les dues últimes alhora amb un equip de tres persones és el suïcidi habitual de les startups."},
+ {n:"Efectes de xarxa i costos de canvi",
+  what:"Dues fonts d'avantatge que Porter no capta bé: el producte que val més com més gent l'usa, i el cost (en diners, temps o risc) que suposa per a un client canviar de proveïdor.",
+  when:"En negocis digitals, són sovint l'única defensa real a llarg termini. Val la pena dissenyar-los deliberadament des del principi.",
+  trap:"Molts negocis afirmen tenir efectes de xarxa quan només tenen molts usuaris. La prova: un usuari nou fa que el producte sigui millor per als que ja hi són? Si no, és escala, no efecte de xarxa.",
+  ex:"Si els docents comparteixen materials dins d'Aula Viva i es citen entre ells, hi ha efecte de xarxa real. Si cada centre fa servir la plataforma aïlladament, no n'hi ha — però sí que hi pot haver cost de canvi si la programació anual d'un centre hi està construïda a dins."}
+ ]},
+{id:"fin", n:"II", c:"var(--fin)", t:"Comptabilitat i finances",
+ sub:"Llegir una empresa pels números. Sobretot: per què empreses rendibles sobre el paper fan fallida.",
+ fw:[
+ {n:"Els tres estats financers i com encaixen",
+  what:"El compte de resultats explica si guanyes diners en un període (ingressos menys despeses). El balanç és una foto del que tens i el que deus en un instant. L'estat de fluxos d'efectiu explica si entren i surten diners de veritat.",
+  when:"Sempre, i en aquest ordre: el resultat diu si el negoci té sentit econòmic; el balanç, si és sòlid; la caixa, si sobreviu el mes que ve.",
+  trap:"El compte de resultats es basa en la meritació: una venda es registra quan es fa, no quan es cobra. Per això pots tenir un any excel·lent i no tenir diners al banc. La majoria de fallides d'empreses joves són per caixa, no per pèrdues.",
+  ex:"Aula Viva tanca setembre amb 40.000 € facturats a escoles. Al compte de resultats és un mes brillant. Però les escoles paguen a 90 dies i les nòmines es paguen cada 30. Sobre el paper guanya diners; a la pràctica pot no arribar a desembre."},
+ {n:"Benefici no és caixa",
+  what:"El benefici és una opinió comptable; la caixa és un fet. Les diferències vénen de terminis de cobrament i pagament, existències, amortitzacions i inversions.",
+  when:"Sempre que algú et digui que un negoci és rendible. La pregunta següent ha de ser: i genera caixa?",
+  trap:"L'amortització resta al resultat però no és una sortida de diners; les inversions surten de caixa però no resten al resultat. Per això el benefici es pot maquillar amb decisions comptables i la caixa molt menys.",
+  ex:"Si Aula Viva capitalitza el desenvolupament del programari, el resultat millora aquest any (no es carrega tota la despesa) però la caixa és exactament la mateixa. El benefici ha pujat sense que hi hagi ni un euro més al banc."},
+ {n:"Fons de maniobra i cicle de conversió d'efectiu",
+  what:"Els diners atrapats en el funcionament diari: el que et deuen els clients, més les existències, menys el que deus als proveïdors. El cicle mesura quants dies passen des que pagues fins que cobres.",
+  when:"És la variable que decideix si créixer et mata o t'enriqueix. Un negoci que cobra abans de pagar (com un supermercat o una subscripció anticipada) es finança sol.",
+  trap:"Creixent, el fons de maniobra creix amb tu i xucla caixa. Per això moltes empreses fan fallida CREIXENT: cada venda nova requereix diners abans de generar-ne.",
+  ex:"Si Aula Viva cobra la subscripció anual per endavant al setembre, el cicle és negatiu i el creixement genera caixa. Si factura a 90 dies a l'administració pública, el creixement la consumeix. La mateixa empresa amb el mateix producte, i dos destins financers oposats."},
+ {n:"Marge de contribució, marge brut i EBITDA",
+  what:"El marge de contribució és el que queda de cada venda després dels costos variables; és el que serveix per cobrir els costos fixos. El marge brut resta el cost directe del producte. L'EBITDA és el resultat abans d'interessos, impostos i amortitzacions.",
+  when:"El marge de contribució és la xifra clau per decidir preus i volum. El marge brut compara la salut estructural entre empreses del mateix sector.",
+  trap:"L'EBITDA es va popularitzar perquè afavoreix empreses molt endeutades i molt intensives en capital: ignora precisament els seus dos grans costos. Charlie Munger deia que quan sentis EBITDA, hi substitueixis mentalment «benefici de mentida». Útil per comparar operacions, perillós com a mesura d'èxit.",
+  ex:"Aula Viva té un marge brut del 85% (típic del programari) però un marge de contribució real del 60% si hi imputes el suport tècnic per client. Confondre els dos fa que sembli que hi ha molt més marge per invertir en captació del que realment hi ha."},
+ {n:"Palanquejament operatiu",
+  what:"La proporció de costos fixos respecte als variables. Com més fixos, més s'amplifica cada variació de vendes sobre el benefici, en les dues direccions.",
+  when:"Per entendre la volatilitat del teu negoci i per decidir entre contractar plantilla (fix) o subcontractar (variable).",
+  trap:"S'associa amb el creixement, però és perillosament simètric: la mateixa estructura que multiplica el benefici quan puges, multiplica les pèrdues quan baixes. En sectors cíclics ha enfonsat empreses sanes.",
+  ex:"Amb el contingut ja creat (cost fix), cada centre nou d'Aula Viva és quasi tot marge. Però si les vendes cauen un 20%, el benefici pot esfumar-se completament, perquè els costos no baixen amb elles."},
+ {n:"Ràtios i descomposició DuPont",
+  what:"ROE = marge × rotació d'actius × palanquejament financer. Descompon la rendibilitat sobre fons propis en les seves tres causes.",
+  when:"Per no quedar-te amb un número global. Dues empreses amb el mateix ROE poden tenir models oposats: una de marge alt i rotació baixa (luxe) i una de marge prim i rotació alta (supermercat).",
+  trap:"Un ROE alt pot venir simplement d'estar molt endeutat, no de ser millor negoci. Sense descompondre'l, el deute es disfressa d'excel·lència. Preferiblement, mira també el ROIC, que no depèn de l'estructura de finançament.",
+  ex:"Si Aula Viva mostra un ROE del 30% però és perquè té molt poc capital propi i molt préstec, aquest 30% no mesura qualitat del negoci sinó exposició al risc."}
+ ]},
+{id:"cli", n:"III", c:"var(--cli)", t:"Clients i unit economics",
+ sub:"Com es crea, es capta i es reté valor. On la majoria de projectes digitals moren sense entendre per què.",
+ fw:[
+ {n:"Segmentació, targeting i posicionament (STP)",
+  what:"Dividir el mercat en grups amb necessitats homogènies, triar a quins t'adreces i definir quin lloc vols ocupar a la seva ment respecte a les alternatives.",
+  when:"Abans de qualsevol decisió de producte o preu. La segmentació mal feta és la causa arrel de la majoria de màrqueting que no funciona.",
+  trap:"Segmentar per dades demogràfiques (edat, sexe, territori) sol ser inútil perquè no explica el comportament. Segmentar per necessitat, context o disposició a pagar sí. I el posicionament només existeix si és RELATIU: dir que ets de qualitat no posiciona res.",
+  ex:"«Docents» no és un segment: no tenen res en comú operativament. «Caps de departament de secundària pública que han de justificar la programació davant d'inspecció» sí que ho és — tenen un problema concret, un pressupost i un calendari."},
+ {n:"Jobs to be done",
+  what:"La gent no compra productes: contracta solucions per a una feina que ha de fer. Cal entendre quina feina, en quin context i quines alternatives té.",
+  when:"Per descobrir la competència real, que sovint no és qui creus. Els competidors són totes les maneres de fer aquella feina, incloent-hi no fer res.",
+  trap:"És fàcil convertir-lo en una frase bonica i buida. La versió rigorosa exigeix entrevistes sobre compres reals ja fetes, no sobre intencions futures, perquè la gent és pèssima predint què farà.",
+  ex:"La feina que contracta un docent no és «tenir bons materials»: és «arribar a divendres amb les classes preparades sense treballar el cap de setmana». Vist així, el competidor principal no és una altra plataforma: és fotocopiar el que va fer l'any passat, que és gratis i instantani."},
+ {n:"CAC, LTV i el període de recuperació",
+  what:"El CAC és el que et costa captar un client (tot el màrqueting i vendes dividit pels clients nous). L'LTV és el marge que genera durant tota la relació. El payback és els mesos que trigues a recuperar el CAC.",
+  when:"Són els indicadors que decideixen si un negoci recurrent és viable. La referència habitual del capital risc és LTV/CAC superior a 3 i payback inferior a 12 mesos.",
+  trap:"L'LTV es calcula amb supòsits sobre el futur (quant durarà el client) i és molt fàcil d'inflar: n'hi ha prou amb assumir un churn optimista. A més, el CAC creix a mesura que creixes, perquè primer captes els clients fàcils. Un LTV/CAC de 5 amb dades de tres mesos no significa gairebé res. I l'LTV s'ha de calcular sobre MARGE, no sobre ingressos: és l'error més freqüent.",
+  ex:"Aula Viva: 40 € de CAC, 12 €/mes d'ingrés amb un 60% de marge = 7,2 €/mes de contribució. Payback: 5,6 mesos. Amb un churn del 4% mensual, el client dura ~25 mesos i l'LTV és de ~180 €. Ràtio 4,5. Viable, mentre el churn no pugi."},
+ {n:"Churn, retenció i cohorts",
+  what:"El churn és el ritme de pèrdua de clients. Les cohorts agrupen els clients pel mes en què van entrar i segueixen el seu comportament al llarg del temps.",
+  when:"Les cohorts són l'única manera honesta de saber si el producte millora: la mitjana global barreja clients nous i antics i amaga els problemes.",
+  trap:"Un creixement fort pot ocultar un churn terrible durant molts mesos, perquè els clients nous compensen els que marxen. Quan la captació s'alenteix, el forat apareix de cop. Mirar només el total de clients és el pitjor indicador possible.",
+  ex:"Si la cohort de setembre reté un 70% als sis mesos i la de gener només un 45%, alguna cosa ha empitjorat — potser el producte, potser el tipus de client que s'ha començat a captar. El total d'usuaris podria estar creixent igualment i no veuries res."},
+ {n:"Fixació de preus",
+  what:"Tres mètodes: per costos (afegir marge), per competència (mirar què cobren els altres) i per valor (què li estalvia o li aporta al client).",
+  when:"El preu és la palanca de rendibilitat més potent que existeix i la menys treballada. Una pujada del 5% en preu sol millorar més el benefici que una reducció del 5% en costos.",
+  trap:"Fixar preus per costos és l'error de manual: el teu cost és irrellevant per al client. I baixar preus per competir en un sector amb barreres baixes acaba en una guerra que guanya qui té més esquena financera, que probablement no ets tu.",
+  ex:"Si Aula Viva estalvia 3 hores setmanals a un docent, el valor anual és enorme comparat amb 12 €/mes. El preu està ancorat al que costen altres eines, no al valor. Sovint el problema no és que sigui car, sinó que és massa barat per poder finançar la captació."},
+ {n:"L'embut i els seus colls d'ampolla",
+  what:"El recorregut des que algú et descobreix fins que compra i repeteix: visibilitat, interès, prova, compra, retenció, recomanació.",
+  when:"Per identificar ON es perd la gent, en comptes d'optimitzar a cegues. La millora ha d'atacar el pas amb pitjor conversió, no el més còmode.",
+  trap:"Optimitzar un pas que no és el coll d'ampolla no serveix de res: és la teoria de restriccions aplicada al màrqueting. Si el 0,5% dels visitants es registra però només arriben 50 visites al mes, doblar la conversió et dona mig usuari més.",
+  ex:"Un blog amb molt contingut i poques visites té el coll d'ampolla a dalt de tot de l'embut. Escriure més articles millora un pas que no és el limitant. La feina real és la descoberta, encara que sigui la part menys agradable."}
+ ]},
+{id:"val", n:"IV", c:"var(--val)", t:"Valoració i decisions d'inversió",
+ sub:"Com es decideix si val la pena posar diners en alguna cosa, i com es reparteix el pastís quan entren inversors.",
+ fw:[
+ {n:"Valor temporal dels diners",
+  what:"Un euro avui val més que un euro d'aquí un any, perquè el pots invertir i perquè el futur és incert. Descomptar és traduir diners futurs a euros d'avui.",
+  when:"És la base de tota valoració. Sense això, comparar una inversió que paga aviat amb una que paga tard no té sentit.",
+  trap:"La taxa de descompte sembla un detall tècnic però ho decideix tot: canviar-la del 8% al 12% pot convertir un projecte excel·lent en un de mediocre. Qui tria la taxa, tria el resultat.",
+  ex:"Els 50.000 € que Aula Viva podria guanyar l'any 5 valen, descomptats al 12%, uns 28.000 € d'avui. Gairebé la meitat. Les promeses llunyanes valen molt menys del que semblen."},
+ {n:"VAN i TIR",
+  what:"El VAN és la suma de tots els fluxos futurs descomptats menys la inversió inicial: si és positiu, el projecte crea valor. La TIR és la taxa que faria el VAN igual a zero.",
+  when:"El VAN és el criteri correcte per decidir. La TIR és útil per comunicar perquè és un percentatge i s'entén de seguida.",
+  trap:"La TIR enganya de tres maneres: assumeix que reinverteixes els fluxos a la mateixa taxa (irreal), pot donar diversos resultats si hi ha fluxos negatius intercalats, i ignora l'escala — una TIR del 60% sobre 1.000 € val menys que una del 20% sobre 500.000 €. Quan VAN i TIR discrepen, fes cas del VAN.",
+  ex:"Invertir 20.000 € en contingut nou que genera 6.000 €/any durant 5 anys té una TIR d'aproximadament el 15%. Si el teu cost de capital és del 10%, crea valor; si és del 20% (perquè el risc és alt), el destrueix."},
+ {n:"Cost de capital i WACC",
+  what:"La rendibilitat mínima que ha de donar un projecte per compensar el risc. El WACC és la mitjana ponderada del cost del deute i del cost dels fons propis.",
+  when:"És la taxa de descompte que has de fer servir. Per a un projecte personal, la referència honesta és el teu cost d'oportunitat: què faries amb aquests diners i aquest temps si no.",
+  trap:"El cost dels fons propis és molt superior al del deute (l'inversor assumeix més risc), cosa que sorprèn a molta gent que veu el capital propi com a gratis. No ho és: només és un cost que no es factura. Aquest és probablement l'error conceptual més estès entre emprenedors.",
+  ex:"Si dediques 400 hores l'any a un projecte que podries dedicar a classes particulars a 25 €/h, el projecte arrossega un cost d'oportunitat de 10.000 € anuals que no apareix enlloc als teus comptes — però és tan real com una factura."},
+ {n:"Valoració per múltiples i per descompte de fluxos",
+  what:"Per múltiples: valores comparant amb transaccions semblants (per exemple, tantes vegades l'ARR o l'EBITDA). Per DCF: projectes els fluxos futurs i els descomptes.",
+  when:"Els múltiples serveixen per a una estimació ràpida i per negociar. El DCF obliga a explicitar els supòsits, i aquest és el seu valor real més que el número final.",
+  trap:"Un DCF és extraordinàriament sensible als supòsits: la major part del valor sol estar al valor residual, que és la part més especulativa de tot el model. I els múltiples reflecteixen el sentiment del mercat en un moment concret, no el valor intrínsec: el 2021 i el 2023 tenien múltiples radicalment diferents per a les mateixes empreses.",
+  ex:"Una EdTech amb 200.000 € d'ARR creixent al 40% podria valorar-se entre 3× i 8× ARR segons el moment del mercat, el churn i qui compra. El rang és tan ampli que el número concret importa menys que entendre què el mou."},
+ {n:"Taula de capital, dilució i preferències",
+  what:"La taula de capital reparteix la propietat. Cada ronda et dilueix. Les preferències de liquidació determinen qui cobra primer i quant en cas de venda.",
+  when:"Abans de signar res. La valoració que et proposen importa molt menys que les condicions que hi van associades.",
+  trap:"Una valoració alta amb una preferència de liquidació de 2× i participativa pot deixar-te sense res en una venda moderada, mentre que una valoració més baixa amb 1× no participativa et deixa molt millor. La xifra del titular és la que menys informació conté. Aquest és el mateix mecanisme que fa que les accions de crowdfunding sense drets valguin molt menys del que semblen.",
+  ex:"Si un inversor posa 500.000 € amb preferència 2× i l'empresa es ven per 1.000.000 €, cobra 1.000.000 € i els fundadors es queden a zero — tot i tenir la majoria de les accions sobre el paper."},
+ {n:"Opcions reals",
+  what:"El valor de poder decidir més endavant amb més informació: ampliar si va bé, abandonar si va malament, ajornar fins que s'aclareixi alguna cosa.",
+  when:"En projectes molt incerts, el VAN clàssic infravalora les inversions petites que compren informació i obren portes.",
+  trap:"És fàcil justificar qualsevol despesa dient que compra opcionalitat. L'opció només té valor si de veritat pots i penses actuar segons el resultat; si faràs el mateix passi el que passi, no has comprat cap opció.",
+  ex:"Gastar 2.000 € en un pilot amb tres escoles té un VAN directe negatiu, però compra informació que pot evitar-te invertir 40.000 € en el producte equivocat. Això sí que és una opció real."}
+ ]},
+{id:"ope", n:"V", c:"var(--ope)", t:"Operacions i execució",
+ sub:"Com es converteix una bona idea en una cosa que s'entrega a temps i amb qualitat. La part menys glamurosa i la que més empreses enfonsa.",
+ fw:[
+ {n:"Teoria de les restriccions",
+  what:"Tot sistema té un coll d'ampolla que en limita el rendiment global. Millorar qualsevol altra part no millora el resultat: només acumula treball en curs davant de la restricció.",
+  when:"Sempre que vulguis millorar un procés. El mètode és: identifica la restricció, explota-la al màxim, subordina-hi tota la resta i només després amplia-la. I quan l'has ampliada, torna a començar, perquè la restricció s'haurà mogut.",
+  trap:"És contraintuïtiu perquè premia deixar recursos inactius: mantenir tothom ocupat al 100% és sovint el que empitjora el sistema. Costa d'acceptar culturalment, sobretot per part de qui mesura la productivitat en hores ocupades. També és fàcil confondre la restricció amb el que és més visible o més sorollós.",
+  ex:"Si el coll d'ampolla d'Aula Viva és la validació pedagògica del contingut, contractar més programadors només genera més codi esperant validació. Sembla progrés i és inventari."},
+ {n:"Treball en curs i llei de Little",
+  what:"El temps de cicle és igual al treball en curs dividit pel ritme de sortida. Si tens moltes coses començades alhora, cada una triga més a acabar-se, encara que treballis igual de fort.",
+  when:"Quan tot va lent i ningú entén per què, tot i que tothom està ocupadíssim. La solució sol ser començar menys coses, no treballar més hores.",
+  trap:"Anar-hi en contra és el reflex natural: quan els terminis s'allarguen, la reacció instintiva és acceptar més feina en paral·lel per no aturar ningú, cosa que allarga encara més tots els terminis. També s'ignora el cost del canvi de context, que és molt superior al que la gent estima.",
+  ex:"Si Aula Viva té set funcionalitats a mig fer, cap arriba als usuaris. Limitar-ho a dues alhora no redueix el que es produeix en un any, però sí el temps que triga cada cosa a estar disponible — i el que arriba abans, abans genera ingressos i aprenentatge."},
+ {n:"Capacitat, variabilitat i teoria de cues",
+  what:"Quan la utilització d'un recurs s'acosta al 100%, els temps d'espera no creixen de manera proporcional sinó exponencial. La variabilitat (de la demanda o del temps de tasca) amplifica l'efecte.",
+  when:"Per dimensionar equips i serveis. Explica per què un hospital, un servei d'atenció al client o un equip de desenvolupament col·lapsa molt abans d'arribar al seu límit teòric.",
+  trap:"Es planifica com si tot fos previsible i mitjà, i la mitjana amaga la variabilitat. Un equip planificat al 95% de capacitat no té cap marge per a l'imprevist, i l'imprevist és estadísticament segur.",
+  ex:"Si les dues persones d'Aula Viva estan compromeses al 100% amb el pla, la primera incidència greu de setembre (i al setembre n'hi ha sempre) fa caure tot el calendari. Planificar al 70-80% no és mandra: és disseny de sistema."},
+ {n:"Lean i eliminació de malbaratament",
+  what:"Identificar sistemàticament les activitats que no aporten valor al client: sobreproducció, esperes, retreball, moviments innecessaris, inventari, processos excessius.",
+  when:"Per treure greix d'un procés sense sacrificar qualitat, i com a disciplina de millora contínua.",
+  trap:"Fer-lo servir com a coartada per retallar personal el pervertix completament; la versió original de Toyota depenia de la seguretat de l'equip per funcionar. I un sistema massa magre és fràgil: la pandèmia va mostrar què passa amb cadenes de subministrament optimitzades sense cap folgança. Eficiència i resiliència es paguen l'una a l'altra.",
+  ex:"El malbaratament més gran d'una EdTech petita sol ser el retreball: fer contingut que ningú fa servir. Validar amb tres docents abans de produir vint unitats didàctiques estalvia més que qualsevol optimització del procés de producció."},
+ {n:"Qualitat: prevenció contra correcció",
+  what:"El cost de corregir un defecte creix per ordres de magnitud com més tard es detecta: és barat al disseny, car en producció i devastador quan el troba el client.",
+  when:"Per justificar la inversió en validació prèvia, que sempre sembla una despesa evitable quan hi ha pressa.",
+  trap:"Portat a l'extrem porta a la paràlisi: buscar la qualitat perfecta abans de llançar res impedeix el contacte amb el mercat, que és l'única font d'informació fiable. La disciplina útil és distingir què ha de sortir perfecte (dades, seguretat, factures) del que ha de sortir aviat i imperfecte.",
+  ex:"Un error en un material curricular detectat per un inspector costa la relació amb el centre. El mateix error detectat en una revisió interna costa vint minuts. Però esperar a tenir el catàleg complet i impecable abans de vendre res costa l'empresa."},
+ {n:"Fer o comprar (make or buy)",
+  what:"Decidir quines activitats fas internament i quines externalitzes, segons si són nuclears per al teu avantatge competitiu i segons el cost de coordinació.",
+  when:"Combina-ho amb la cadena de valor: internalitza el que et diferencia, compra el que és commodity.",
+  trap:"El càlcul purament de cost enganya, perquè oblida els costos de transacció: coordinar, supervisar, corregir i la dependència del proveïdor. I externalitzar una activitat nuclear pot buidar-te de capacitat de manera irreversible: molts fabricants que van externalitzar la producció van descobrir anys després que havien creat el seu competidor.",
+  ex:"Aula Viva ha de fer internament el disseny curricular (és el seu avantatge) i comprar allotjament, passarel·la de pagament i suport de primer nivell. Dedicar setmanes a muntar infraestructura pròpia és internalitzar precisament el que no diferencia."}
+ ]},
+{id:"per", n:"VI", c:"var(--per)", t:"Persones i organització",
+ sub:"L'estratègia la executen persones amb els seus incentius, les seves pors i les seves rutines. Aquí és on la majoria de plans es desfan.",
+ fw:[
+ {n:"Incentius i el problema principal-agent",
+  what:"Qui decideix (l'agent) i qui suporta les conseqüències (el principal) sovint no són la mateixa persona, i els seus interessos divergeixen. Els incentius alineen o destrueixen segons com es dissenyin.",
+  when:"En qualsevol sistema de comissions, objectius o bonus. La pregunta correcta és quin comportament estàs premiant realment, no quin voldries premiar.",
+  trap:"Mesurar el que és fàcil de mesurar en comptes del que importa. Un comercial amb objectiu de vendes tancarà contractes amb clients que faran churn als tres mesos, perquè el churn no és problema seu. Llei de Goodhart: quan una mesura es converteix en objectiu, deixa de ser una bona mesura.",
+  ex:"Pagar per centres captats fa créixer el nombre de centres i esfondra la retenció. Pagar per centres actius al cap d'un any alinea molt millor, encara que sigui més incòmode de gestionar."},
+ {n:"Motivació intrínseca i extrínseca",
+  what:"L'extrínseca ve de recompenses externes (diners, reconeixement); la intrínseca, de l'autonomia, el domini i el propòsit. Funcionen de manera diferent segons el tipus de tasca.",
+  when:"Per a tasques mecàniques i repetitives, els incentius econòmics funcionen bé. Per a tasques creatives o cognitives, poden empitjorar el rendiment.",
+  trap:"L'efecte de desplaçament: pagar per una cosa que algú feia per gust pot destruir la motivació original i fer-la irrecuperable. És el cas de la multa de la guarderia — convertir una obligació moral en un preu que es pot pagar.",
+  ex:"Si els docents comparteixen materials a Aula Viva per orgull professional i comunitat, introduir un pagament per material pot reduir-ne la qualitat i el volum, no augmentar-los."},
+ {n:"Estructura, coordinació i llei de Conway",
+  what:"L'estructura organitzativa determina els canals de comunicació, i aquests acaben determinant la forma del producte. Conway ho va formular així: les organitzacions dissenyen sistemes que reprodueixen la seva pròpia estructura de comunicació.",
+  when:"En decidir com organitzar equips. Si vols un producte integrat, no muntis equips que no es parlen.",
+  trap:"Es reorganitza sovint com a substitut d'una decisió estratègica difícil: la reorganització dona sensació d'acció sense haver de triar què fer. I cada reorganització té un cost de sis a dotze mesos de productivitat que ningú comptabilitza.",
+  ex:"Si a Aula Viva la persona de producte i la de contingut treballen per separat, el resultat serà una eina potent amb materials mediocres o al revés. La qualitat de la integració entre les dues és el producte."},
+ {n:"El cost real d'una contractació errònia",
+  what:"Un error de contractació no costa el sou: costa la selecció, la formació, la productivitat perduda, l'efecte sobre l'equip, la sortida i tornar a començar. Les estimacions solen situar-lo entre sis mesos i dos anys de salari.",
+  when:"Per justificar processos de selecció més lents i períodes de prova reals, sobretot en equips petits on una persona és un percentatge enorme de la capacitat.",
+  trap:"La pressa és el principal factor de risc: es contracta quan ja fa mesos que falta gent, i llavors s'accepta el primer candidat viable. També hi ha el biaix de similitud, que fa que tendim a contractar gent que se'ns assembla i a empobrir la diversitat de criteri de l'equip.",
+  ex:"En un equip de dos, una contractació errònia no és un 33% del problema: és el 100% del temps del fundador dedicat a gestionar-la en comptes de vendre."},
+ {n:"Cultura i seguretat psicològica",
+  what:"La cultura és el comportament que es tolera i el que es premia, no el que hi ha escrit a la paret. La seguretat psicològica és la creença compartida que es poden dir coses incòmodes sense represàlia.",
+  when:"És el predictor més robust del rendiment d'equips en tasques complexes, segons la recerca d'Amy Edmondson i les dades internes que Google va publicar del seu projecte Aristòtil.",
+  trap:"Es confon amb amabilitat o absència de conflicte, i és gairebé el contrari: la seguretat psicològica permet el conflicte productiu i el desacord obert. Un equip on ningú discuteix no és segur, és silenciós.",
+  ex:"Si a Aula Viva ningú s'atreveix a dir que la funcionalitat estrella no la fa servir ningú, l'error es descobrirà quan ja s'hi hagin cremat sis mesos."},
+ {n:"Gestió del canvi",
+  what:"Els models clàssics (Kotter) proposen crear sentit d'urgència, formar una coalició, comunicar una visió, generar victòries ràpides i consolidar.",
+  when:"Quan la dificultat no és tècnica sinó d'adopció. Les eines educatives no fracassen per la tecnologia: fracassen perquè els docents no les incorporen a la seva rutina.",
+  trap:"Es presenten com a receptes seqüencials i tenen poc suport empíric rigorós; funcionen millor com a llista de comprovació que com a mètode. I la urgència fabricada es detecta de seguida i genera cinisme.",
+  ex:"Vendre a un centre no és vendre al director: és aconseguir que vint docents canviïn la seva rutina de divendres. Si el producte no els estalvia feina la primera setmana, la implantació mor encara que el contracte estigui signat."}
+ ]},
+{id:"neg", n:"VII", c:"var(--neg)", t:"Negociació",
+ sub:"Una habilitat que es pot aprendre amb mètode, i on la preparació val molt més que el talent o la fermesa.",
+ fw:[
+ {n:"BATNA i ZOPA",
+  what:"La BATNA és la teva millor alternativa si no hi ha acord; és la font real del teu poder. La ZOPA és la franja on hi ha acord possible entre el mínim d'un i el màxim de l'altre.",
+  when:"Abans de qualsevol negociació important. Millorar la teva BATNA abans de seure't a la taula val més que qualsevol tàctica un cop hi ets.",
+  trap:"Confondre agressivitat amb poder. Qui no té alternativa no té poder per molt fort que parli, i normalment es nota. I si no estimes la BATNA de l'altre, negocies a cegues: potser està molt més desesperat que tu.",
+  ex:"Si Aula Viva depèn d'un sol gran client per sobreviure, no negocia: accepta. Tenir tres clients mitjans en comptes d'un de gran és una decisió de negociació, no només de diversificació comercial."},
+ {n:"Crear valor abans de repartir-lo",
+  what:"Tota negociació té una part distributiva (repartir un pastís fix) i una d'integrativa (fer el pastís més gran trobant intercanvis on cadascú valora coses diferents).",
+  when:"Sempre que hi hagi més d'una variable en joc: preu, termini, exclusivitat, suport, volum. Amb una sola variable, tot és distributiu i algú perd.",
+  trap:"L'assumpció del pastís fix és el biaix més estès en negociació: assumim que el que guanya l'altre ho perdem nosaltres, quan sovint valorem coses diferents. Regatejar massa aviat destrueix valor que ja no es recupera.",
+  ex:"Un centre vol un descompte del 30%. En comptes de regatejar el preu, ofereix el preu íntegre amb pagament anual anticipat i compromís de dos anys: el centre guanya previsibilitat pressupostària i Aula Viva millora dràsticament el cicle de caixa. Tots dos guanyen sense tocar el preu."},
+ {n:"Interessos, no posicions",
+  what:"La posició és el que algú demana; l'interès és per què ho demana. Fisher i Ury (Harvard) sostenen que negociar sobre interessos obre solucions que negociar sobre posicions tanca.",
+  when:"Quan sembla que no hi ha acord possible. La pregunta clau és per què ho necessites així, i sol revelar restriccions que es poden resoldre d'una altra manera.",
+  trap:"El mètode assumeix bona fe i comunicació oberta, i hi ha contraparts que exploten això. També hi ha cultures i contextos on preguntar pels interessos es llegeix com a debilitat. Cal saber quan aplicar-lo i quan protegir-se.",
+  ex:"Un director demana un descompte (posició). El seu interès real pot ser que la despesa entri en un exercici pressupostari concret. Ajustar la data de facturació pot resoldre el problema sense tocar el preu."},
+ {n:"Ancoratge i primera oferta",
+  what:"La primera xifra concreta condiciona tota la negociació posterior, encara que les dues parts sàpiguen que és arbitrària.",
+  when:"Si estàs ben informat del valor de mercat, obrir sol ser avantatjós. Si estàs mal informat, deixar obrir l'altre et dona informació valuosa.",
+  trap:"Obrir amb una xifra agressiva abans d'haver explorat interessos tanca la porta a l'intercanvi integratiu i pot fer descarrilar la conversa. I si la teva àncora és absurda perds credibilitat, que és molt més difícil de recuperar que uns quants punts de preu.",
+  ex:"Si Aula Viva entra dient 12 €/mes perquè és el que cobren els altres, ha ancorat la conversa en el cost d'eines comparables. Si entra parlant de les hores que estalvia a cada docent, ancora en el valor, que és un terreny molt més favorable."},
+ {n:"Negociació interna i parts múltiples",
+  what:"Poques negociacions són entre dues persones. Sovint la teva contrapart ha de convèncer altres persones a la seva organització, i tu també.",
+  when:"En vendes B2B i en qualsevol acord dins d'una institució. Cal identificar qui decideix, qui influeix, qui paga i qui pot vetar — sovint són quatre persones diferents.",
+  trap:"Convèncer l'interlocutor i creure que ja està fet. Molts acords moren perquè el teu interlocutor no tenia capacitat de decisió i no tenia arguments per defensar-ho internament. Part de la teva feina és donar-li aquests arguments.",
+  ex:"En un institut, qui decideix pot ser la direcció, qui influeix el cap de departament, qui paga l'AMPA o el consell escolar, i qui pot vetar el responsable de protecció de dades. Ignorar-ne un de sol tomba el contracte."},
+ {n:"Tàctiques dures i com respondre-hi",
+  what:"Pressió de temps artificial, autoritat limitada fingida, la tècnica del bo i el dolent, o reobrir punts ja tancats al final.",
+  when:"Reconèixer-les és el 80% de la defensa. Anomenar la tàctica en veu alta i amb calma sol desactivar-la.",
+  trap:"Respondre-hi amb la mateixa moneda escala el conflicte i sol destruir valor per a tots dos. I hi ha una línia ètica: el que és tàctica dura i el que és engany o coacció són coses diferents, i la segona a més d'immoral acostuma a ser mal negoci a llarg termini, perquè la reputació és l'actiu que més triga a construir-se.",
+  ex:"Si un client diu que ha d'ancorar la decisió avui perquè demà se li acaba el pressupost, val la pena comprovar-ho. Cedir sota pressió de temps fixa un precedent que pagaràs en totes les renovacions futures."}
+ ]},
+{id:"dec", n:"VIII", c:"var(--dec)", t:"Decisió sota incertesa",
+ sub:"El que realment distingeix un bon directiu: decidir bé amb informació incompleta, i no confondre un bon procés amb un bon resultat.",
+ fw:[
+ {n:"Valor esperat i arbres de decisió",
+  what:"Multiplicar cada resultat possible per la seva probabilitat i sumar-ho. L'arbre de decisió representa gràficament les branques i permet calcular cap enrere.",
+  when:"Quan hi ha diversos escenaris amb probabilitats estimables. Obliga a explicitar els supòsits, que és el valor principal de l'exercici, més que el número final.",
+  trap:"El valor esperat assumeix que pots repetir l'aposta moltes vegades. Si una branca et deixa fora del joc (ruïna), el valor esperat positiu és irrellevant: no hi haurà segona tirada. Aquesta és la diferència entre una aposta bona i una aposta acceptable, i és el que el càlcul no et diu.",
+  ex:"Una campanya amb un 30% de probabilitat de guanyar 60.000 € i un 70% de perdre 8.000 € té un valor esperat positiu (+12.400 €). Però si perdre 8.000 € et deixa sense poder pagar nòmines, no la pots fer per molt positiu que sigui el càlcul."},
+ {n:"Probabilitat de referència (visió exterior)",
+  what:"Abans d'estimar les teves possibilitats, mira què va passar a casos comparables. Kahneman ho anomenava la visió exterior, per oposició a la visió interior basada en els detalls del teu cas.",
+  when:"En qualsevol previsió de terminis, costos o èxit. La visió exterior és sistemàticament més precisa que la interior, i gairebé ningú la fa servir.",
+  trap:"Tots creiem que el nostre cas és especial i que les estadístiques generals no ens apliquen — la fal·làcia de la planificació. La correcció és partir de la taxa base i ajustar-la lleugerament, no partir del teu optimisme i ajustar-lo a la baixa.",
+  ex:"Si el 90% de les EdTech petites no arriben als 500.000 € d'ARR, aquesta és la teva taxa base. Els arguments sobre per què tu ets diferent han de ser molt més forts que un doctorat i moltes ganes per moure aquesta xifra."},
+ {n:"Decisions reversibles i irreversibles",
+  what:"Bezos les va anomenar de tipus 2 i tipus 1. Les reversibles s'han de prendre ràpid i amb poca informació; les irreversibles, lentament i amb molta.",
+  when:"Per calibrar quanta anàlisi mereix cada decisió. La major part de les decisions són reversibles i es tracten com si no ho fossin, cosa que paralitza.",
+  trap:"L'error simètric també existeix: tractar com a reversible una decisió que no ho és. Signar una exclusivitat, acomiadar algú, agafar un soci o cedir preferències de liquidació són decisions de tipus 1 disfressades de tràmit.",
+  ex:"Canviar el preu de la subscripció és reversible: prova-ho un mes. Signar amb un inversor amb preferència 2× no ho és: t'acompanyarà fins a la sortida. Dedica-hi anàlisi en proporció inversa a la facilitat de desfer-ho."},
+ {n:"Experimentació i proves A/B",
+  what:"Dividir el públic en grups i comparar el comportament davant de dues variants, en comptes de discutir opinions.",
+  when:"Quan el volum ho permet i el resultat és mesurable. Substitueix la discussió jeràrquica (decideix qui cobra més) per l'evidència.",
+  trap:"Amb mostres petites, la majoria de diferències que veus són soroll: cal molt més volum del que la gent creu per detectar millores del 10%. També hi ha el problema de mirar els resultats contínuament i aturar l'experiment quan surt el que volies, que és una manera segura de convèncer-se de qualsevol cosa. I optimitzar micro-detalls pot amagar que el problema és estratègic.",
+  ex:"Amb 400 visites al mes, provar dos títols de landing no dona cap conclusió estadística. A aquesta escala, cinc entrevistes en profunditat aporten molta més informació que qualsevol test A/B."},
+ {n:"Escenaris i anàlisi de sensibilitat",
+  what:"En comptes d'una previsió única, construir escenaris (pessimista, base, optimista) i identificar quines variables mouen més el resultat.",
+  when:"Sempre que facis un pla financer. La pregunta útil no és quant sortirà, sinó quina variable pot fer que això falli.",
+  trap:"Els tres escenaris solen ser el mateix pla optimista amb tres decoracions: el pessimista rarament ho és de veritat. Una prova honesta: el teu escenari pessimista inclou que el producte no funcioni? Si no, no és pessimista, és moderat.",
+  ex:"Al pla d'Aula Viva, la variable que més mou el resultat no és el preu ni el CAC: és el churn. Una anàlisi de sensibilitat ho hauria mostrat abans de dedicar mesos a optimitzar la captació."},
+ {n:"Premortem i pensament de grup",
+  what:"Abans de decidir, imagina que ja han passat dos anys i el projecte ha fracassat estrepitosament, i escriu per què. Klein el va proposar com a correcció de l'excés de confiança col·lectiu.",
+  when:"Just abans de comprometre recursos importants. Funciona perquè canvia la pregunta de si pot fallar (que ningú vol respondre) a per què va fallar (que allibera la crítica).",
+  trap:"Si el líder parla primer o mostra la seva preferència, el premortem es converteix en teatre. Cal que cadascú escrigui en silenci abans de compartir res, o el pensament de grup s'ho empassa tot.",
+  ex:"Un premortem abans d'obrir Mèxic hauria fet emergir el que ningú diu en veu alta: que el currículum és diferent, que no hi ha xarxa comercial i que l'equip són dues persones que ja no donen l'abast a Catalunya."}
+ ]}
+
+];
+
+/* ============================ EL CAS ============================ */
+const CASES = {
+aula:{name:"Aula Viva", tag:"EdTech · actius lleugers",
+ intro:"Una EdTech catalana: marge alt, capex baix, el problema és trobar clients i retenir-los. A cada punt tries una decisió, en veus la conseqüència i després pots obrir l'anàlisi completa amb les tres opcions comparades.",
+ steps:[
+{mod:"Estratègia", c:"var(--est)", t:"On plantar la bandera",
+ set:["Ets fundadora d'Aula Viva. Tens una eina que genera i adapta materials curriculars amb IA, alineada amb la LOMLOE i el currículum català. Sou dues persones i teniu 15.000 € d'estalvis.",
+      "Has detectat tres mercats possibles i no teniu recursos per atacar-ne més d'un."],
+ figs:[["Estalvis disponibles","15.000 €"],["Equip","2 persones"],["Marge de temps abans de quedar-vos sense","~10 mesos"]],
+ q:"Quin mercat ataqueu primer?",
+ opts:[
+  {l:"Escoles públiques, via concursos i administració","o":"Tiquets grans (3.000-8.000 € per centre) però cicles de venda de 9 a 18 mesos i pagament a 90-120 dies. Amb 15.000 € i deu mesos de marge, us quedeu sense caixa abans de cobrar la primera factura. El mercat és bo; el vostre calendari financer no el resisteix."},
+  {l:"Docents individuals, subscripció mensual","o":"Tiquets petits (10-15 €/mes) però venda immediata, cobrament per targeta i validació ràpida del producte. Genera caixa des del primer mes i us ensenya què volen els usuaris. El repte serà el churn: els docents proven molt i abandonen fàcilment."},
+  {l:"Editorials, com a proveïdor tecnològic B2B","o":"Un sol contracte podria resoldre l'any, però depeneu totalment d'un client que us pot substituir, us imposarà el seu ritme i us convertirà en fàbrica a mida. Sense BATNA, no negocieu: accepteu."}],
+ an:["La resposta no surt de quin mercat és més gran, sinó de creuar-lo amb la vostra restricció real: la caixa. Amb deu mesos de marge, un cicle de venda de dotze mesos és matemàticament inviable per bo que sigui el marge.",
+     "Les cinc forces expliquen per què el B2B amb editorials és una trampa: el poder de negociació del client és aclaparador quan és el teu únic client. I la venda a l'administració afegeix un problema de fons de maniobra que mata empreses rendibles.",
+     "El camí B2C no és el més rendible per client, però compra les dues coses que us falten: informació i temps. Cobrar per endavant amb targeta dona un cicle de conversió d'efectiu negatiu, que és el que finança el creixement."],
+ lesson:"L'estratègia correcta depèn de la teva restricció, no del tamany del mercat. Un mercat excel·lent amb un cicle de cobrament que no pots aguantar és un mercat dolent PER A TU."},
+{mod:"Clients · Preu", c:"var(--cli)", t:"Quant cobrar",
+ set:["Sis mesos després teniu 320 docents subscrits a 12 €/mes. El producte funciona i la satisfacció és alta, però el creixement s'ha alentit i el CAC ha pujat de 22 € a 41 € perquè ja heu esgotat els canals gratuïts.",
+      "Sobre la taula hi ha tres moviments de preu."],
+ figs:[["Subscriptors","320"],["Preu actual","12 €/mes"],["Marge de contribució","60%"],["CAC actual","41 €"],["Churn mensual","5,5%"]],
+ q:"Què feu amb el preu?",
+ opts:[
+  {l:"Baixar a 8 €/mes per accelerar el creixement","o":"El marge de contribució per client cau de 7,2 € a 4,8 € mensuals i el payback del CAC passa de 5,7 a 8,5 mesos. Amb un churn del 5,5% el client dura uns 18 mesos, així que encara recupereu — però el marge per finançar la captació es fa tan prim que el creixement s'ofega sol."},
+  {l:"Mantenir 12 € i atacar el churn del 5,5%","o":"És l'única opció que millora TOTES les mètriques alhora. Baixar el churn del 5,5% al 3,5% allarga la vida del client de 18 a 28 mesos i puja l'LTV de ~130 € a ~200 €, sense tocar ni el preu ni el CAC. La galleda foradada era el problema real."},
+  {l:"Pujar a 18 € amb més funcionalitats","o":"El marge per client puja a 10,8 €/mes i el payback baixa a menys de 4 mesos. És defensable si el valor percebut ho acompanya, però amb un churn del 5,5% estàs pujant el preu d'un producte que la gent ja abandona. Primer cal entendre per què marxen."}],
+ an:["Amb un churn del 5,5% mensual, la meitat dels clients ha marxat abans de l'any. Qualsevol discussió de preu abans de resoldre això és optimitzar la part equivocada de l'embut.",
+     "El càlcul honest: LTV = marge mensual ÷ churn. A 12 € amb 60% de marge i 5,5% de churn, són uns 131 €. Amb un CAC de 41 €, la ràtio és 3,2 — just al límit del que es considera sa, i empitjorant.",
+     "Baixar preus en un sector amb barreres d'entrada baixes és començar una guerra que guanya qui té més esquena financera. No sou vosaltres."],
+ lesson:"Quan CAC i churn empitjoren alhora, el preu quasi mai és la palanca correcta. La retenció millora l'LTV sense tocar res més, i és l'única millora que no té contrapartida."},
+{mod:"Finances", c:"var(--fin)", t:"Rendibles i sense diners",
+ set:["Un any i mig després heu obert la línia de centres educatius. Tanqueu l'exercici amb 180.000 € facturats i 22.000 € de benefici. Sobre el paper, un any excel·lent.",
+      "El 15 de gener el banc mostra 6.400 € i les nòmines del mes són de 9.800 €."],
+ figs:[["Facturació anual","180.000 €"],["Benefici comptable","22.000 €"],["Pendent de cobrament","74.000 €"],["Termini mitjà de cobrament","96 dies"],["Termini de pagament a proveïdors","30 dies"],["Caixa disponible","6.400 €"]],
+ q:"Què feu aquesta setmana?",
+ opts:[
+  {l:"Demanar una pòlissa de crèdit al banc","o":"Resol el problema immediat i és el que faria la majoria. Però és cara, i sobretot no toca la causa: el cicle de conversió d'efectiu de 66 dies. Cada euro nou de creixement tornarà a xuclar caixa i tornareu a ser aquí d'aquí sis mesos, amb més deute."},
+  {l:"Canviar les condicions de cobrament dels contractes","o":"És l'arrel del problema. Passar a facturació anual anticipada amb descompte, o dividir en dos pagaments amb el primer per endavant, converteix el cicle en negatiu i fa que el creixement generi caixa en comptes de consumir-la. És més lent d'implantar, però és l'única solució estructural."},
+  {l:"Frenar les vendes fins a normalitzar la caixa","o":"Sona prudent i és exactament al revés: el problema no és vendre massa, és cobrar tard. Frenar les vendes redueix el creixement sense arreglar el cicle, i a més perdeu posició davant dels competidors."}],
+ an:["Aquest és el cas de manual de per què el benefici no és caixa. Els 22.000 € de benefici existeixen, però 74.000 € estan atrapats en clients que encara no han pagat. La comptabilitat de meritació registra la venda; el banc no.",
+     "El cicle de conversió d'efectiu és de 96 dies de cobrament menys 30 de pagament: 66 dies en què finances tu l'operació. Com més creixes, més diners hi ha atrapats. Per això moltes empreses fan fallida creixent.",
+     "La pòlissa no és una mala decisió a curt termini — de fet, probablement caldrà per sobreviure al gener. L'error seria quedar-s'hi i creure que el problema està resolt."],
+ lesson:"Les empreses joves rarament moren per pèrdues; moren per caixa. Abans de buscar finançament, mira si el problema és el teu cicle de cobrament — sovint es resol negociant terminis, no demanant diners."},
+{mod:"Valoració · Inversió", c:"var(--val)", t:"El term sheet",
+ set:["Amb 420.000 € d'ARR i creixent al 45% anual, un fons us ofereix 800.000 € per un 20%, cosa que implica una valoració post-money de 4 milions. Sona molt bé.",
+      "A la lletra petita: preferència de liquidació de 2× participativa, i un pool d'opcions del 12% que s'ha de crear ABANS de la inversió (o sigui, dilueix només els fundadors)."],
+ figs:[["ARR actual","420.000 €"],["Creixement anual","45%"],["Inversió oferta","800.000 € pel 20%"],["Valoració post-money","4.000.000 €"],["Preferència de liquidació","2× participativa"],["Pool d'opcions","12% pre-money"]],
+ q:"Què feu amb l'oferta?",
+ opts:[
+  {l:"Acceptar: la valoració és molt bona","o":"Amb una preferència 2× participativa, en una venda de 5 milions l'inversor cobra primer 1,6 milions i A MÉS participa amb el seu 20% de la resta: s'emporta uns 2,28 milions d'una venda de 5. Els fundadors, després de la dilució del pool, es reparteixen molt menys del que la seva participació nominal suggereix."},
+  {l:"Negociar les condicions abans que la xifra","o":"És el moviment correcte. Canviar 2× participativa per 1× no participativa val molt més que pujar la valoració: en una venda de 5 milions, l'inversor passaria de ~2,28 M a 1 M (o al seu 20%, el que sigui més alt). I moure el pool a post-money reparteix la dilució entre tots."},
+  {l:"Rebutjar i créixer sense capital","o":"Defensable si el negoci ja genera caixa i el mercat no és de guanyador únic. Però amb un competidor finançat pel darrere i un producte amb efectes de xarxa febles, renunciar al capital pot costar-vos la finestra d'oportunitat. Cal comparar-ho amb la vostra BATNA real."}],
+ an:["La valoració és la xifra del titular i és la que menys informació conté. Les condicions determinen qui cobra què, i en la majoria de sortides moderades pesen molt més que el preu per acció.",
+     "Preferència participativa vol dir cobrar dues vegades: primer el múltiple garantit i després la seva part proporcional del que queda. En sortides grans amb prou diferència, l'efecte es dilueix; en sortides moderades, que són la majoria, s'ho emporta gairebé tot.",
+     "El pool d'opcions pre-money és un truc estàndard i legítim, però cal saber-lo llegir: crear un 12% abans de la inversió significa que la dilució la pagueu íntegrament vosaltres, no l'inversor. És, efectivament, una rebaixa encoberta de la valoració."],
+ lesson:"En qualsevol inversió, la pregunta no és a quant em valoren, sinó qui cobra què i en quin ordre. Exactament el mateix que cal mirar en una campanya de crowdfunding abans de posar-hi diners."},
+{mod:"Organització", c:"var(--org)", t:"La comissió que destrueix",
+ set:["Heu contractat dos comercials i els heu posat un incentiu de 300 € per centre educatiu tancat. En sis mesos han tancat 34 centres i l'equip ho celebra.",
+      "Passat un any, les dades de renovació arriben: dels 34 centres, només 11 renoven."],
+ figs:[["Centres tancats","34"],["Incentius pagats","10.200 €"],["Centres que renoven","11 (32%)"],["Cost d'implantació per centre","~900 €"],["Ingrés mitjà per centre","2.400 €/any"]],
+ q:"Com ho corregiu?",
+ opts:[
+  {l:"Substituir la comissió per un salari fix més alt","o":"Elimina l'incentiu perniciós però també l'incentiu a vendre. En una funció on l'esforç és difícil d'observar directament, el fix pur trasllada tot el risc a l'empresa i sol reduir l'activitat comercial. Resol un problema creant-ne un altre."},
+  {l:"Pagar la comissió en dos trams: meitat al tancar, meitat a la renovació","o":"Alinea l'agent amb el principal sense matar l'incentiu. El comercial segueix motivat a vendre, però ara li importa a QUI ven, perquè la meitat del seu cobrament depèn que aquell centre estigui viu d'aquí un any. És la correcció estàndard i funciona."},
+  {l:"Mantenir-ho i millorar el producte perquè retingui més","o":"El producte probablement també necessita millores, però mentre l'incentiu premiï tancar contractes sigui com sigui, els comercials seguiran portant centres mal encaixats. Estàs demanant al producte que compensi un sistema d'incentius que treballa en contra."}],
+ an:["Els números fan la lectura brutal: 34 centres han costat 10.200 € d'incentius més uns 30.600 € d'implantació, i només 11 generen ingressos recurrents. El sistema ha premiat exactament el que mesurava, i el que mesurava era el que no importava.",
+     "És el problema principal-agent en estat pur: qui decideix a quin centre ven (l'agent) no suporta la conseqüència que no renovi (el principal). I és també la llei de Goodhart — el número de contractes ha deixat de ser un bon indicador precisament perquè s'ha convertit en objectiu.",
+     "El disseny correcte no és eliminar l'incentiu sinó allargar-ne l'horitzó fins que coincideixi amb l'horitzó del negoci."],
+ lesson:"Quan un equip fa massivament una cosa que perjudica l'empresa, mira primer el sistema d'incentius i després les persones. Gairebé sempre la gent està fent racionalment el que li has demanat sense adonar-te'n."},
+{mod:"Estratègia", c:"var(--est)", t:"Arriba el gegant",
+ set:["Una gran editorial internacional llança una eina d'IA per a materials curriculars i la regala als centres que ja tenen contractats els seus llibres de text. La seva versió és tècnicament inferior, però és gratis i ja està dins de la relació comercial existent.",
+      "El vostre creixement de nous centres s'atura en sis setmanes."],
+ figs:[["Centres actuals","61"],["Renovació anual","78%"],["Nous centres · mes anterior","7"],["Nous centres · aquest mes","1"],["Caixa","145.000 €"]],
+ q:"Quina és la resposta estratègica?",
+ opts:[
+  {l:"Competir en preu: baixar fins a gairebé regalar-ho","o":"Competir en preu contra qui pot regalar el producte com a complement d'un altre negoci és una guerra impossible: per a ells és una despesa de retenció, per a vosaltres és tot l'ingrés. Guanya qui té més esquena financera."},
+  {l:"Estrènyer el nínxol on el gegant no pot o no vol entrar","o":"És l'única defensa estructural. Una editorial internacional no farà el currículum català amb el detall que el feu vosaltres perquè el mercat és massa petit per a la seva estructura de costos. Fer-vos més específics us fa menys atacables, encara que redueixi el mercat teòric."},
+  {l:"Pivotar a un altre segment completament","o":"Reacció d'exagerada urgència. Teniu 61 centres, un 78% de renovació i 145.000 € de caixa: no és una emergència existencial. Pivotar per pànic destrueix l'actiu que ja teníeu construït i us posa a competir en un terreny que no coneixeu."}],
+ an:["Això és l'amenaça de substituts de Porter en acció, i amb el pitjor agreujant: el substitut no necessita guanyar diners amb el producte perquè el seu negoci real és un altre.",
+     "La resposta és VRIO. La pregunta no és si podeu ser millors en general, sinó què teniu que sigui valuós, rar i que a ells no els compensi imitar. La resposta és l'especificitat local: massa petita per justificar el seu esforç, prou gran per sostenir-vos a vosaltres.",
+     "Estrènyer el nínxol sembla renunciar a créixer, i de fet ho és a curt termini. Però un mercat petit defensable val més que un de gran on t'esclafen — que és, en el fons, la mateixa lògica de la cua llarga."],
+ lesson:"Quan entra un gegant, no lluitis on ell és fort. Busca on la seva estructura de costos li impedeix seguir-te, encara que això signifiqui acceptar un mercat més petit."},
+{mod:"Operacions", c:"var(--ope)", t:"Tothom ocupat i res acabat",
+ set:["Sou set persones. Els centres es queixen que les novetats promeses al setembre encara no han arribat al febrer. Internament ningú entén la queixa: tothom treballa moltíssim i no para.",
+      "Mires el tauler i hi ha nou funcionalitats començades. La validació pedagògica la fa una sola persona, que a més dona suport als centres."],
+ figs:[["Equip","7 persones"],["Funcionalitats començades","9"],["Funcionalitats acabades els darrers 4 mesos","2"],["Persones que validen contingut","1"],["Ocupació declarada de l'equip","~100%"]],
+ q:"Per on ataques?",
+ opts:[
+  {l:"Contractar dos desenvolupadors més","o":"Augmentaràs la producció de codi davant d'un coll d'ampolla que no és el codi. El resultat previsible és més treball en curs esperant validació, terminis encara més llargs i una estructura de costos fixos més alta. Has ampliat una part no restrictiva del sistema."},
+  {l:"Limitar el treball en curs i alliberar la persona que valida","o":"És la jugada correcta. La restricció és la validació pedagògica, i aquesta persona a més està dedicant temps a suport, que és feina no restrictiva. Traient-li el suport i baixant de nou funcionalitats obertes a tres, el temps de cicle cau per llei de Little sense contractar ningú."},
+  {l:"Demanar més hores i pressionar amb terminis","o":"El problema no és falta d'esforç: l'equip ja està al 100%, i precisament per això no té marge per absorbir cap imprevist. Pressionar un sistema saturat allarga les cues en comptes d'escurçar-les, i afegeix rotació de personal al problema."}],
+ an:["El símptoma clàssic: molta activitat, poc resultat. La llei de Little ho explica sense misteri — amb nou coses obertes i un ritme de sortida de mig element al mes, el temps de cicle és necessàriament enorme.",
+     "La teoria de restriccions dona el mètode en ordre: identificar la restricció (la validació), explotar-la (treure-li tota la feina que no sigui validar) i subordinar-hi la resta (no començar res que no pugui passar per validació). Ampliar-la contractant només té sentit després.",
+     "L'ocupació al 100% no és una virtut sinó el diagnòstic: un sistema sense folgança i amb variabilitat alta genera cues creixents. Planificar al 70-80% sembla malbaratar recursos i en realitat és el que permet complir terminis."],
+ lesson:"Quan tothom està ocupat i no s'acaba res, el problema mai és l'esforç. Busca la restricció, treu-li tot el que no sigui la seva feina i redueix el nombre de coses obertes alhora."},
+{mod:"Decisió sota incertesa", c:"var(--dec)", t:"Mèxic",
+ set:["Un contacte us proposa entrar a Mèxic: mercat enorme, mateixa llengua i pocs competidors locals amb producte comparable. L'equip està engrescat.",
+      "Teniu 210.000 € de caixa. El currículum mexicà és diferent del català i no teniu cap xarxa comercial allà. A Catalunya encara hi ha 400 centres sense contactar."],
+ figs:[["Caixa disponible","210.000 €"],["Cost estimat de l'entrada completa","160.000 €"],["Probabilitat d'èxit estimada per l'equip","60%"],["Casos comparables que han reeixit (dades del sector)","~15%"],["Centres pendents a Catalunya","400"]],
+ q:"Què decidiu?",
+ opts:[
+  {l:"Entrar amb tot: 160.000 € i una persona desplaçada","o":"Comprometeu el 76% de la caixa en una decisió pràcticament irreversible, basada en una estimació interna del 60% que la visió exterior situa al voltant del 15%. Si falla, no hi ha segona tirada: el valor esperat positiu no serveix de res si la branca dolenta et deixa fora del joc."},
+  {l:"Pilot de 18.000 € amb tres escoles mexicanes","o":"Compres informació barata sobre la variable més incerta (si el producte encaixa amb un currículum diferent) sense comprometre la supervivència. És una opció real: petita despesa avui que et dona el dret, no l'obligació, d'invertir fort demà amb molta millor informació."},
+  {l:"No entrar i acabar de penetrar Catalunya","o":"Defensable i probablement rendible: 400 centres del mateix mercat que ja domineu és penetració pura, la casella de menys risc d'Ansoff. El cost és l'opcionalitat — si Mèxic era una finestra temporal, es tanca. No és una mala decisió, però és una decisió d'abandonar una opció, i convé prendre-la conscientment."}],
+ an:["El primer que salta és la bretxa entre el 60% que estima l'equip i el ~15% de la taxa base del sector. És la fal·làcia de la planificació en estat pur: la visió interior (coneixem el producte, tenim un contacte, l'idioma és el mateix) desplaça la visió exterior, que és sistemàticament més precisa.",
+     "La decisió també s'ha de classificar: entrar amb 160.000 € és de tipus 1, irreversible, i mereix molta anàlisi. El pilot és de tipus 2, reversible, i mereix decidir-se ràpid. Tractar-les igual és l'error.",
+     "El pilot té un VAN directe probablement negatiu, i tot i així és la millor opció: el que compra no són ingressos sinó informació sobre la incertesa clau. Això és exactament una opció real, i només val si de veritat esteu disposats a no continuar si el pilot va malament.",
+     "Un premortem aquí hauria estat molt barat: imaginar que d'aquí dos anys Mèxic ha fracassat i escriure per què. Les respostes probables (currículum diferent, cap xarxa comercial, equip desbordat) ja són visibles avui."],
+ lesson:"Davant d'una decisió gran i incerta, la pregunta no és entrar o no entrar: és quina és la manera més barata de comprar informació abans de comprometre'm de manera irreversible."}
+]},
+bioma:{name:"Bioma", tag:"Cria d'insectes · actius pesants",
+ intro:"Una granja d'insectes a l'Empordà: capex enorme, procés biològic variable, mercat de commodity i regulació estricta. És l'invers exacte d'Aula Viva, i per això ensenya el que el programari no pot. Les xifres són il·lustratives però l'ordre de magnitud i el marc legal són reals.",
+ steps:[
+{mod:"Estratègia", c:"var(--est)", t:"Quin bitxo i per a qui",
+ set:["Sou dos: tu i una enginyera d'aliments. Teniu 180.000 € entre estalvis i una subvenció, i una nau de 1.200 m² a l'Empordà, a vint minuts de tres indústries agroalimentàries.",
+      "La cria d'insectes permet tres camins molt diferents, i el capital només dona per a un."],
+ figs:[["Capital disponible","180.000 €"],["Nau disponible","1.200 m²"],["Preu de la farina de peix","~1.900 €/t"],["Preu de la farina d'insecte","3.500-5.500 €/t"],["El teu cost de producció a petita escala","~3.100 €/t"]],
+ q:"Quin mercat ataqueu?",
+ opts:[
+  {l:"Mosca soldat per a pinso d'aqüicultura, a volum","o":"Entres a competir contra la farina de peix a ~1.900 €/t i la soja a ~450 €/t quan el teu cost és de 3.100 €/t. En un mercat de commodity el comprador només paga per proteïna, i no li pots demanar que pagui el triple. Aquest camí només tanca a escala de desenes de milers de tones, cosa que exigeix desenes de milions de capex. A la teva escala, cada tona venuda perd diners."},
+  {l:"Mosca soldat per a pet food premium i aqüicultura d'alt valor","o":"És l'únic segment on una planta petita pot tenir marge des del principi. El pet food premium paga 4.000-6.000 €/t perquè valora la hipoal·lergènia, la digestibilitat i el relat de sostenibilitat: no compra proteïna barata, compra un atribut. La proximitat a les tres indústries agroalimentàries et resol el substrat."},
+  {l:"Cuc de la farina per a consum humà (novel food)","o":"És legalment possible: la UE ha autoritzat el Tenebrio molitor com a nou aliment. Però el mercat europeu de consum humà d'insectes és minúscul i el rebuig cultural és alt, mentre que el cost de compliment alimentari és molt superior al del pinso. Preus per quilo excel·lents i volums irrellevants."}],
+ an:["La pregunta de fons és si ets preu-acceptant o preu-fixador. En pinso a volum, el preu te'l fixen la farina de peix i la soja: no tens cap capacitat d'influir-hi i les cinc forces hi juguen totes en contra (clients concentrats, substituts barats, producte indiferenciat).",
+     "El pet food premium canvia la naturalesa del producte: deixes de vendre proteïna i comences a vendre un atribut (hipoal·lergènic, sostenible, traçable). El client compra per una raó que el preu per unitat de proteïna no captura, i per això accepta pagar-ne el triple.",
+     "El novel food humà és el clàssic mercat que sembla enorme a les presentacions i és diminut a la caixa registradora. La regulació no és l'obstacle principal — ja està resolta — sinó la demanda real.",
+     "La ubicació no és un detall: el substrat serà el teu cost variable principal, i tenir-lo a vint minuts és una part real del teu avantatge."],
+ lesson:"En un mercat de commodity no decideixes el preu, i cap eficiència operativa et salvarà d'una diferència de 3×. Busca el segment que et paga per un atribut, no per quilos de proteïna."},
+{mod:"Operacions · Regulació", c:"var(--ope)", t:"El substrat que no pots fer servir",
+ set:["El pla de negoci diu, com el de tot el sector, que alimentareu les larves amb residus orgànics municipals i restes de restauració: gratis o fins i tot cobrant per retirar-los. És l'argument circular que enamora inversors i administracions.",
+      "L'assessoria jurídica torna amb males notícies abans de començar les obres."],
+ figs:[["Cost de substrat previst al pla","0 €/t (o negatiu)"],["Cost real de subproductes vegetals","60-95 €/t"],["Substrat per quilo de larva","~4 kg"],["Pes del substrat sobre el cost variable","~45%"]],
+ q:"Com ho resoleu?",
+ opts:[
+  {l:"Seguir amb residus i demanar una excepció","o":"No hi ha excepció possible per aquesta via. La normativa europea considera els insectes criats per a proteïna processada com a animals de granja, i els prohibeix explícitament els fems, els residus de càtering i la carn. Fer-ho t'exclouria del mercat de pinso, que és tot el teu mercat."},
+  {l:"Reformular amb subproductes vegetals de la indústria agroalimentària","o":"És l'única via legal i, de fet, redefineix el negoci: el substrat passa de ser gratis a ser el 45% del cost variable. Tancar contractes de subministrament estables amb les tres indústries del costat es converteix en una peça tan crítica com la biologia, i en un avantatge difícil de copiar per qui no tingui aquesta proximitat."},
+  {l:"Comprar pinso convencional formulat","o":"És legal i simple, però et posa a comprar exactament el mateix input que els teus competidors del pinso convencional: cereal i soja a preu de mercat. Destrueix alhora l'argument de cost i el de sostenibilitat, que eren les dues raons de ser del projecte."}],
+ an:["Aquest és el cop de realitat més important del sector, i el que gairebé mai apareix a les presentacions: la normativa europea sobre subproductes animals restringeix els substrats als materials que també es poden donar al bestiar convencional. Fems, residus de càtering i carn queden explícitament exclosos per raons de bioseguretat.",
+     "La conseqüència econòmica és enorme: el relat de convertir residus gratuïts en proteïna, que és el que sosté la major part de les valoracions del sector, no és aplicable a la UE per a pinso. Els subproductes vegetals aptes tenen preu de mercat i competeixen amb altres usos.",
+     "Estratègicament, però, obre una porta: si el substrat és el cost principal i té preu, aleshores l'accés privilegiat a subproductes locals ÉS l'avantatge competitiu. És valuós, és rar (depèn de la geografia) i és difícil d'imitar per algú que no estigui allà. Passa el filtre VRIO molt millor que la tecnologia de cria.",
+     "També té una conseqüència operativa: la composició dels subproductes varia entre lots, i aquesta variabilitat es tradueix directament en variabilitat del rendiment biològic. Estabilitzar-la és feina de procés."],
+ lesson:"Comprova la normativa ABANS d'escriure el pla de negoci. Aquí la regulació no és un tràmit administratiu: determina quin negoci és possible i quin és una il·lusió ben finançada."},
+{mod:"Finances", c:"var(--fin)", t:"El capex no perdona",
+ set:["Teniu el disseny de la planta pilot: 500 tones de larva fresca l'any, que un cop assecades i desgreixades donen unes 110 tones de farina, 40 d'oli i 300 de frass (l'excrement, que es ven com a fertilitzant).",
+      "L'enginyeria pressuposta 2,4 milions per la planta completa. Amb els preus del pet food premium, els ingressos anuals a plena capacitat serien d'uns 545.000 €."],
+ figs:[["Capex planta completa","2.400.000 €"],["Ingressos anuals a plena capacitat","~545.000 €"],["Marge de contribució","55%"],["Costos fixos anuals","380.000 €"],["Caixa disponible","180.000 €"],["Temps fins a plena capacitat","18-24 mesos"]],
+ q:"Com estructureu la inversió?",
+ opts:[
+  {l:"Construir la planta sencera ara, finançada amb deute","o":"2,4 M€ de capex per 545.000 € d'ingressos és una ràtio de 4,4× inversió sobre vendes anuals. I fes el compte: 545.000 € × 55% de marge són 300.000 € de contribució, contra 380.000 € de costos fixos. L'EBITDA és negatiu a PLENA capacitat, abans de pagar cap quota. És una insolvència programada amb divuit mesos de retard."},
+  {l:"Modularitzar: un primer mòdul de 150 t i créixer amb la demanda","o":"El capex inicial baixa a uns 700.000 €, el cost per tona serà pitjor però l'empresa sobreviu per arribar a l'escala. I sobretot: valides el rendiment biològic real abans de comprometre la xifra grossa. En un procés viu, la diferència entre el full de càlcul i la nau sol ser considerable."},
+  {l:"Externalitzar la cria i quedar-vos el processament i la marca","o":"Redueix el capex dràsticament, però en un producte biològic la cria ÉS el 80% de la qualitat final. Externalitzes precisament l'activitat que determina el producte i et quedes amb la que qualsevol pot fer. La cadena de valor diu que això és exactament al revés."}],
+ an:["Aquí es veu tot el contrari d'Aula Viva. Un negoci de programari té capex baix, marge brut del 85% i palanquejament operatiu que juga a favor quan creixes. Aquest té una ràtio capex/vendes de 4,4× i uns costos fixos que se't mengen tota la contribució fins que la planta va plena.",
+     "El càlcul del punt d'equilibri és implacable: amb 380.000 € de fixos i un marge de contribució del 55%, necessites 690.000 € de vendes per no perdre diners — més del que la planta pot facturar a plena capacitat als preus previstos. El model, tal com està dissenyat, no tanca a cap nivell d'ocupació.",
+     "Això no vol dir que el negoci sigui inviable: vol dir que els supòsits de preu, rendiment o costos fixos han d'estar equivocats en algun punt, i cal descobrir-ho amb 700.000 € en risc, no amb 2,4 milions.",
+     "El cementiri del sector està ple d'empreses molt ben finançades que van construir plantes grans abans de tenir la corba de costos demostrada."],
+ lesson:"Als negocis intensius en capital, l'error rarament és el marge unitari: és l'escala a la qual decideixes descobrir-lo. Modularitza tot el que puguis."},
+{mod:"Clients · Preu", c:"var(--cli)", t:"Qui fixa el preu quan no pots aturar la producció",
+ set:["El mòdul funciona i produïu 110 tones anuals. Una multinacional de pet food ofereix un contracte d'aprovisionament: 80 tones l'any a 3.900 €/t durant tres anys.",
+      "Al mercat spot els preus han oscil·lat entre 4.200 i 5.500 €/t els últims dotze mesos, però sense cap garantia de volum."],
+ figs:[["Capacitat anual","110 t"],["Oferta d'aprovisionament","80 t a 3.900 €/t"],["Preu spot (12 mesos)","4.200-5.500 €/t"],["Cost de producció","3.100 €/t"],["Coproductes (oli + frass)","~105.000 €/any"],["Costos fixos","380.000 €/any"]],
+ q:"Com veneu la producció?",
+ opts:[
+  {l:"Signar l'aprovisionament pel 100% de la capacitat","o":"Garanteix ingressos i, sobretot, et fa bancable: un contracte a tres anys és col·lateral davant d'un banc. Però et deixa sense poder de negociació, sense informació de mercat i amb un preu fix mentre els teus costos (substrat i energia) poden pujar. I concentra tot el risc de client en un de sol."},
+  {l:"Comprometre'n el 60-70% i deixar la resta a spot","o":"Cobreixes els costos fixos amb ingressos previsibles — que és el que et permet finançar-te — i mantens marge, informació de preu i una segona porta si el client gran es posa dur a la renovació. És la resposta estàndard i és la correcta."},
+  {l:"Vendre-ho tot a spot buscant el preu màxim","o":"Maximitza el preu teòric i destrueix la bancabilitat: sense contractes, cap banc finança l'ampliació. I hi ha un problema físic: la larva creix tant si has trobat comprador com si no. Un procés biològic no es pot aturar esperant millors preus, i això et posa en posició de venedor forçat justament quan el preu baixa."}],
+ an:["La restricció que ho decideix tot no és comercial sinó física: no pots aturar la producció. Qui no pot aturar la producció perd poder de negociació, perquè la contrapart sap que has de vendre.",
+     "Els coproductes són la peça que gairebé sempre s'oblida i que sovint decideix la viabilitat: 105.000 € d'oli i frass sobre uns 340.000 € de farina és gairebé un 24% dels ingressos. En aquest sector, els projectes que quadren solen ser els que monetitzen els tres fluxos, no només la proteïna.",
+     "Amb 380.000 € de costos fixos, cobrir-los amb contracte (80 t × 3.900 € = 312.000 €, més coproductes) és el que et treu de la zona de mort. La resta a spot és el marge i l'aprenentatge."],
+ lesson:"Quan no pots aturar la producció, assegura amb contracte la part que et cobreix els fixos i deixa la resta exposada al mercat. Ni tot garantit ni tot a la loteria."},
+{mod:"Persones", c:"var(--per)", t:"El biòleg o l'industrial",
+ set:["Els rendiments estan per sota del pla i, pitjor, són erràtics: hi ha lots excel·lents i lots desastrosos sense que ningú sàpiga explicar per què. La mortalitat prevista era del 12% i està al 22%.",
+      "La caixa dona per a una sola contractació."],
+ figs:[["Mortalitat prevista / real","12% / 22%"],["Conversió substrat→larva prevista / real","22% / 15%"],["Variació entre lots","±30%"],["Contractacions possibles","1"],["Cost anual","~45.000 €"]],
+ q:"A qui contracteu?",
+ opts:[
+  {l:"Un entomòleg per optimitzar la cria","o":"Pot millorar la genètica i les condicions de cria a mitjà termini, però el símptoma que descrius no és biològic: és de control de procés. Lots que varien un 30% sense causa identificada apunten a temperatura, humitat, densitat i homogeneïtat del substrat mal controlades, no a l'espècie."},
+  {l:"Un responsable de producció industrial amb experiència en procés continu","o":"És la jugada correcta. La majoria de fracassos d'escalat en aquest sector no són biològics sinó de control de procés: mesurar, estandarditzar i aconseguir que el lot 300 sigui igual que el lot 3. Aquest coneixement és, a més, el vostre actiu més defensable."},
+  {l:"Resoldre-ho amb consultors externs mentre espereu","o":"El coneixement operatiu és precisament el que ha de quedar dins de casa: és el que passa el filtre VRIO. Llogar-lo et dona un informe i cap capacitat acumulada, i quan el consultor marxa el problema torna."}],
+ an:["La distinció clau és entre un problema de coneixement científic i un problema de control industrial. La variabilitat entre lots del 30% és la signatura inequívoca del segon.",
+     "Val la pena connectar-ho amb el VRIO del primer mòdul: l'espècie no és rara (qualsevol pot comprar Hermetia illucens) i la tecnologia bàsica és pública. El que sí que és rar i costós d'imitar és el saber fer acumulat de mantenir un procés viu estable a escala. Externalitzar-lo seria buidar l'empresa del seu únic avantatge.",
+     "I atenció al disseny de l'incentiu quan el contracteu: si el bonus va lligat a tones produïdes, produirà tones amb qualitat irregular. Si va lligat al rendiment de conversió i a la variabilitat entre lots, atacarà el problema real. És la mateixa lliçó de la comissió comercial d'Aula Viva."],
+ lesson:"A la indústria, l'avantatge sostenible no és l'organisme ni la recepta: és el control del procés. I això s'ha d'internalitzar, perquè és el que ningú et pot copiar ni tornar a vendre."},
+{mod:"Negociació", c:"var(--neg)", t:"L'exclusiva de la pinsera",
+ set:["Una gran fabricant de pinsos ibèrica vol tancar un acord de cinc anys: exclusivitat per a la península, 100 tones anuals compromeses amb penalització del 25% del valor si no les serviu, i preu indexat a la cotització de la farina de peix.",
+      "És el contracte més gran que us han ofert mai i obriria un canal comercial que trigaríeu anys a construir."],
+ figs:[["Durada","5 anys"],["Volum compromès","100 t/any"],["La teva capacitat","110 t/any"],["Penalització per incompliment","25% del valor"],["Indexació del preu","Farina de peix"],["Variabilitat real de la teva producció","±20%"]],
+ q:"Què feu amb l'oferta?",
+ opts:[
+  {l:"Acceptar: el volum i el canal ho compensen","o":"Comprometeu el 91% de la capacitat amb penalitzacions, en un procés amb una variabilitat biològica del 20% que encara no controleu. Estadísticament, incompliríeu en algun exercici. I la indexació és el pitjor detall: lliga el vostre preu a una commodity que no té cap relació amb els vostres costos, que són substrat vegetal i energia."},
+  {l:"Negociar volum, indexació i abast de l'exclusiva","o":"És la resposta correcta i totes tres variables són negociables per separat. Volum compromès al 60% amb opció d'ampliar, indexació als vostres costos reals o amb un preu mínim garantit, i exclusivitat limitada al canal de pinso (deixant lliure el pet food premium) amb revisió anual. La pinsera vol seguretat de subministrament; això li ho podeu donar sense donar-li exclusivitat total."},
+  {l:"Rebutjar i seguir amb clients petits","o":"Preserva la independència però renuncia a un canal que val anys de feina comercial, i ho fa sense haver explorat què hi ha darrere de les seves condicions. Rebutjar per principi, sense negociar, és tan car com acceptar per pressa."}],
+ an:["Comença per identificar l'interès darrere de la posició. La pinsera demana exclusivitat (posició), però el que probablement necessita és seguretat de subministrament i que no acabeu servint el seu competidor directe (interès). Es pot satisfer amb una clàusula de prioritat de subministrament i una exclusivitat limitada a un canal, que us costa infinitament menys.",
+     "La indexació és l'error tècnic que passa desapercebut i costa més diners. Indexar a la farina de peix vol dir que si els vostres costos pugen i la farina de peix baixa, el marge desapareix sense que hàgiu fet res malament. El preu s'ha d'indexar al que mou els vostres costos, o dur un terra pactat.",
+     "I el volum: comprometre el 91% de la capacitat amb penalitzacions quan la producció varia un 20% és acceptar un risc que no depèn de la vostra voluntat. Es negocia amb bandes, no amb una xifra fixa.",
+     "La BATNA real aquí no és dolenta: teniu pet food premium i mercat spot. Val la pena recordar-ho a la taula, amb tranquil·litat."],
+ lesson:"Descompon sempre l'oferta en variables separades i negocia'n cada una: volum, preu, indexació, durada i abast. I no indexis mai el teu preu a una commodity que no mou els teus costos."},
+{mod:"Valoració · Inversió", c:"var(--val)", t:"Quin capital encaixa",
+ set:["Per fer el segon mòdul calen uns 900.000 €. Hi ha tres portes obertes i totes tenen sentit sobre el paper.",
+      "El context importa: després de l'eufòria inversora, el sector ha viscut una retirada de capital especulatiu, amb consolidació i compra d'actius de companyies en dificultats."],
+ figs:[["Necessitat de capital","900.000 €"],["Fons d'impacte","1.500.000 € pel 35%"],["Préstec públic amb aval","900.000 € al 4%"],["Soci industrial (pinsera)","1.200.000 € pel 30% + contracte"],["EBITDA actual","lleugerament positiu"],["Horitzó realista fins a escala rendible","5-8 anys"]],
+ q:"Quin capital agafeu?",
+ opts:[
+  {l:"Fons d'impacte: 1,5 M€ pel 35%","o":"Dilueix molt i, sobretot, introdueix un rellotge: un fons té un horitzó de 7 a 10 anys i necessita una sortida. Aquest negoci necessita temps biològic i industrial que no s'accelera amb diners. Capital impacient en un negoci lent acaba forçant decisions d'escalat prematures — exactament les que han enfonsat mitja indústria."},
+  {l:"Préstec públic amb aval i subvencions, creixement modular","o":"No dilueix i encaixa amb el ritme real del negoci. El sector agroalimentari i d'economia circular té accés real a línies públiques i fons europeus, i amb un EBITDA ja positiu sou finançables. El risc a vigilar és el palanquejament: deute fix sobre un procés que encara té variabilitat és una combinació que cal dimensionar amb prudència."},
+  {l:"Soci industrial: capital, client i canal alhora","o":"Aporta les tres coses que us falten, però et pot capturar: qui és alhora client i accionista té incentius per pressionar el preu de transferència a la baixa i per bloquejar-vos la venda a la seva competència. La valoració és el que menys importa aquí; el que cal negociar són els drets de veto, l'exclusivitat implícita i la política de preus."}],
+ an:["La pregunta correcta no és quin capital és més barat, sinó quin encaixa amb la durada del negoci. Aquesta és una de les decisions on el desajust mata: un negoci amb corba d'aprenentatge industrial de cinc a vuit anys i un inversor amb horitzó de sortida de set és una bomba de rellotgeria.",
+     "El cost dels fons propis és molt superior al del deute, i aquí es veu bé: cedir un 35% d'una empresa que ja genera EBITDA positiu és molt més car que un préstec al 4%, encara que el préstec s'hagi de tornar i les accions no.",
+     "Amb el soci industrial, com sempre, el titular és la valoració i el que importa són els drets. Un accionista que és el teu client principal té un conflicte d'interès estructural que cal resoldre per escrit abans de signar, no després.",
+     "El context de retirada de capital del sector juga a favor de la disciplina: quan hi havia diners fàcils, el vici era escalar abans d'hora. Ara la via lenta i finançada amb deute barat és, probablement, la que sobreviu."],
+ lesson:"Fes coincidir la durada del capital amb la durada del negoci. Capital impacient en un negoci lent força les decisions equivocades justament quan menys convé."},
+{mod:"Decisió sota incertesa", c:"var(--dec)", t:"L'escalat que ho decideix tot",
+ set:["Dos anys després funcioneu: 110 tones, marge positiu, procés estabilitzat. Un grup inversor proposa construir una planta de 5.000 tones amb 18 milions, sota la premissa que a aquesta escala el cost baixarà dels 3.100 €/t actuals als 1.800 €/t, que és on la farina d'insecte competeix de veritat.",
+      "Tota la tesi del sector es basa en aquesta corba de costos. Diverses companyies molt ben finançades l'han anunciada i poques l'han demostrada."],
+ figs:[["Capex planta gran","18.000.000 €"],["Capacitat","5.000 t"],["Cost objectiu anunciat","1.800 €/t"],["Cost actual","3.100 €/t"],["Caixa actual","1.100.000 €"],["Empreses del sector que han assolit el cost anunciat","molt poques"]],
+ q:"Què decidiu?",
+ opts:[
+  {l:"Escalar a 5.000 t: és ara o mai","o":"Comprometeu 18 milions sobre una hipòtesi (la corba de costos) que el propi sector encara no ha validat de manera generalitzada. La visió exterior és demolidora: companyies amb centenars de milions captats han tingut serioses dificultats per arribar als costos anunciats. És una decisió irreversible amb risc de ruïna basada en la visió interior."},
+  {l:"Escalar per etapes a 1.000 t i validar la corba","o":"Compres exactament la informació que decideix tot: si el cost realment baixa amb l'escala AL VOSTRE procés. Si a 1.000 t el cost cau a 2.300 €/t, la corba existeix i podeu continuar amb dades. Si es queda a 2.900 €/t, acabeu d'estalviar-vos 18 milions. És una opció real de manual."},
+  {l:"No escalar i consolidar el nínxol premium","o":"Opció honesta i sovint menystinguda: una empresa petita, rendible i defensada en pet food premium és un bon negoci, encara que no sigui una gran història d'inversió. Renuncieu a l'escala, no a la rendibilitat. El cost és l'opcionalitat si el mercat es consolida i els grans us tanquen el canal."}],
+ an:["Comenceu per la taxa base, no per l'entusiasme: la pregunta no és si vosaltres podeu, sinó quantes empreses comparables ho han aconseguit. Quan la resposta és poques i amb molt més capital, els arguments sobre per què el vostre cas és diferent han de ser extraordinaris.",
+     "Classifiqueu la decisió: 18 milions de capex en un actiu específic és irreversible de manual (tipus 1) i mereix tota l'anàlisi del món. L'etapa intermèdia és molt més reversible i es pot decidir més ràpid.",
+     "El VAN directe de l'etapa intermèdia probablement no és espectacular. No importa: el que compra no són ingressos, és la resolució de la incertesa clau del negoci. Això és una opció real, i només val si esteu genuïnament disposats a aturar-vos si el resultat és dolent.",
+     "Un premortem aquí és barat i brutal: imagineu que d'aquí tres anys la planta gran ha fracassat, i escriviu per què. Les respostes previsibles (el cost no va baixar tant, el preu del pet food es va erosionar amb l'entrada de capacitat, el substrat va pujar) ja són visibles avui i totes són quantificables."],
+ lesson:"Quan tota la tesi depèn d'una corba de costos que ningú ha demostrat encara a la teva escala, el moviment amb més valor no és escalar: és comprar la prova al preu més baix possible."}
+]}
+};
+
+/* ============================ CALCULADORES ============================ */
+const CALC = {
+ unit:{capMes:0},
+ van:{},
+ palanc:{},
+ dilu:{},
+ mult:{}
+};
+const CV = {
+ unit:{cac:41, arpu:12, marge:60, churn:5.5},
+ van:{inv:20000, flux:6000, anys:5, taxa:12},
+ palanc:{fix:9000, preu:2400, cvar:600, uds:60, delta:20},
+ dilu:{pre:3200000, inv:800000, pool:12, exit:5000000, pref:2},
+ mult:{arr:420000, creix:45, mult:5},
+ esper:{cost:160000, prob:60, guany:600000, recup:15, caixa:210000}
+};
+const CDEF = {
+unit:{c:"var(--cli)", n:"1", t:"Unit economics: CAC, LTV i payback",
+ lead:"El quadre de comandament de qualsevol negoci recurrent. Puja el churn i mira com s'ensorra tot.",
+ ctrls:[{p:"cac",l:"Cost d'adquisició (CAC)",min:5,max:300,step:1,f:"eur"},
+        {p:"arpu",l:"Ingrés per client i mes",min:2,max:200,step:1,f:"eur"},
+        {p:"marge",l:"Marge de contribució",min:10,max:100,step:1,f:"pct"},
+        {p:"churn",l:"Churn mensual",min:0.5,max:15,step:0.1,f:"pct"}]},
+van:{c:"var(--val)", n:"2", t:"VAN, TIR i període de recuperació",
+ lead:"El criteri formal per decidir si una inversió crea o destrueix valor. Mou la taxa de descompte i observa.",
+ ctrls:[{p:"inv",l:"Inversió inicial",min:1000,max:200000,step:1000,f:"eur"},
+        {p:"flux",l:"Flux de caixa anual",min:0,max:60000,step:500,f:"eur"},
+        {p:"anys",l:"Anys de vida del projecte",min:1,max:20,step:1,f:"any"},
+        {p:"taxa",l:"Taxa de descompte",min:0,max:30,step:0.5,f:"pct"}]},
+palanc:{c:"var(--fin)", n:"3", t:"Palanquejament operatiu",
+ lead:"Com d'amplificat queda el teu benefici quan les vendes es mouen. Puja els costos fixos i mira el grau.",
+ ctrls:[{p:"fix",l:"Costos fixos anuals",min:0,max:200000,step:1000,f:"eur"},
+        {p:"preu",l:"Ingrés per client i any",min:100,max:10000,step:100,f:"eur"},
+        {p:"cvar",l:"Cost variable per client",min:0,max:5000,step:50,f:"eur"},
+        {p:"uds",l:"Clients actuals",min:1,max:500,step:1,f:"ud"},
+        {p:"delta",l:"Variació de vendes a simular",min:-50,max:50,step:5,f:"pctv"}]},
+dilu:{c:"var(--val)", n:"4", t:"Dilució i preferència de liquidació",
+ lead:"Qui cobra què en una venda. Mou la preferència d'1× a 2× i mira què li passa als fundadors.",
+ ctrls:[{p:"pre",l:"Valoració pre-money",min:200000,max:20000000,step:100000,f:"eur"},
+        {p:"inv",l:"Inversió",min:50000,max:5000000,step:50000,f:"eur"},
+        {p:"pool",l:"Pool d'opcions (pre-money)",min:0,max:25,step:1,f:"pct"},
+        {p:"pref",l:"Preferència de liquidació",min:1,max:3,step:0.5,f:"x"},
+        {p:"exit",l:"Preu de venda de l'empresa",min:200000,max:40000000,step:200000,f:"eur"}]},
+esper:{c:"var(--dec)", n:"6", t:"Valor esperat i risc de ruïna",
+ lead:"El càlcul que diu si una aposta val la pena, i la comprovació que el càlcul no fa: què passa si surt malament.",
+ ctrls:[{p:"cost",l:"Cost de l'aposta",min:1000,max:500000,step:1000,f:"eur"},
+        {p:"prob",l:"Probabilitat d'èxit",min:1,max:99,step:1,f:"pct"},
+        {p:"guany",l:"Valor si surt bé",min:0,max:3000000,step:10000,f:"eur"},
+        {p:"recup",l:"Recuperable si surt malament",min:0,max:100,step:5,f:"pct"},
+        {p:"caixa",l:"Caixa total disponible",min:1000,max:1000000,step:5000,f:"eur"}]},
+mult:{c:"var(--est)", n:"5", t:"Valoració per múltiples",
+ lead:"L'estimació ràpida que es fa servir per negociar. El rang és tan ampli que el número importa menys que el que el mou.",
+ ctrls:[{p:"arr",l:"Ingressos recurrents anuals (ARR)",min:10000,max:5000000,step:10000,f:"eur"},
+        {p:"creix",l:"Creixement anual",min:0,max:200,step:5,f:"pct"},
+        {p:"mult",l:"Múltiple aplicat",min:0.5,max:15,step:0.5,f:"x"}]}
+};
+
+/* ============================ DIAGNÒSTICS ============================ */
+const DIAG = [
+{t:"Diagnòstic 1 · La plataforma que creix i es buida",
+ intro:"Una plataforma de formació en línia porta divuit mesos operant. El fundador està content perquè els usuaris totals no paren de pujar i acaba de contractar dos comercials més. Aquestes són les seves dades.",
+ rows:[["h","Cohort","Reten. mes 6"],["","Cohort gener","62%"],["","Cohort abril","51%"],["","Cohort juliol","38%"],["","Cohort octubre","29%"],
+       ["h","Mètrica","Valor"],["","Usuaris totals","4.180 (+12% mes)"],["","CAC","68 € (era 31 € fa un any)"],["","ARPU","19 €/mes"],["","Marge de contribució","55%"],["","Despesa mensual en captació","24.000 €"],["","Caixa","190.000 €"]],
+ points:["El creixement d'usuaris totals està amagant un col·lapse. Cada cohort reté pitjor que l'anterior: del 62% al 29% en nou mesos. El total puja només perquè la captació supera les baixes, però és una galleda que es forada més cada mes.",
+ "Els unit economics ja no tanquen. Marge mensual per client: 19 € × 55% = 10,45 €. Amb una retenció que implica un churn creixent, la vida del client s'escurça mentre el CAC s'ha més que doblat (de 31 € a 68 €). El payback ja frega els 6,5 mesos amb clients que sovint no hi arriben.",
+ "La causa del CAC creixent és previsible: s'han esgotat els canals barats i s'està comprant tràfic cada cop més fred, que a més reté pitjor. Això explica per part la degradació de les cohorts: no és només que el producte empitjori, és que s'està captant pitjor client.",
+ "Contractar dos comercials més és accelerar cap al precipici: augmenta la despesa fixa (palanquejament operatiu) per omplir més ràpid una galleda foradada.",
+ "Amb 24.000 € mensuals de captació i 190.000 € de caixa, hi ha menys de vuit mesos de marge si res canvia.",
+ "Què faria un analista: congelar l'augment de captació, entrevistar els usuaris de les cohorts recents per entendre la caiguda de retenció, segmentar el CAC per canal per veure quins canals porten clients que duren, i no tornar a accelerar fins que una cohort nova reculli per damunt del 50%. Primer tapar el forat, després omplir."]},
+{t:"Diagnòstic 2 · L'empresa rendible que no arriba a final de mes",
+ intro:"Una consultoria educativa de vuit persones tanca l'any amb beneficis i el gestor felicita els socis. Al gener, però, no poden pagar les pagues extres. Aquestes són les xifres.",
+ rows:[["h","Compte de resultats","Import"],["","Facturació","640.000 €"],["","Despeses","581.000 €"],["","Benefici","59.000 €"],
+       ["h","Balanç i caixa","Import"],["","Clients pendents de cobrament","198.000 €"],["","Termini mitjà de cobrament","113 dies"],["","Pagament a proveïdors i nòmines","30 dies"],["","Deute a curt termini","85.000 €"],["","Caixa","11.500 €"],
+       ["h","Concentració","Pes"],["","Client principal","44% de la facturació"]],
+ points:["Hi ha benefici (59.000 €) i no hi ha diners (11.500 €). La diferència està als 198.000 € atrapats en clients que no han pagat. És el cas clàssic de meritació contra tresoreria.",
+ "El cicle de conversió d'efectiu és de 113 menys 30 = 83 dies en què l'empresa finança els seus clients amb diners que no té. Creixent, aquest forat creix proporcionalment: si l'any que ve facturen un 30% més, necessitaran aproximadament un 30% més de finançament només per operar.",
+ "El deute a curt de 85.000 € contra una caixa d'11.500 € és una situació de liquiditat tensa: qualsevol imprevist o retard d'un client gran els deixa en impagament.",
+ "El risc més greu no és comptable sinó estratègic: el 44% de la facturació depèn d'un sol client. En termes de negociació, no tenen BATNA — si aquest client demana un descompte o allarga terminis, l'han d'acceptar. La concentració de clients és una decisió de negociació disfressada de comercial.",
+ "El benefici del 9,2% sobre vendes és prim per a una consultoria i deixa poc marge per absorbir el cost financer que necessitaran.",
+ "Què faria un analista: renegociar terminis de cobrament (anticipar percentatges a l'inici del projecte, facturació per fites, descompte per pagament ràpid), instal·lar un pressupost de tresoreria setmanal a 13 setmanes, contractar una pòlissa ABANS de necessitar-la (es negocia molt millor amb caixa que sense), i posar un objectiu explícit de baixar el client principal per sota del 25% en dos anys, encara que això signifiqui créixer més lentament."]}
+];
+
+/* ============================ ESTAT ============================ */
+const store={get(k,d){try{const v=localStorage.getItem("mba_"+k);return v===null?d:JSON.parse(v);}catch(e){return d;}},
+ set(k,v){try{localStorage.setItem("mba_"+k,JSON.stringify(v));}catch(e){}}};
+let picks=store.get("picks",{}), dnotes=store.get("dnotes",{}), caseSel=store.get("caseSel","aula");
+let tab="moduls", modOpen={}, anOpen={}, diagOpen={};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+document.getElementById("sub").textContent="Vuit mòduls amb el nucli d'una escola de negocis, dos casos reals que els travessen tots i les eines de càlcul que es fan servir de veritat. Rigorós, aplicat i sense pretendre que substitueix un màster: el que dona un MBA i això no dona és la xarxa de contactes i la credencial.";
+
+const TABS=[["moduls","Mòduls"],["cas","El cas"],["calc","Calculadores"],["diag","Diagnòstic"]];
+function renderTabs(){document.getElementById("tabs").innerHTML=TABS.map(([k,l])=>`<button class="${k===tab?'on':''}" data-tab="${k}">${l}</button>`).join("");}
+document.getElementById("tabs").addEventListener("click",e=>{const b=e.target.closest("button[data-tab]");if(!b)return;tab=b.dataset.tab;renderTabs();render();window.scrollTo(0,0);});
+
+/* ---------- MÒDULS ---------- */
+function renderMods(){
+ let o='<div class="narrow"><p class="lead">Cada marc inclou <b>quan serveix</b> i <b>quan enganya</b>. La segona part és la que separa fer servir una eina de recitar-la, i és la que falta a la majoria de resums.</p>';
+ MODS.forEach(m=>{
+  const open=modOpen[m.id];
+  o+=`<section class="mod ${open?'open':''}" style="--c:${m.c}"><button class="head" data-mod="${m.id}">
+   <span class="num">${m.n}</span><span class="t"><strong>${esc(m.t)}</strong><small>${esc(m.sub)}</small></span>
+   <span class="caret">▼</span></button><div class="bodyw">`;
+  m.fw.forEach(f=>{
+   o+=`<div class="fw"><h4>${esc(f.n)}</h4>
+    <div class="row"><b>Què és</b>${esc(f.what)}</div>
+    <div class="row"><b>Quan serveix</b>${esc(f.when)}</div>
+    <div class="row trap"><b>Quan enganya</b>${esc(f.trap)}</div>
+    <div class="ex" style="margin-top:9px"><b>Aplicat a Aula Viva · </b>${esc(f.ex)}</div></div>`;
+  });
+  o+='</div></section>';
+ });
+ return o+'</div>';
+}
+
+/* ---------- CAS ---------- */
+function renderCase(){
+ const cs=CASES[caseSel];
+ let o='<div class="narrow"><div class="casesel">'+
+  Object.keys(CASES).map(k=>`<button class="cbtn ${k===caseSel?'on':''}" data-case="${k}"><b>${esc(CASES[k].name)}</b><span>${esc(CASES[k].tag)}</span></button>`).join("")+
+  '</div>';
+ o+=`<p class="lead">${esc(cs.intro)}</p>`;
+ cs.steps.forEach((s,i)=>{
+  const key=caseSel+"-"+i, pick=picks[key];
+  o+=`<section class="step" style="--c:${s.c}"><div class="meta"><span class="badge">Decisió ${i+1}</span><span class="modlab">${esc(s.mod)}</span></div>
+   <h3>${esc(s.t)}</h3>`;
+  s.set.forEach(p=>o+=`<p class="set">${esc(p)}</p>`);
+  o+='<div class="figs">'+s.figs.map(f=>`<div><span>${esc(f[0])}</span><b>${esc(f[1])}</b></div>`).join("")+'</div>';
+  o+=`<p class="q">${esc(s.q)}</p><div class="choices">`;
+  s.opts.forEach((op,k)=>{
+   o+=`<button class="choice ${pick===k?'picked':''}" data-pick="${key}" data-k="${k}"><span class="k">${"ABC"[k]}</span><span>${esc(op.l)}</span></button>`;
+  });
+  o+='</div>';
+  if(pick!==undefined){
+   o+=`<div class="outcome"><b>Conseqüència de la teva decisió</b>${esc(s.opts[pick].o)}</div>`;
+   o+=`<div style="margin-top:13px"><button class="btn ${anOpen[key]?'ghost':''}" data-an="${key}">${anOpen[key]?"Amaga l'anàlisi":"Anàlisi completa"}</button></div>`;
+   if(anOpen[key]){
+    o+='<div class="analysis open">'+s.an.map(p=>`<p>${esc(p)}</p>`).join("")+
+       `<div class="lesson"><b>La lliçó · </b>${esc(s.lesson)}</div></div>`;
+   }
+  }
+  o+='</section>';
+ });
+ const done=cs.steps.filter((_,i)=>picks[caseSel+"-"+i]!==undefined).length;
+ o+=`<p class="lead" style="text-align:center">${done}/${cs.steps.length} decisions preses en aquest cas</p>`;
+ return o+'</div>';
+}
+
+/* ---------- CALCULADORES ---------- */
+const nf=new Intl.NumberFormat("ca-ES",{maximumFractionDigits:0});
+const nf1=new Intl.NumberFormat("ca-ES",{maximumFractionDigits:1});
+const E=n=>nf.format(Math.round(n))+" €";
+const P=n=>nf1.format(n)+"%";
+function fmtVal(f,v){if(f==="eur")return E(v);if(f==="pct")return nf1.format(v)+"%";
+ if(f==="pctv")return (v>0?"+":"")+nf1.format(v)+"%";if(f==="any")return v+(v==1?" any":" anys");
+ if(f==="ud")return nf.format(v);if(f==="x")return nf1.format(v)+"×";return v;}
+function chart(series,o){
+ o=o||{};const W=340,H=o.h||140,pl=4,pr=4,pt=10,pb=16;
+ let all=[];series.forEach(s=>all=all.concat(s.v));
+ let max=Math.max.apply(null,all),min=Math.min.apply(null,all);
+ if(min>0)min=0; if(max===min)max=min+1;
+ const n=series[0].v.length;
+ const X=i=>pl+i*(W-pl-pr)/((n-1)||1), Y=v=>pt+(max-v)*(H-pt-pb)/(max-min);
+ let s='<svg viewBox="0 0 '+W+' '+H+'" class="chart" preserveAspectRatio="none">';
+ if(min<0)s+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(0).toFixed(1)+'" y2="'+Y(0).toFixed(1)+'" stroke="#bdb6a8" stroke-width="1" stroke-dasharray="3 3"/>';
+ const y0=Y(Math.max(min,0));
+ series.forEach(sr=>{const pts=sr.v.map((v,i)=>X(i).toFixed(1)+","+Y(v).toFixed(1)).join(" ");
+  if(sr.fill)s+='<polygon points="'+X(0).toFixed(1)+","+y0.toFixed(1)+" "+pts+" "+X(n-1).toFixed(1)+","+y0.toFixed(1)+'" fill="'+sr.color+'" opacity="0.15"/>';
+  s+='<polyline points="'+pts+'" fill="none" stroke="'+sr.color+'" stroke-width="2.2" stroke-linejoin="round"'+(sr.dash?' stroke-dasharray="4 3"':'')+'/>';});
+ if(o.marker){const mx=X(o.marker.i),my=Y(o.marker.v);
+  s+='<line x1="'+mx.toFixed(1)+'" x2="'+mx.toFixed(1)+'" y1="'+pt+'" y2="'+(H-pb)+'" stroke="#8b8577" stroke-width="1" stroke-dasharray="2 3"/>';
+  s+='<circle cx="'+mx.toFixed(1)+'" cy="'+my.toFixed(1)+'" r="4.5" fill="#fff" stroke="'+o.marker.color+'" stroke-width="2.5"/>';}
+ if(o.xlab){s+='<text x="'+pl+'" y="'+(H-3)+'" font-size="9" fill="#8b8577">'+o.xlab[0]+'</text>';
+  s+='<text x="'+(W-pr)+'" y="'+(H-3)+'" font-size="9" fill="#8b8577" text-anchor="end">'+o.xlab[1]+'</text>';}
+ return s+'</svg>';}
+function legend(items){return '<div class="legend">'+items.map(i=>'<span><i style="background:'+i.c+'"></i>'+i.l+'</span>').join("")+'</div>';}
+
+const CUPD={
+unit(){const s=CV.unit;
+ const contrib=s.arpu*s.marge/100, vida=100/s.churn, ltv=contrib*vida;
+ const pay=contrib>0?s.cac/contrib:Infinity, ratio=s.cac>0?ltv/s.cac:0;
+ const cum=[];let acc=-s.cac;cum.push(acc);
+ for(let m=1;m<=36;m++){acc+=contrib*Math.pow(1-s.churn/100,m);cum.push(acc);}
+ const sa=ratio>=3&&pay<=12;
+ return '<div class="kpis">'+
+  '<div class="kpi"><small>Contribució per client i mes</small><strong>'+E(contrib)+'</strong></div>'+
+  '<div class="kpi"><small>Vida mitjana del client</small><strong>'+nf1.format(vida)+' mesos</strong></div>'+
+  '<div class="kpi"><small>LTV (sobre marge)</small><strong>'+E(ltv)+'</strong></div>'+
+  '<div class="kpi"><small>LTV / CAC</small><strong class="'+(ratio>=3?'pos':'neg')+'">'+nf1.format(ratio)+'×</strong></div>'+
+  '<div class="kpi wide"><small>Període de recuperació del CAC</small><strong class="'+(pay<=12?'pos':'neg')+'">'+
+   (isFinite(pay)?nf1.format(pay)+" mesos":"mai")+'</strong></div></div>'+
+  legend([{c:"#A0431E",l:"Contribució acumulada per client (36 mesos)"}])+
+  chart([{v:cum,color:"#A0431E",fill:true}],{xlab:["captació","mes 36"]})+
+  '<p class="verdict">'+(sa?'Els números tanquen: ràtio per damunt de 3× i recuperació per sota de 12 mesos, que són les referències habituals.':
+   'Aquests números <b>no tanquen</b>: '+(ratio<3?'la ràtio LTV/CAC és inferior a 3× ':'')+(pay>12?'i el CAC triga més d\'un any a recuperar-se':'')+'. ')+
+  ' La corba creua el zero quan el client ja ha pagat el que va costar captar-lo. Fixa\'t que l\'LTV es calcula sobre MARGE, no sobre ingrés: '+
+  'fer-ho sobre ingrés és l\'error més comú i infla el resultat un '+nf1.format(100/(s.marge/100)-100)+'%. '+
+  'Prova de moure només el churn: és la variable que més mou el resultat, i és la que menys es toca.</p>';},
+van(){const s=CV.van;
+ let van=-s.inv;const cum=[-s.inv];
+ for(let y=1;y<=s.anys;y++){van+=s.flux/Math.pow(1+s.taxa/100,y);cum.push(van);}
+ let tir=null;
+ for(let r=0;r<=200;r+=0.1){let v=-s.inv;for(let y=1;y<=s.anys;y++)v+=s.flux/Math.pow(1+r/100,y);
+  if(v<0){tir=r;break;}}
+ const pay=s.flux>0?s.inv/s.flux:Infinity;
+ return '<div class="kpis">'+
+  '<div class="kpi"><small>VAN</small><strong class="'+(van>=0?'pos':'neg')+'">'+E(van)+'</strong></div>'+
+  '<div class="kpi"><small>TIR aproximada</small><strong>'+(tir!==null?nf1.format(tir)+"%":"—")+'</strong></div>'+
+  '<div class="kpi wide"><small>Recuperació simple (sense descomptar)</small><strong>'+
+   (isFinite(pay)?nf1.format(pay)+" anys":"mai")+'</strong></div></div>'+
+  legend([{c:"#5B3E86",l:"VAN acumulat any a any"}])+
+  chart([{v:cum,color:"#5B3E86",fill:true}],{xlab:["inversió","any "+s.anys]})+
+  '<p class="verdict">'+(van>=0?'Amb una taxa del '+P(s.taxa)+' el projecte <b>crea valor</b>.':
+   'Amb una taxa del '+P(s.taxa)+' el projecte <b>destrueix valor</b>: els fluxos no compensen el risc i el cost del capital.')+
+  ' La TIR ronda el '+(tir!==null?nf1.format(tir)+"%":"—")+', o sigui que el projecte aguanta fins a aquesta taxa de descompte. '+
+  'Mou la taxa i observa com de fràgil és la conclusió: qui tria la taxa de descompte, tria el resultat. '+
+  'I recorda que la TIR ignora l\'escala — un percentatge alt sobre poc diner pot valer menys que un de modest sobre molt.</p>';},
+palanc(){const s=CV.palanc;
+ const mc=s.preu-s.cvar, contrib=mc*s.uds, ben=contrib-s.fix;
+ const bep=mc>0?Math.ceil(s.fix/mc):Infinity;
+ const gao=ben!==0?contrib/ben:Infinity;
+ const nouBen=mc*s.uds*(1+s.delta/100)-s.fix;
+ const varBen=ben!==0?(nouBen-ben)/Math.abs(ben)*100:0;
+ const cum=[];for(let i=0;i<=20;i++){const u=Math.max(1,Math.round(bep*2*i/20));cum.push(mc*u-s.fix);}
+ return '<div class="kpis">'+
+  '<div class="kpi"><small>Marge de contribució unitari</small><strong>'+E(mc)+'</strong></div>'+
+  '<div class="kpi"><small>Punt d\'equilibri</small><strong>'+(isFinite(bep)?nf.format(bep)+" clients":"—")+'</strong></div>'+
+  '<div class="kpi"><small>Benefici actual</small><strong class="'+(ben>=0?'pos':'neg')+'">'+E(ben)+'</strong></div>'+
+  '<div class="kpi"><small>Grau de palanquejament</small><strong>'+(isFinite(gao)?nf1.format(gao)+"×":"—")+'</strong></div>'+
+  '<div class="kpi wide"><small>Si les vendes varien un '+(s.delta>0?"+":"")+nf1.format(s.delta)+'%, el benefici varia</small><strong class="'+
+   (varBen>=0?'pos':'neg')+'">'+(varBen>0?"+":"")+nf1.format(varBen)+'%</strong></div></div>'+
+  legend([{c:"#14663F",l:"Benefici segons nombre de clients"}])+
+  chart([{v:cum,color:"#14663F"}],{xlab:["0 clients",nf.format(bep*2)+" clients"]})+
+  '<p class="verdict">El grau de palanquejament operatiu de <b>'+(isFinite(gao)?nf1.format(gao)+"×":"—")+'</b> vol dir que cada 1% de variació en vendes es converteix en un '+
+  (isFinite(gao)?nf1.format(gao):"—")+'% de variació en el benefici. És la mateixa amplificació en les dues direccions: '+
+  'l\'estructura que et fa guanyar molt quan puges és la que t\'esfondra quan baixes. '+
+  'Puja els costos fixos i mira com el grau creix — aquesta és la decisió real que hi ha darrere de contractar plantilla en comptes de subcontractar.</p>';},
+dilu(){const s=CV.dilu;
+ const post=s.pre+s.inv;
+ const pctInv=post>0?s.inv/post*100:0;
+ const pctFund=Math.max(0,100-pctInv-s.pool);
+ const pref=s.inv*s.pref;
+ let invGets, fundGets;
+ if(s.exit<=pref){invGets=s.exit;}
+ else{invGets=pref+(s.exit-pref)*pctInv/100;}
+ invGets=Math.min(invGets,s.exit);
+ fundGets=(s.exit-invGets)*(pctFund/(pctFund+s.pool||1));
+ const sensePref=s.exit*pctInv/100;
+ const cost=invGets-sensePref;
+ return '<div class="kpis">'+
+  '<div class="kpi"><small>Valoració post-money</small><strong>'+E(post)+'</strong></div>'+
+  '<div class="kpi"><small>% inversor</small><strong>'+nf1.format(pctInv)+'%</strong></div>'+
+  '<div class="kpi"><small>% fundadors (després del pool)</small><strong>'+nf1.format(pctFund)+'%</strong></div>'+
+  '<div class="kpi"><small>Preferència garantida</small><strong>'+E(pref)+'</strong></div>'+
+  '<div class="kpi"><small>L\'inversor s\'emporta</small><strong class="neg">'+E(invGets)+'</strong></div>'+
+  '<div class="kpi"><small>Els fundadors s\'emporten</small><strong class="'+(fundGets>0?'pos':'neg')+'">'+E(fundGets)+'</strong></div>'+
+  '</div>'+
+  '<p class="verdict">En una venda de '+E(s.exit)+', l\'inversor s\'emporta <b>'+E(invGets)+'</b> — '+
+  (cost>1?'és a dir <b>'+E(cost)+' més</b> del que li correspondria pel seu '+nf1.format(pctInv)+'% (que serien '+E(sensePref)+'). '+
+   'Aquesta diferència la paguen íntegrament els fundadors.':'exactament el que li correspon pel seu percentatge, perquè la venda és prou gran perquè la preferència no s\'activi de manera rellevant.')+
+  ' Baixa la preferència a 1× i mira la diferència: negociar aquesta condició sol valer molt més que negociar la valoració. '+
+  'I fixa\'t en el pool: aquest '+nf1.format(s.pool)+'% creat abans de la inversió el paguen només els fundadors — és una rebaixa encoberta de la valoració.</p>';},
+esper(){const s=CV.esper;
+ const p=s.prob/100, rec=s.cost*s.recup/100;
+ const ev=p*s.guany+(1-p)*rec-s.cost;
+ const perdua=s.cost-rec;
+ const pct=s.caixa>0?perdua/s.caixa*100:0;
+ const pStar=(s.guany-rec)!==0?(s.cost-rec)/(s.guany-rec)*100:100;
+ const curve=[];for(let x=0;x<=100;x+=2)curve.push((x/100)*s.guany+(1-x/100)*rec-s.cost);
+ const mi=Math.round(s.prob/2);
+ const ruina=pct>=60;
+ return '<div class="kpis">'+
+  '<div class="kpi"><small>Valor esperat</small><strong class="'+(ev>=0?'pos':'neg')+'">'+(ev>0?"+":"")+E(ev)+'</strong></div>'+
+  '<div class="kpi"><small>Probabilitat mínima per a EV positiu</small><strong>'+nf1.format(pStar)+'%</strong></div>'+
+  '<div class="kpi"><small>Pèrdua real si surt malament</small><strong class="neg">'+E(perdua)+'</strong></div>'+
+  '<div class="kpi"><small>Sobre la teva caixa</small><strong class="'+(ruina?'neg':'')+'">'+nf1.format(pct)+'%</strong></div>'+
+  '</div>'+
+  legend([{c:"#40506B",l:"Valor esperat segons la probabilitat d'èxit"}])+
+  chart([{v:curve,color:"#40506B",fill:true}],{marker:{i:mi,v:curve[mi],color:"#40506B"},xlab:["0% d'èxit","100% d'èxit"]})+
+  '<p class="verdict">'+(ev>=0
+   ? 'El valor esperat és positiu: amb aquestes xifres, l\'aposta compensa <b>en mitjana</b>. Necessites almenys un '+nf1.format(pStar)+'% de probabilitat d\'èxit perquè surti a compte.'
+   : 'El valor esperat és negatiu: caldria una probabilitat d\'èxit superior al <b>'+nf1.format(pStar)+'%</b> perquè compensés.')+
+  ' '+(ruina
+   ? '<b>Però atenció al que el càlcul no diu:</b> si surt malament perds el '+nf1.format(pct)+'% de la teva caixa. A aquest nivell no hi ha segona tirada, i el valor esperat només té sentit si pots repetir l\'aposta moltes vegades. Una aposta amb EV positiu que et pot deixar fora del joc no és una bona aposta: és una aposta que no et pots permetre.'
+   : 'Si surt malament perds el '+nf1.format(pct)+'% de la caixa, un cop assumible: podries tornar a intentar-ho, que és el que fa que el valor esperat sigui un criteri vàlid aquí.')+
+  ' Contrasta sempre la teva probabilitat estimada amb la taxa base de casos comparables: la visió interior sol ser molt més optimista que les dades del sector.</p>';},
+mult(){const s=CV.mult;
+ const val=s.arr*s.mult;
+ const baix=s.arr*Math.max(0.5,s.mult*0.6), alt=s.arr*s.mult*1.6;
+ const proj=[];let a=s.arr;proj.push(a);
+ for(let y=1;y<=5;y++){a=a*(1+s.creix/100);proj.push(a);}
+ const regla40=s.creix;
+ return '<div class="kpis">'+
+  '<div class="kpi"><small>Valoració estimada</small><strong>'+E(val)+'</strong></div>'+
+  '<div class="kpi"><small>Rang realista de mercat</small><strong style="font-size:14px">'+E(baix)+' – '+E(alt)+'</strong></div>'+
+  '<div class="kpi wide"><small>ARR projectat d\'aquí 5 anys al '+nf1.format(s.creix)+'% anual</small><strong>'+E(proj[5])+'</strong></div>'+
+  '</div>'+
+  legend([{c:"#1F4E79",l:"Projecció d'ARR a 5 anys"}])+
+  chart([{v:proj,color:"#1F4E79",fill:true}],{xlab:["avui","any 5"]})+
+  '<p class="verdict">Un múltiple de '+nf1.format(s.mult)+'× sobre '+E(s.arr)+' dona '+E(val)+'. Però el rang de mercat per a la mateixa empresa pot anar de '+E(baix)+' a '+E(alt)+
+  ' segons el moment del cicle, el churn i qui compra: el 2021 i el 2023 tenien múltiples radicalment diferents per a empreses idèntiques. '+
+  'Amb un creixement del '+nf1.format(regla40)+'%, la conversa amb un inversor girarà sobretot al voltant de si aquest ritme és sostenible i a quin cost de captació. '+
+  'El número concret importa menys que entendre què el mou.</p>';}
+};
+function renderCalc(){
+ let o='<div class="narrow"><p class="lead">Les eines numèriques que es fan servir de veritat en una escola de negocis. Mou els controls i mira com canvien les conclusions.</p>';
+ Object.keys(CDEF).forEach(k=>{const d=CDEF[k];
+  o+=`<section class="calc" style="--c:${d.c}"><h3>${d.n} · ${esc(d.t)}</h3><p class="clead">${esc(d.lead)}</p>`;
+  d.ctrls.forEach(c=>{o+=`<div class="ctrl"><div class="lab"><span>${esc(c.l)}</span><b id="v-${k}-${c.p}"></b></div>
+   <input type="range" min="${c.min}" max="${c.max}" step="${c.step}" value="${CV[k][c.p]}" data-calc="${k}" data-p="${c.p}" aria-label="${esc(c.l)}"></div>`;});
+  o+=`<div class="out" id="out-${k}"></div></section>`;});
+ return o+'</div>';
+}
+function refreshCalc(k){const d=CDEF[k];
+ d.ctrls.forEach(c=>{const el=document.getElementById("v-"+k+"-"+c.p);if(el)el.textContent=fmtVal(c.f,CV[k][c.p]);});
+ const b=document.getElementById("out-"+k);if(b)b.innerHTML=CUPD[k]();}
+function refreshAllCalc(){Object.keys(CDEF).forEach(refreshCalc);}
+
+/* ---------- DIAGNÒSTIC ---------- */
+function renderDiag(){
+ let o='<div class="narrow"><p class="lead">Aquí no hi ha opcions. Se\'t donen les dades d\'una empresa i has de dir què li passa. Escriu-ho primer i després compara amb l\'anàlisi completa: és l\'exercici que més s\'assembla a un examen de cas.</p>';
+ DIAG.forEach((d,i)=>{
+  o+=`<section class="diag"><h3>${esc(d.t)}</h3><p class="set" style="font-size:15px;line-height:1.65;margin:0 0 13px">${esc(d.intro)}</p>`;
+  o+='<table class="tbl">'+d.rows.map(r=>`<tr class="${r[0]==="h"?"h":""}"><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join("")+'</table>';
+  o+=`<label>Què li passa a aquesta empresa? Escriu el teu diagnòstic abans de mirar</label>
+   <textarea rows="4" data-dn="${i}" placeholder="Ex.: el problema real és…">${esc(dnotes[i]||"")}</textarea>
+   <div style="margin-top:12px"><button class="btn ${diagOpen[i]?'ghost':''}" data-diag="${i}">${diagOpen[i]?"Amaga l'anàlisi":"Veure l'anàlisi completa"}</button></div>`;
+  if(diagOpen[i])o+='<div class="analysis open">'+d.points.map(p=>`<p>${esc(p)}</p>`).join("")+'</div>';
+  o+='</section>';});
+ return o+'</div>';
+}
+
+/* ---------- RENDER ---------- */
+function render(){
+ const v=document.getElementById("view");
+ v.innerHTML = tab==="moduls"?renderMods() : tab==="cas"?renderCase() : tab==="calc"?renderCalc() : renderDiag();
+ if(tab==="calc")refreshAllCalc();
+}
+document.getElementById("view").addEventListener("click",e=>{
+ const t=e.target;
+ const m=t.closest("[data-mod]"); if(m){modOpen[m.dataset.mod]=!modOpen[m.dataset.mod];render();return;}
+ const cse=t.closest("[data-case]"); if(cse){caseSel=cse.dataset.case;store.set("caseSel",caseSel);render();window.scrollTo(0,0);return;}
+ const p=t.closest("[data-pick]"); if(p){picks[p.dataset.pick]=+p.dataset.k;store.set("picks",picks);render();return;}
+ const a=t.closest("[data-an]"); if(a){anOpen[a.dataset.an]=!anOpen[a.dataset.an];render();return;}
+ const d=t.closest("[data-diag]"); if(d){diagOpen[d.dataset.diag]=!diagOpen[d.dataset.diag];render();return;}
+});
+document.getElementById("view").addEventListener("input",e=>{
+ const ta=e.target.closest("[data-dn]"); if(ta){dnotes[ta.dataset.dn]=ta.value;store.set("dnotes",dnotes);return;}
+ const sl=e.target.closest("input[data-calc]");
+ if(sl){CV[sl.dataset.calc][sl.dataset.p]=parseFloat(sl.value);refreshCalc(sl.dataset.calc);}
+});
+renderTabs();render();
+</script>
+</body>
+</html>

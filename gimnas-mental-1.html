@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EEE6">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Gimnàs mental — Models per pensar millor</title>
+<style>
+  :root{
+    --paper:#F1EEE6; --card:#fff; --ink:#23212C; --muted:#6B6875; --line:#E4DFD3;
+    --decisio:#2947D4; --negoci:#C0392B; --finances:#1E8E5A; --psico:#7C3AA6;
+    --macro:#0E6E7A; --critica:#9A5B12;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --monof: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    background:var(--paper); color:var(--ink); font-family:var(--sans);
+    font-size:16px; line-height:1.5; -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:980px; margin:0 auto; padding:22px 16px calc(60px + env(safe-area-inset-bottom));}
+
+  header .eyebrow{font-family:var(--monof); font-size:11px; letter-spacing:1.2px;
+    text-transform:uppercase; color:var(--muted); display:block; margin-bottom:6px;}
+  header h1{font-size:29px; line-height:1.08; font-weight:800; margin:0 0 6px; letter-spacing:-0.5px;}
+  header p{margin:0; font-size:14.5px; color:var(--muted); max-width:580px;}
+
+  /* tabs */
+  nav.tabs{display:flex; gap:16px; overflow-x:auto; border-bottom:1px solid var(--line);
+    margin:20px 0 22px; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+  nav.tabs::-webkit-scrollbar{display:none;}
+  nav.tabs button{background:none; border:none; font-family:inherit; font-weight:700; font-size:15px;
+    color:var(--muted); padding:9px 2px; margin-bottom:-1px; border-bottom:2.5px solid transparent;
+    cursor:pointer; white-space:nowrap;}
+  nav.tabs button.on{color:var(--ink); border-bottom-color:var(--ink);}
+
+  /* filters */
+  .filters{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:18px;}
+  .chip{font-family:var(--monof); font-size:11.5px; padding:7px 11px; border-radius:999px;
+    border:1.5px solid var(--line); background:transparent; color:var(--muted); cursor:pointer;}
+  .chip.on{color:#fff;}
+  .counter{font-family:var(--monof); font-size:12px; color:var(--finances); margin-left:auto;
+    align-self:center; padding-bottom:9px; white-space:nowrap;}
+
+  /* cards grid */
+  .grid{display:grid; gap:13px; grid-template-columns:1fr;}
+  @media(min-width:620px){ .grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr));} }
+
+  .card{background:var(--card); border:1px solid var(--line); border-top:4px solid var(--c);
+    border-radius:17px; overflow:hidden; display:flex; flex-direction:column;}
+  .card .top{padding:13px 15px 15px; flex:1;}
+  .cat{display:flex; align-items:center; gap:6px; margin-bottom:9px;}
+  .dot{width:8px; height:8px; border-radius:3px; background:var(--c); flex:0 0 auto;}
+  .cat span{font-family:var(--monof); font-size:10px; letter-spacing:.5px; text-transform:uppercase; color:var(--c);}
+  .cat .done{margin-left:auto; color:var(--finances); font-size:9.5px;}
+  .hook{font-size:15px; line-height:1.5; margin:0 0 13px;}
+  .gutq{font-family:var(--monof); font-size:11px; color:var(--muted); margin:0 0 8px;}
+  .opts{display:flex; flex-direction:column; gap:7px;}
+  .opt{text-align:left; font-family:inherit; font-size:13.5px; color:var(--ink); padding:10px 12px;
+    border-radius:11px; border:1.5px solid var(--line); background:var(--paper); cursor:pointer; line-height:1.4;}
+  .reveal-btn{font-family:var(--monof); font-size:12px; color:#fff; background:var(--c); border:none;
+    padding:9px 14px; border-radius:11px; cursor:pointer;}
+  .card h3{font-size:18.5px; font-weight:800; margin:0 0 8px; line-height:1.15; letter-spacing:-0.3px;}
+  .what{font-size:14px; line-height:1.5; margin:0 0 10px;}
+  .why{background:var(--paper); border-radius:11px; padding:10px 12px; font-size:12.8px;
+    line-height:1.5; color:var(--muted); margin:0; border-left:3px solid var(--c);}
+  .card .foot{display:flex; border-top:1px solid var(--line);}
+  .card .foot button{flex:1; font-family:var(--monof); font-size:11px; background:none; border:none;
+    padding:11px 6px; cursor:pointer; color:var(--muted);}
+  .card .foot button+button{border-left:1px solid var(--line); color:var(--c);}
+  .card .foot button.marked{background:var(--c); color:#fff;}
+
+  /* foundations */
+  .narrow{max-width:720px; margin:0 auto;}
+  .lead{font-size:14.5px; color:var(--muted); margin:0 0 18px;}
+  .sec{background:var(--card); border:1px solid var(--line); border-left:4px solid var(--c);
+    border-radius:17px; margin-bottom:13px; overflow:hidden;}
+  .sec > .head{width:100%; text-align:left; background:none; border:none; padding:15px 17px;
+    cursor:pointer; display:flex; gap:10px; align-items:flex-start; font-family:inherit;}
+  .sec .head .t{flex:1;}
+  .sec .head strong{display:block; font-size:17px; font-weight:800; line-height:1.2;
+    margin-bottom:3px; color:var(--ink); letter-spacing:-0.3px;}
+  .sec .head small{display:block; font-size:13px; color:var(--muted); line-height:1.45;}
+  .caret{flex:0 0 auto; color:var(--muted); font-size:13px; margin-top:4px; transition:transform .2s;}
+  .sec.open .caret{transform:rotate(180deg);}
+  .sec .bodyw{padding:0 17px 18px; display:none;}
+  .sec.open .bodyw{display:block;}
+  .blk{padding-top:16px; border-top:1px solid var(--line);}
+  .blk h4{font-size:15px; font-weight:700; margin:0 0 8px; letter-spacing:-0.2px;}
+  .blk p{font-size:14.5px; line-height:1.6; margin:0 0 10px;}
+  .note{background:var(--paper); border-radius:11px; padding:11px 13px; font-size:13.3px;
+    line-height:1.55; color:var(--muted); margin:4px 0 0; border-left:3px solid var(--c);}
+  .note b{color:var(--c); font-family:var(--monof); font-size:10.5px; letter-spacing:.5px;
+    text-transform:uppercase; display:block; margin-bottom:5px;}
+
+  /* quiz */
+  .qtop{display:flex; align-items:center; gap:8px; margin-bottom:16px;}
+  .qlvl{font-family:var(--monof); font-size:11px; color:var(--muted);}
+  .pips{margin-left:auto; display:flex; gap:3px; flex-wrap:wrap; justify-content:flex-end;}
+  .pip{width:6px; height:6px; border-radius:3px; background:var(--line);}
+  .pip.now{width:16px; background:var(--ink);}
+  .pip.past{background:var(--finances);}
+  .qcard{background:var(--card); border:1px solid var(--line); border-radius:17px; padding:20px 18px;}
+  .qs{font-size:16px; line-height:1.55; margin:0;}
+  .qq{font-size:16.5px; font-weight:700; margin:13px 0; letter-spacing:-0.2px;}
+  .qopt{display:flex; align-items:center; gap:10px; width:100%; text-align:left; font-family:inherit;
+    font-size:14.5px; padding:12px 13px; border-radius:12px; border:1.5px solid var(--line);
+    background:var(--paper); color:var(--ink); cursor:pointer; line-height:1.4;}
+  .qopt.sel{border-color:var(--ink); background:#fff;}
+  .qopt.ok{background:#E8F5EE; border-color:var(--finances); color:#15683F;}
+  .qopt.no{background:#FBEBE9; border-color:var(--negoci); color:#9C2A20;}
+  .qopt .box{width:17px; height:17px; border-radius:5px; border:1.5px solid var(--muted);
+    flex:0 0 auto; display:flex; align-items:center; justify-content:center; font-size:11px; color:#fff;}
+  .qopt.sel .box{background:var(--ink); border-color:var(--ink);}
+  .qopt.ok .box{background:var(--finances); border-color:var(--finances);}
+  .qopt.no .box{background:var(--negoci); border-color:var(--negoci);}
+  .fb{margin-top:15px; border-radius:12px; padding:12px 13px; font-size:13.5px; line-height:1.5;}
+  .fb.ok{background:#E8F5EE;} .fb.no{background:#FBEBE9;}
+  .btn{font-family:var(--monof); font-size:12.5px; color:#fff; background:var(--ink); border:none;
+    padding:11px 17px; border-radius:12px; cursor:pointer;}
+  .btn[disabled]{background:var(--line); cursor:default;}
+  .btn.alt{background:var(--psico);}
+  .btn.ghost{background:transparent; color:var(--muted); border:1.5px solid var(--line);}
+  .rowend{display:flex; justify-content:flex-end; margin-top:14px;}
+  .result{max-width:440px; margin:36px auto; text-align:center;}
+  .result .score{font-size:52px; font-weight:800; line-height:1;}
+  .result .score span{font-size:24px; color:var(--muted);}
+
+  /* final cases */
+  .case{background:var(--card); border:1px solid var(--line); border-radius:17px; padding:19px; margin-bottom:16px;}
+  .case .tag{font-family:var(--monof); font-size:11.5px; color:#fff; background:var(--ink);
+    border-radius:8px; padding:3px 9px; margin-right:8px;}
+  .case h3{display:inline; font-size:17.5px; font-weight:800; letter-spacing:-0.3px;}
+  .case .txt{font-size:15.5px; line-height:1.55; margin:13px 0 15px;}
+  .case label{font-family:var(--monof); font-size:11px; color:var(--muted); display:block; margin-bottom:6px;}
+  .case textarea{width:100%; font-family:inherit; font-size:14px; color:var(--ink); background:var(--paper);
+    border:1.5px solid var(--line); border-radius:12px; padding:10px 12px; resize:vertical; outline:none;}
+  .case textarea:focus{border-color:var(--psico);}
+  .analysis{margin-top:13px; border-left:3px solid var(--psico); padding-left:13px; display:none;}
+  .analysis.open{display:block;}
+  .analysis p{font-size:13.8px; line-height:1.55; margin:0 0 10px;}
+
+  button:focus-visible, textarea:focus-visible{outline:2px solid var(--decisio); outline-offset:2px;}
+  @media(prefers-reduced-motion:reduce){*{transition:none !important;}}
+  /* simuladors */
+  .sim{background:var(--card); border:1px solid var(--line); border-left:4px solid var(--c);
+    border-radius:17px; padding:18px 16px; margin-bottom:16px;}
+  .sim h3{font-size:17px; font-weight:800; margin:0 0 5px; letter-spacing:-0.3px;}
+  .sim .simlead{font-size:13.5px; color:var(--muted); margin:0 0 15px; line-height:1.5;}
+  .ctrl{margin-bottom:13px;}
+  .ctrl .lab{display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin-bottom:5px;}
+  .ctrl .lab span{font-size:13px; color:var(--muted);}
+  .ctrl .lab b{font-family:var(--monof); font-size:13.5px; color:var(--ink); white-space:nowrap;}
+  input[type=range]{width:100%; -webkit-appearance:none; appearance:none; background:transparent; margin:0; padding:6px 0;}
+  input[type=range]::-webkit-slider-runnable-track{height:5px; border-radius:3px; background:var(--line);}
+  input[type=range]::-moz-range-track{height:5px; border-radius:3px; background:var(--line);}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:24px; height:24px; margin-top:-9.5px;
+    border-radius:50%; background:var(--c); border:3px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.28); cursor:pointer;}
+  input[type=range]::-moz-range-thumb{width:22px; height:22px; border-radius:50%; background:var(--c);
+    border:3px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.28); cursor:pointer;}
+  .out{border-top:1px solid var(--line); padding-top:14px; margin-top:4px;}
+  .kpis{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;}
+  .kpi{background:var(--paper); border-radius:11px; padding:10px 11px;}
+  .kpi small{display:block; font-size:11px; color:var(--muted); margin-bottom:3px; line-height:1.3;}
+  .kpi strong{font-size:17px; font-weight:800; letter-spacing:-0.4px; display:block; line-height:1.15;}
+  .kpi.wide{grid-column:1/-1;}
+  .pos{color:var(--finances);} .neg{color:var(--negoci);}
+  .chart{width:100%; height:auto; display:block; margin:4px 0 8px; overflow:visible;}
+  .legend{display:flex; flex-wrap:wrap; gap:12px; font-size:11.5px; color:var(--muted); margin-bottom:10px;}
+  .legend i{display:inline-block; width:11px; height:3px; border-radius:2px; margin-right:5px; vertical-align:middle;}
+  .verdict{font-size:13.5px; line-height:1.55; background:var(--paper); border-radius:11px;
+    padding:11px 12px; border-left:3px solid var(--c); margin:0;}
+  .bars{margin-bottom:12px;}
+  .bar{margin-bottom:9px;}
+  .bar .t{display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:4px;}
+  .bar .t b{font-family:var(--monof); font-size:12.5px;}
+  .bar .track{height:11px; border-radius:6px; background:var(--paper); overflow:hidden;}
+  .bar .fill{height:100%; border-radius:6px;}
+  .hidden{display:none !important;}
+  footer.tip{margin-top:28px; font-family:var(--monof); font-size:11px; color:var(--muted); text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Gimnàs mental</span>
+    <h1>Models per pensar millor</h1>
+    <p id="subtitle"></p>
+  </header>
+
+  <nav class="tabs" id="tabs"></nav>
+  <main id="view"></main>
+
+  <footer class="tip">El progrés es desa al teu dispositiu · funciona sense connexió</footer>
+</div>
+
+<script>
+/* =========================== DADES =========================== */
+const CATS = {
+  decisio:{label:"Decisió i recursos", color:"var(--decisio)"},
+  negoci:{label:"Negoci", color:"var(--negoci)"},
+  macro:{label:"Macroeconomia", color:"var(--macro)"},
+  finances:{label:"Finances", color:"var(--finances)"},
+  psico:{label:"Psicologia", color:"var(--psico)"},
+  critica:{label:"Mirada crítica", color:"var(--critica)"}
+};
+
+const CONCEPTS = [
+/* DECISIÓ */
+{id:"enfonsat",cat:"decisio",name:"Cost enfonsat",
+ hook:"Ets al cinema. Als 20 minuts, la pel·li és un pestinyo insuportable. Ja has pagat l'entrada.",
+ gut:{q:"Què fas?",a:["Em quedo, que ja he pagat","Marxo i aprofito la tarda"]},
+ what:"Diners o temps ja gastats que no recuperaràs facis el que facis.",
+ why:"L'instint de «quedar-me per aprofitar» és la trampa. Els 10 € ja no hi són; l'única pregunta és què vols fer amb la propera hora i mitja."},
+{id:"oportunitat",cat:"decisio",name:"Cost d'oportunitat",
+ hook:"Dissabte al matí. Pots anar a fotografiar ocells o quedar-te endreçant el garatge.",
+ gut:{q:"Què «costa» anar a fotografiar?",a:["La benzina i poc més","El garatge sense endreçar"]},
+ what:"El valor de la millor alternativa a què renuncies.",
+ why:"Cada «sí» és un «no» a una altra cosa. El cost real no és el que pagues, sinó el que deixes de fer."},
+{id:"marginal",cat:"decisio",name:"Cost marginal / pensar al marge",
+ hook:"Tens un blog. Et planteges si escriure un article més aquesta setmana.",
+ gut:{q:"Quina és la bona pregunta?",a:["Val la pena tenir un blog?","Aquest article de més, què em costa i què m'aporta?"]},
+ what:"El que costa produir una unitat més. «Al marge» = decidir sobre el següent pas, no sobre tot el projecte.",
+ why:"Poques decisions són «tot o res». Decidir la propera unitat evita bloquejos i afina."},
+{id:"decreixents",cat:"decisio",name:"Rendiments decreixents",
+ hook:"La primera hora d'estudi abans d'un examen fa miracles. L'hora vuitena seguida, ja no tant.",
+ what:"A partir d'un punt, afegir més del mateix recurs aporta cada cop menys.",
+ why:"«Més» no és sempre millor de manera proporcional. A vegades el següent esforç ja no compensa."},
+{id:"risc",cat:"decisio",name:"Risc vs. incertesa",
+ hook:"Tirar un dau: saps que hi ha 1 entre 6. Muntar un producte nou: no tens ni idea de què passarà.",
+ what:"Risc: probabilitats que pots estimar. Incertesa: desconegut genuí que no pots posar en números.",
+ why:"Confondre'ls fa que t'inventis probabilitats falses per sentir-te segur. A vegades el sincer és «no ho sé»."},
+/* NEGOCI */
+{id:"escala",cat:"negoci",name:"Economies d'escala",
+ hook:"Preparar un material et costa 10 hores. Vendre'l a 5 persones o a 500 costa… les mateixes 10 hores.",
+ what:"Com més produeixes, més barat surt cada unitat perquè el cost fix es reparteix.",
+ why:"És el motor de l'ingrés passiu digital: fabricar un cop, servir infinites vegades."},
+{id:"xarxa",cat:"negoci",name:"Efecte de xarxa",
+ hook:"Un WhatsApp on només hi ets tu no serveix de res.",
+ what:"El producte val més com més gent l'usa.",
+ why:"Crea un cercle (més usuaris → més valor → més usuaris) i fa dificilíssim competir amb plataformes ja plenes."},
+{id:"moat",cat:"negoci",name:"Fossat competitiu (moat)",
+ hook:"Vols vendre fitxes d'anglès genèriques. Com tu, mil persones més.",
+ gut:{q:"Què et protegeix de la còpia?",a:["Res, és fàcil de replicar","Un coneixement que pocs tenen"]},
+ what:"Allò que protegeix el negoci de la competència: marca, coneixement únic, xarxa, cost de canvi.",
+ why:"La pregunta d'or: què tinc jo que sigui difícil de copiar?"},
+{id:"fixos",cat:"negoci",name:"Costos fixos vs. variables",
+ hook:"Una subscripció mensual la pagues venguis o no. La comissió per venda, només si vens.",
+ what:"Fixos: no depenen de l'activitat. Variables: pugen i baixen amb ella.",
+ why:"Saber la barreja et diu quant has de vendre per no perdre-hi diners."},
+{id:"equilibri",cat:"negoci",name:"Punt d'equilibri (break-even)",
+ hook:"La web et costa 100 €/any. Cada venda et deixa 5 € nets.",
+ gut:{q:"Quantes vendes per començar a guanyar?",a:["20","100"]},
+ what:"El volum a partir del qual els ingressos cobreixen els costos. Aquí, 20 vendes.",
+ why:"Saber el número abans de començar t'estalvia il·lusions."},
+{id:"cua",cat:"negoci",name:"Cua llarga (long tail)",
+ hook:"Una llibreria de barri només té els best-sellers. Amazon té milions de títols que venen un cop l'any.",
+ what:"La suma de molts productes de nínxol que venen poc pot superar els pocs èxits massius.",
+ why:"Funciona només si tenir cada producte publicat costa gairebé zero."},
+{id:"asimetria",cat:"negoci",name:"Asimetria d'informació",
+ hook:"Compres un cotxe de segona mà. El venedor sap si té trampa; tu no.",
+ what:"Una part en sap més que l'altra, i això distorsiona el mercat.",
+ why:"Ressenyes, garanties i certificacions existeixen justament per reduir-la."},
+{id:"incentius",cat:"negoci",name:"Incentius",
+ hook:"Una guarderia multa els pares que arriben tard… i els retards augmenten.",
+ gut:{q:"Per què?",a:["La multa era massa baixa","Va convertir una culpa en un preu que pots pagar"]},
+ what:"La gent respon als estímuls, sovint de maneres inesperades.",
+ why:"Sempre pregunta: quin comportament estic premiant de veritat?"},
+{id:"comparatiu",cat:"negoci",name:"Avantatge comparatiu",
+ hook:"Ets ràpid fent de tot. Però on ets relativament millor?",
+ what:"Convé dedicar-te al que fas millor en comparació i delegar o automatitzar la resta, encara que ho facis tot prou bé.",
+ why:"No es tracta de ser el millor en tot, sinó de concentrar-te on el teu temps rendeix més."},
+{id:"transaccio",cat:"negoci",name:"Cost de transacció",
+ hook:"Vendre una cosa entre particulars: negociar, confiar, cobrar, enviar… quina mandra.",
+ what:"La fricció (temps, confiança, gestió) de cada intercanvi, a part del preu.",
+ why:"Moltes plataformes i intermediaris existeixen només per baixar aquesta fricció."},
+{id:"externalitats",cat:"negoci",name:"Externalitats",
+ hook:"Una fàbrica contamina un riu. Qui paga el mal no és qui contamina, sinó els veïns.",
+ what:"Un cost (o benefici) que recau sobre tercers que no han decidit res.",
+ why:"El preu de mercat sovint no reflecteix aquests efectes; per això s'hi posen impostos o subvencions."},
+{id:"churn",cat:"negoci",name:"Churn i retenció",
+ hook:"Guanyes 100 subscriptors al mes, però en perds 90. Estàs omplint una galleda foradada.",
+ what:"Churn: el ritme al qual la gent se'n va. Retenció: quants es queden.",
+ why:"Créixer sense retenir és córrer per no moure't. Sovint tapar el forat val més que captar més."},
+/* MACRO */
+{id:"ofertademanda",cat:"macro",name:"Oferta i demanda",
+ hook:"Molta gent vol pisos al centre i n'hi ha pocs. El preu puja. Fins aquí, el manual.",
+ gut:{q:"I això ho explica tot?",a:["Sí, és la llei bàsica","No sempre: depèn de qui fixa el preu"]},
+ what:"Quan la demanda supera l'oferta el preu tendeix a pujar, i a l'inrevés.",
+ why:"Vàlid com a punt de partida, però el model suposa molts venedors petits que no poden influir en el preu. A la majoria de mercats reals això no passa. (Vegeu Fonaments → Mirada crítica.)"},
+{id:"senyal",cat:"macro",name:"El preu com a senyal",
+ hook:"Puja el preu del cafè: uns en beuen menys, altres en planten més.",
+ what:"El preu transmet informació sobre escassetat sense que ningú l'hagi de coordinar.",
+ why:"El matís modern: un preu alt també pot indicar poder de mercat o una bombolla. Cal preguntar-se sempre què reflecteix aquest preu."},
+{id:"pib",cat:"macro",name:"PIB",
+ hook:"El valor de tot el que produeix un país en un any. La xifra que surt a les notícies.",
+ what:"La mesura estàndard d'activitat econòmica.",
+ why:"No mesura el treball domèstic, ni la desigualtat, ni el cost ambiental. Un país pot créixer en PIB i empitjorar en benestar."},
+{id:"cicles",cat:"macro",name:"Cicles econòmics",
+ hook:"L'economia no creix en línia recta: puja, s'infla, cau i torna a començar.",
+ what:"Alternança d'expansions i recessions (dos trimestres seguits de caiguda del PIB).",
+ why:"Els cicles són estructurals, no accidents. El que canvia és la intensitat i qui en paga el cost."},
+{id:"inflacio",cat:"macro",name:"Inflació i deflació",
+ hook:"1.000 € sota el matalàs. D'aquí un any compraràs menys amb ells.",
+ what:"Inflació: pujada general de preus. Deflació: baixada general, que sembla bona però paralitza el consum.",
+ why:"Els bancs centrals apunten a ~2%. Diners quiets no perden bitllets, però perden valor."},
+{id:"tipus",cat:"macro",name:"Tipus d'interès",
+ hook:"El BCE apuja tipus i, de sobte, la teva hipoteca variable puja també.",
+ what:"El preu dels diners: el que costa demanar-los prestats. L'eina principal del banc central.",
+ why:"Tipus alts refreden preus i economia; tipus baixos l'estimulen. T'afecta a hipoteques, préstecs i estalvi."},
+{id:"politiques",cat:"macro",name:"Política fiscal vs. monetària",
+ hook:"El govern baixa impostos mentre el banc central apuja tipus. Un accelera, l'altre frena.",
+ what:"Fiscal: impostos i despesa pública (governs). Monetària: tipus i diners en circulació (bancs centrals).",
+ why:"Són les dues palanques de l'economia i sovint van descoordinades, o fins i tot en direccions contràries."},
+{id:"mercats",cat:"macro",name:"Competència, oligopoli i monopoli",
+ hook:"Quantes companyies elèctriques de veritat pots triar?",
+ what:"Competència: molts venedors, ningú mana. Oligopoli: pocs dominen. Monopoli: un de sol.",
+ why:"Com menys competència, més capacitat de fixar preus. La majoria de sectors clau són oligopolis, no mercats de manual."},
+/* FINANCES */
+{id:"compost",cat:"finances",name:"Interès compost",
+ hook:"1.000 € al 7% anual. El segon any el 7% no és sobre 1.000, sinó sobre 1.070. I així cada any.",
+ what:"Guanyes sobre el capital i sobre els interessos ja generats. Efecte bola de neu.",
+ why:"El temps importa més que la quantitat: començar aviat amb poc bat començar tard amb molt."},
+{id:"compostnegatiu",cat:"finances",name:"L'interès compost en contra",
+ hook:"Una targeta revolving: pagues cada mes i el deute no baixa mai.",
+ gut:{q:"Com pot ser?",a:["Pagues massa poc","L'interès s'acumula sobre el que deus"]},
+ what:"El mateix mecanisme bola de neu, però jugant contra teu.",
+ why:"Amortitzar un deute al 18% equival a una rendibilitat garantida del 18%. Cap inversió t'ofereix això sense risc."},
+{id:"estalvi",cat:"finances",name:"Taxa d'estalvi",
+ hook:"Un guanya 2.000 € i n'estalvia 400. L'altre en guanya 5.000 i no n'estalvia cap.",
+ gut:{q:"Qui va més ben encaminat?",a:["El de 5.000","El de 2.000"]},
+ what:"El percentatge dels ingressos que no gastes.",
+ why:"La xifra que importa no és quant guanyes, sinó quant et queda. És l'única part que controles del tot."},
+{id:"emergencia",cat:"finances",name:"Fons d'emergència",
+ hook:"S'espatlla la caldera el mateix mes que et quedes sense feina.",
+ what:"Diners líquids per cobrir de 3 a 6 mesos de despeses.",
+ why:"No és una inversió, és una assegurança: evita endeutar-te o vendre inversions en el pitjor moment. Va primer."},
+{id:"deute",cat:"finances",name:"Deute bo i deute dolent",
+ hook:"Una hipoteca raonable i un préstec ràpid al 20% no són el mateix animal.",
+ what:"Bo: finança alguna cosa que genera valor. Dolent: finança consum a interès alt.",
+ why:"El deute car és interès compost en contra teu. Sortir-ne sol batre qualsevol inversió."},
+{id:"horitzo",cat:"finances",name:"Horitzó temporal",
+ hook:"Els diners del cotxe de d'aquí sis mesos no poden estar al mateix lloc que els de la jubilació.",
+ what:"Cada diner ha de tenir un termini associat que determina quant risc pot assumir.",
+ why:"Barrejar horitzons és l'error que porta a vendre en pànic just quan no toca."},
+{id:"liquiditat",cat:"finances",name:"Liquiditat",
+ hook:"Diners al compte: els tens ara. Un pis: val molt, però vendre'l ràpid vol dir abaixar el preu.",
+ what:"La facilitat de convertir una cosa en diners sense perdre valor.",
+ why:"Cal tenir-ne prou per als imprevistos abans de posar la resta en coses menys líquides."},
+{id:"actius",cat:"finances",name:"Actius vs. passius",
+ hook:"Una web que ven mentre dorms et posa diners a la butxaca. Un renting te'ls treu cada mes.",
+ what:"Actiu: el que et genera diners. Passiu: el que te'n consumeix.",
+ why:"La riquesa es construeix acumulant actius, no despeses que semblen riquesa."},
+{id:"diversificacio",cat:"finances",name:"Diversificació",
+ hook:"Poses tots els estalvis en una sola empresa. Fa fallida.",
+ gut:{q:"Com ho evites?",a:["Encertant l'empresa bona","Repartint entre moltes"]},
+ what:"Repartir per no dependre d'una sola aposta.",
+ why:"Renuncies a «l'encert brutal» a canvi d'evitar el «desastre total». Per a la majoria, val la pena."},
+{id:"riscrend",cat:"finances",name:"Risc i rendibilitat van units",
+ hook:"«Rendibilitat del 15% garantida i sense risc.»",
+ gut:{q:"Què fas?",a:["Investigar-ho, sona bé","Fugir corrents"]},
+ what:"Més rendibilitat esperada implica sempre més risc.",
+ why:"Si algú t'ofereix alta rendibilitat sense risc, o no ho entén o t'està enganyant. Senyal d'alerta número u."},
+{id:"volatilitat",cat:"finances",name:"Volatilitat ≠ risc",
+ hook:"El teu fons cau un 30%. Tres anys després, s'ha recuperat.",
+ what:"Volatilitat: el preu oscil·la. Risc real: pèrdua permanent de capital.",
+ why:"Vendre durant la caiguda és el que converteix la volatilitat en pèrdua de veritat."},
+{id:"indexada",cat:"finances",name:"Gestió activa vs. indexada",
+ hook:"Un gestor promet batre el mercat i cobra un 2% anual per intentar-ho.",
+ what:"Activa: tria valors per superar el mercat. Indexada: el replica amb comissions mínimes.",
+ why:"Històricament, la gran majoria de fons actius no baten el seu índex de manera sostinguda."},
+{id:"comissions",cat:"finances",name:"Comissions",
+ hook:"Un 0,3% o un 2% anual. Semblen tots dos números petits.",
+ what:"El cost anual de mantenir una inversió.",
+ why:"A trenta anys la diferència es menja una part enorme del resultat. És l'únic factor que controles amb certesa."},
+{id:"dca",cat:"finances",name:"Aportacions periòdiques (DCA)",
+ hook:"En comptes d'endevinar el millor moment, poses la mateixa quantitat cada mes.",
+ what:"Invertir de manera automàtica i regular passi el que passi.",
+ why:"Compres més barat quan cau i et treu la decisió de les mans del teu jo impulsiu. Antídot del biaix del present."},
+/* PSICO */
+{id:"supervivencia",cat:"psico",name:"Biaix de supervivència",
+ hook:"A la guerra, reforçaven els avions on veien més forats de bala.",
+ gut:{q:"On calia reforçar de veritat?",a:["On hi havia més forats","On NO n'hi havia en els que tornaven"]},
+ what:"Mirar només els que «sobreviuen» i oblidar els fracassos invisibles. Els avions tocats a les zones sense forats… no tornaven.",
+ why:"Els casos d'èxit que veus són una mostra esbiaixada. Fixa't també en els que no hi són."},
+{id:"aversio",cat:"psico",name:"Aversió a la pèrdua",
+ hook:"Perdre 100 € fa més mal que l'alegria de guanyar-ne 100.",
+ what:"Una pèrdua pesa psicològicament ~el doble que un guany igual.",
+ why:"Explica per què costa tant vendre allò que baixa, o cancel·lar una subscripció que ja tens."},
+{id:"ancoratge",cat:"psico",name:"Ancoratge",
+ hook:"Jaqueta «rebaixada de 200 € a 80 €». Quina ganga!",
+ gut:{q:"I si valgués 80 € de debò?",a:["Segueix semblant barata","De cop sembla cara"]},
+ what:"El primer número que veiem condiciona tot el que jutgem després, encara que sigui arbitrari.",
+ why:"Per això els menús posen un plat caríssim: fa que la resta sembli raonable."},
+{id:"provasocial",cat:"psico",name:"Prova social",
+ hook:"Un restaurant ple t'atrau més que un de buit, tot i que no has tastat res.",
+ what:"Tendim a fer el que fan els altres, sobretot quan dubtem.",
+ why:"Útil (la multitud sovint encerta) però manipulable. I compte: potser només veus les bones ressenyes."},
+{id:"dotacio",cat:"psico",name:"Efecte dotació",
+ hook:"Et regalo una tassa. Al cap d'un minut, per recomprar-te-la em demanes més del que hauries pagat tu.",
+ what:"Valorem més les coses pel simple fet de posseir-les.",
+ why:"Base del «emporta-t'ho a casa i prova'l»: un cop és teu, deixar-ho fa mal."},
+{id:"paralisi",cat:"psico",name:"Paràlisi per anàlisi",
+ hook:"24 melmelades per tastar: molta gent s'atura, poquíssima compra. Amb 6, molts més compren.",
+ what:"Massa opcions bloquegen i deixen insatisfet.",
+ why:"Quan dissenyes, no atabalis. Quan decideixes, «prou bo» sovint bat «el millor»."},
+{id:"confirmacio",cat:"psico",name:"Biaix de confirmació",
+ hook:"T'encanta una idea de negoci. Sense adonar-te'n, busques qui t'hi doni la raó.",
+ what:"Donem més pes al que confirma el que ja pensem i ignorem el que ens contradiu.",
+ why:"L'antídot: buscar activament qui digui «per què això fallarà?»."},
+{id:"present",cat:"psico",name:"Biaix del present",
+ hook:"«Començo la dieta dilluns.» El pastís d'ara, però, me'l menjo.",
+ what:"Descompte hiperbòlic: sobrevalorem la recompensa immediata davant la futura.",
+ why:"És el germà fosc de l'interès compost i la causa de mitja procrastinació del món."},
+{id:"framing",cat:"psico",name:"Efecte marc (framing)",
+ hook:"«Operació amb 90% d'èxit» o «amb 10% de mortalitat». La mateixa dada.",
+ gut:{q:"Quina et fa més por?",a:["«90% d'èxit»","«10% de mortalitat»"]},
+ what:"Com es presenta una mateixa informació canvia la decisió.",
+ why:"La forma no és neutra. Qui emmarca, influeix."},
+{id:"regressio",cat:"psico",name:"Regressió a la mitjana",
+ hook:"Un alumne treu un 10 espectacular. El següent examen, un 7. «S'ha relaxat?» No necessàriament.",
+ what:"Després d'un resultat extrem, el següent sol acostar-se a la mitjana, per pur atzar.",
+ why:"Fa veure causes on només hi ha estadística."},
+/* CRÍTICA */
+{id:"administrats",cat:"critica",name:"Preus administrats",
+ hook:"El preu del teu contracte de mòbil no surt de cap corba: surt d'una reunió.",
+ gut:{q:"Qui el fixa?",a:["El mercat, per equilibri","L'empresa, amb un marge objectiu"]},
+ what:"En sectors concentrats, les empreses fixen preus per marge sobre costos (markup), no els reben del mercat.",
+ why:"Ho van descriure Gardiner Means i Michał Kalecki. Explica una cosa que les corbes no poden: per què els preus pugen quan pugen els costos però no baixen quan baixen."},
+{id:"financiaritzacio",cat:"critica",name:"Financiarització",
+ hook:"Un pis deixa de ser un lloc per viure i passa a ser un producte d'inversió.",
+ what:"Quan un actiu real (habitatge, terra, matèries primeres) es converteix en vehicle financer.",
+ why:"El preu deixa de dependre de qui el vol fer servir i passa a dependre de qui el vol revendre. És un canvi qualitatiu, no una anècdota."},
+{id:"bellesa",cat:"critica",name:"El concurs de bellesa (Keynes)",
+ hook:"Un concurs on no guanyes triant la cara més bonica, sinó endevinant quina triarà la majoria.",
+ what:"Als mercats especulatius no valores l'actiu: valores el que creus que els altres creuran.",
+ why:"El preu es torna reflexiu. Deixa de ser un senyal d'escassetat i passa a ser una expectativa sobre expectatives."},
+{id:"algoritmics",cat:"critica",name:"Preus algorítmics",
+ hook:"Vint immobiliàries competidores fan servir el mateix programa per posar preus.",
+ what:"Programari que ajusta preus en temps real amb dades de mercat compartides.",
+ why:"Ningú s'ha assegut a pactar res, però el resultat pot assemblar-se a un càrtel. Hi ha litigis oberts i debat sobre si és col·lusió tàcita."},
+{id:"beneficis",cat:"critica",name:"Inflació de beneficis",
+ hook:"Puja el cost de l'energia. Els preus pugen més que el cost.",
+ what:"Tesi d'Isabella Weber: en sectors concentrats, un xoc de costos serveix de cobertura per ampliar marges.",
+ why:"És una tesi discutida (altres l'atribueixen a la demanda post-pandèmia), però ha entrat al debat de la banca central. Val la pena conèixer-la sabent que no hi ha consens."},
+{id:"expectatives",cat:"critica",name:"Preus d'expectatives",
+ hook:"L'energia es contracta a futur: el preu d'avui incorpora la previsió de demà.",
+ what:"Mercats de futurs i cobertures fan que el preu reflecteixi previsions, no fets consumats.",
+ why:"El preu es torna molt sensible a la narrativa i a la por, més que a la realitat física de l'oferta."},
+{id:"rg",cat:"critica",name:"r > g (Piketty)",
+ hook:"El capital ja acumulat creix més ràpid que l'economia sencera.",
+ gut:{q:"Què implica?",a:["Qui treballa més, prospera més","Qui ja té capital s'allunya de qui viu del sou"]},
+ what:"Quan la rendibilitat del capital (r) supera el creixement (g), el patrimoni creix més que els ingressos del treball.",
+ why:"És l'interès compost actuant a escala social. No és qüestió d'esforç individual: és estructural."},
+{id:"patrimonial",cat:"critica",name:"Capitalisme patrimonial",
+ hook:"Compta quants coneguts teus tenen pis perquè el van heretar.",
+ what:"Quan la posició econòmica depèn més del que heretes que del que produeixes.",
+ why:"Piketty: el segle XX igualitari va ser l'excepció (guerres, depressió, impostos altíssims), no la tendència natural del sistema."},
+{id:"ideologia",cat:"critica",name:"La desigualtat és ideològica",
+ hook:"Cada època té un relat que justifica qui està a dalt: la sang, la religió… i avui el mèrit.",
+ what:"Tesi de Capital i ideologia: la desigualtat mai és purament econòmica, sinó construïda políticament.",
+ why:"Si és ideològica, és política. I si és política, és reversible. Aquesta és la part esperançadora de l'argument."},
+{id:"minsky",cat:"critica",name:"Hipòtesi de Minsky",
+ hook:"Van tan bé les coses que tothom s'atreveix a arriscar més. I aleshores…",
+ what:"L'estabilitat financera prolongada genera per si mateixa les condicions de la crisi següent.",
+ why:"Explica les bombolles molt millor que cap corba d'oferta: el problema no és un xoc extern, sinó la calma prèvia."},
+{id:"amortitzar",cat:"finances",name:"Amortitzar és invertir sense risc",
+ hook:"Tens 5.000 € i, alhora, un deute de 5.000 € al 18%.",
+ gut:{q:"Què rendeix més?",a:["Invertir els 5.000 €","Liquidar el deute"]},
+ what:"Cancel·lar deute car és l'única «inversió» amb rendibilitat coneguda, sense risc i sense impostos.",
+ why:"T'estalvies 900 € d'interessos que no tributen. Per igualar-ho, una inversió hauria de donar-te ~22% brut, sostingut i sense risc. Això no existeix."},
+{id:"palanquejament",cat:"finances",name:"Palanquejament",
+ hook:"Amb 40.000 € teus i 160.000 € d'hipoteca, controles un pis de 200.000 €.",
+ gut:{q:"Si el pis puja un 10%, quant guanyes tu?",a:["Un 10%","Un 50%"]},
+ what:"Fer servir diners prestats per controlar un actiu més gran del que podries pagar.",
+ why:"No canvia la rendibilitat de l'actiu: canvia la rendibilitat sobre ELS TEUS diners. I amplifica igual en les dues direccions — si baixa un 20%, ho perds tot."},
+{id:"spread",cat:"finances",name:"La regla d'or del palanquejament",
+ hook:"Hipoteca al 3%, pis que es revaloritza un 5%. I si es revalorités un 1%?",
+ what:"El palanquejament només afegeix valor si la rendibilitat de l'actiu supera el cost del deute.",
+ why:"El que guanyes és la diferència entre els dos, multiplicada. Si la diferència és negativa, estàs perdent diners amb estil."},
+{id:"garanties",cat:"finances",name:"Ajust de garanties (margin call)",
+ hook:"La teva cartera palanquejada cau. El banc et truca: o poses més diners, o ven.",
+ what:"Quan un préstec està garantit amb actius, si aquests cauen el prestador pot exigir més garantia o liquidar la posició.",
+ why:"Aquí és on la volatilitat es converteix en risc real: et treu l'opció de no vendre, que era justament el que et salvava."},
+{id:"pignoracio",cat:"finances",name:"Crèdit garantit (pignoració)",
+ hook:"Amb 10 milions en accions com a garantia, el banc et presta al 3%. Sense patrimoni, al 18%.",
+ what:"Posar actius com a garantia per obtenir crèdit molt barat sense vendre'ls.",
+ why:"El que abarateix el crèdit no és qui ets, és què tens. La garantia és la peça clau, no el crèdit."},
+{id:"bbd",cat:"critica",name:"Comprar, demanar prestat, morir",
+ hook:"Per què vendria accions i pagaria impostos, si puc demanar un préstec contra elles?",
+ gut:{q:"Per què funciona?",a:["És il·legal però ningú ho mira","El deute no és ingrés i no tributa"]},
+ what:"Estratègia legal (buy, borrow, die): viure de crèdit garantit sense vendre mai, i que la plusvàlia no arribi a tributar mai.",
+ why:"Requereix ja tenir patrimoni gran: el que et dona el crèdit barat és la garantia. És r > g amb nom i cognoms."}
+];
+
+const FOUNDATIONS = [
+{id:"f-macro",label:"Com funciona l'economia",cat:"macro",
+ intro:"El marc general, amb els seus límits inclosos i no com un dogma.",
+ blocks:[
+ {h:"Oferta i demanda, i el seu abast real",
+  p:["La idea de base: quan molta gent vol una cosa i n'hi ha poca, el preu tendeix a pujar; a l'inrevés, baixa. Com a punt de partida serveix i explica moltes situacions quotidianes.",
+     "Però convé saber què assumeix el model quan te l'expliquen: competència perfecta, és a dir, molts venedors petits que no poden influir en el preu i que el prenen com un fet donat. Aquesta condició es compleix en poquíssims mercats rellevants."],
+  note:"El que NO s'ha de concloure: que la llei ha «deixat de funcionar». El que passa és més precís i més interessant — el preu deixa de ser informatiu. Un preu alt ja no et diu de manera fiable «aquí hi ha escassetat»; et pot estar dient «aquí hi ha poder de mercat» o «aquí hi ha una bombolla»."},
+ {h:"El preu com a senyal (i quan menteix)",
+  p:["En teoria el preu coordina l'economia sense autoritat central: als consumidors els diu «consumeix menys o busca alternatives»; als productors, «aquí hi ha diners, produïu-ne més». És la mà invisible d'Adam Smith.",
+     "A la pràctica el senyal pot estar distorsionat per concentració empresarial, especulació, regulació o expectatives. La pregunta útil davant de qualsevol preu no és «és alt o baix?», sinó «què reflecteix exactament aquest preu?»."]},
+ {h:"Estructures de mercat",
+  p:["Competència: molts venedors, ningú controla el preu. Oligopoli: pocs actors dominen (energia, telecomunicacions, distribució alimentària, plataformes digitals). Monopoli: un de sol.",
+     "Com menys competència, més capacitat de fixar preus i pitjor per al consumidor. El detall important és que els sectors que més pesen a la teva factura mensual solen ser oligopolis, no mercats de manual. Per això existeixen les autoritats de competència."]},
+ {h:"PIB, cicles i atur",
+  p:["El PIB mesura el valor del que produeix un país en un any. És l'indicador estàndard, però no compta el treball domèstic, ni la desigualtat, ni la destrucció ambiental: un país pot créixer en PIB i empitjorar en benestar.",
+     "L'economia alterna expansions i recessions (convencionalment, dos trimestres seguits de caiguda). Els cicles són estructurals, no accidents; el que varia és la intensitat i qui en paga el cost.",
+     "L'atur mesura qui busca feina i no en troba. Un atur molt baix pot pressionar salaris a l'alça i alimentar inflació, cosa que crea una tensió permanent entre contenir preus i mantenir l'ocupació."]},
+ {h:"Inflació, tipus d'interès i les dues palanques",
+  p:["Inflació: pujada general de preus que erosiona el poder de compra. Deflació: baixada general, que sembla desitjable però paralitza el consum (si demà serà més barat, avui no compro). Els bancs centrals apunten a una inflació baixa i estable, al voltant del 2%.",
+     "El tipus d'interès és el preu dels diners. Si la inflació és alta, el banc central l'apuja: endeutar-se costa més, es gasta menys, els preus es refreden. Si l'economia va fluixa, l'abaixa. T'afecta directament a hipoteques, préstecs i al que et paguen per estalviar.",
+     "Política fiscal (governs: impostos i despesa) i política monetària (bancs centrals: tipus i massa monetària) són les dues palanques, i sovint no van coordinades."],
+  note:"Sobre l'origen de la inflació hi ha més discussió de la que suggereix el relat estàndard. La versió clàssica l'atribueix a excés de demanda o de diners. Isabella Weber va argumentar que, en sectors concentrats, un xoc de costos pot servir de cobertura per ampliar marges — el que s'ha anomenat inflació de beneficis. És una tesi contestada, però ja forma part del debat seriós."}
+ ]},
+{id:"f-critica",label:"Mirada crítica: per què els preus moderns no encaixen al model",cat:"critica",
+ intro:"Aquí és on el manual d'introducció es queda curt. No són idees marginals: vénen d'economistes reconeguts.",
+ blocks:[
+ {h:"Preus administrats: el preu es decideix, no emergeix",
+  p:["Gardiner Means va documentar als anys trenta els administered prices: preus fixats en un consell d'administració segons un marge objectiu, no resultants d'un encreuament de corbes. Michał Kalecki ho va formalitzar com a fixació per marge sobre costos.",
+     "Té una conseqüència observable que el model estàndard no pot explicar: l'asimetria. Hi ha preus que pugen quan pugen els costos i que després no baixen quan els costos baixen. Si el preu sortís d'un equilibri automàtic, això no hauria de passar."]},
+ {h:"Financiarització: quan un actiu real es torna producte financer",
+  p:["Quan l'habitatge, la terra agrícola o les matèries primeres es converteixen en vehicles d'inversió, el seu preu deixa de dependre principalment de qui els vol fer servir i passa a dependre de qui els vol revendre.",
+     "És un canvi qualitatiu. El mateix bé segueix existint, però la demanda que en determina el preu ja no és la mateixa demanda."]},
+ {h:"L'especulació desplaça l'objecte, no trenca el mecanisme",
+  p:["Un matís que val la pena tenir afinat: comprar un pis per revendre'l TAMBÉ és demanda — demanda especulativa en comptes de demanda d'ús. El preu segueix sortint de l'encreuament entre qui vol comprar i qui vol vendre.",
+     "El que es trenca no és el mecanisme, sinó el vincle amb els fonaments: el preu es desconnecta del cost de producció i de la utilitat real, i passa a reflectir expectatives sobre expectatives.",
+     "Keynes ho va explicar amb el concurs de bellesa: no guanyes triant la cara més bonica, sinó endevinant quina creuràs que la majoria triarà. El preu es torna reflexiu."]},
+ {h:"Preus algorítmics i col·lusió tàcita",
+  p:["Programari que fixa preus en temps real a partir de dades de mercat compartides. Quan molts competidors fan servir el mateix algorisme amb les mateixes dades, el resultat pot assemblar-se molt a un càrtel encara que ningú s'hagi assegut a pactar res.",
+     "En el lloguer als EUA hi ha hagut litigis per aquest motiu, i el debat jurídic sobre si constitueix col·lusió està obert."]},
+ {h:"Preus d'expectatives",
+  p:["Molts sectors ja no fixen preus segons el que passa, sinó segons el que preveuen: mercats de futurs a l'energia, contractació anticipada, cobertures.",
+     "El preu d'avui incorpora la previsió de demà, cosa que el fa molt més sensible a la narrativa i a la por que a la realitat física de l'oferta."]},
+ {h:"Minsky: l'estabilitat fabrica la crisi",
+  p:["Hyman Minsky va proposar que els períodes llargs de calma financera generen per si mateixos les condicions de la crisi següent: com que fa temps que res no falla, tothom accepta més deute i més risc, fins que el sistema es torna fràgil.",
+     "És un marc que explica bombolles molt millor que cap corba d'oferta, perquè situa la causa dins del sistema i no en un xoc extern."]}
+ ]},
+{id:"f-piketty",label:"Piketty i la desigualtat",cat:"critica",
+ intro:"La seva força és que treballa amb dades fiscals de més de dos segles, no amb models teòrics.",
+ blocks:[
+ {h:"El patrimoni desigualta més que la renda",
+  p:["És la constatació de base i sovint es passa per alt: la distribució de què TENS està molt més concentrada que la de què GUANYES cada any. I les dues es reforcen mútuament."]},
+ {h:"r > g",
+  p:["La fórmula famosa d'El capital al segle XXI (2013): quan la rendibilitat del capital (r) supera de manera sostinguda el creixement de l'economia (g), el patrimoni acumulat creix més ràpid que els ingressos del treball.",
+     "La conseqüència no depèn de l'esforç individual: qui ja té capital s'allunya estructuralment de qui viu del sou, encara que aquest treballi més i millor. És l'interès compost operant a escala social, i explica per què la mobilitat social s'encalla."]},
+ {h:"El segle XX va ser l'excepció",
+  p:["Probablement la lectura més contraintuïtiva del llibre. El període 1914-1980, amb desigualtat decreixent i classe mitjana en expansió, va ser producte de dues guerres mundials, la depressió, la destrucció massiva de capital i tipus impositius altíssims.",
+     "No va ser una tendència natural del capitalisme cap a la igualtat, com havia suggerit Kuznets. Des dels vuitanta la desigualtat torna a nivells de principis del XX."]},
+ {h:"Capitalisme patrimonial i herència",
+  p:["Si la tendència continua, la posició econòmica depèn cada cop més del que heretes i menys del que produeixes: un retorn a una societat de rendistes.",
+     "És una crítica frontal a la idea meritocràtica, no un matís sobre ella."]},
+ {h:"Capital i ideologia (2019)",
+  p:["Va més enllà: la desigualtat mai és purament econòmica sinó ideològica. Cada societat construeix un relat que justifica la seva jerarquia — la sang o la religió abans, el mèrit avui.",
+     "Si és ideològica, és política. I si és política, és reversible. És la part de l'argument amb més connexió amb la filosofia dels drets humans."]},
+ {h:"La seva proposta, i les crítiques",
+  p:["Proposa un impost global i progressiu sobre el patrimoni amb transparència fiscal internacional. Ell mateix admet que és políticament utòpic a curt termini i el planteja com a horitzó de referència.",
+     "Crítiques que cal conèixer: bona part de l'augment de patrimoni mesurat és habitatge i no capital productiu, cosa que canvia la interpretació; Acemoglu i Robinson sostenen que r > g no és una llei mecànica sinó que depèn de les institucions; el Financial Times va qüestionar algunes sèries de dades britàniques, tot i que la controvèrsia no va tombar la tesi de fons; i se'l critica per subestimar la innovació com a font de fortunes noves."],
+  note:"Companyia natural per seguir aquesta línia: Mariana Mazzucato (qui crea valor i qui l'extreu, el paper de l'estat emprenedor) i Ha-Joon Chang (les receptes de lliure mercat que els països rics no van seguir mai quan es desenvolupaven)."}
+ ]},
+{id:"f-personals",label:"Finances personals",cat:"finances",
+ intro:"Aquí l'ordre importa: cada pas assumeix que has fet l'anterior.",
+ blocks:[
+ {h:"El punt de partida: la taxa d'estalvi",
+  p:["Abans de res, saber què entra i què surt amb precisió. La xifra que importa no és quant guanyes, sinó quant t'estalvies.",
+     "Algú que guanya 2.000 € i n'estalvia 400 va més ben encaminat que algú que en guanya 5.000 i no n'estalvia cap. És també l'única variable que controles del tot."]},
+ {h:"Fons d'emergència",
+  p:["Diners líquids i accessibles per cobrir entre 3 i 6 mesos de despeses. No és una inversió: és una assegurança.",
+     "La seva funció és que un imprevist no t'obligui a endeutar-te a interès alt ni a vendre inversions en el pitjor moment. Va abans d'invertir res."]},
+ {h:"Deute bo i deute dolent",
+  p:["No tot el deute és igual. El «bo» finança alguna cosa que genera valor o es revaloritza (hipoteca a tipus raonable, formació que millora els teus ingressos). El «dolent» finança consum a interès alt.",
+     "Amortitzar un deute al 18% equival matemàticament a obtenir una rendibilitat garantida del 18%. Cap inversió t'ofereix això sense risc, i per això sortir del deute car sol ser prioritari sobre invertir.",
+     "La targeta revolving és el cas de manual: quota petita, interès acumulant-se sobre el que deus, i un deute que pot no baixar mai. És l'interès compost girat en contra teu."]},
+ {h:"Horitzó temporal i assegurances",
+  p:["Cada diner ha de tenir un termini associat. Els que necessitaràs d'aquí sis mesos no poden estar en res volàtil; els que no tocaràs en vint anys poden assumir molt més risc. Barrejar horitzons és el que porta a vendre en pànic.",
+     "I la part menys glamurosa: protegir-te de les pèrdues catastròfiques (invalidesa, defunció si tens dependents, responsabilitat civil). Val més assegurar el poc probable però devastador que el freqüent però assumible."]}
+ ]},
+{id:"f-inversions",label:"Introducció a les inversions",cat:"finances",
+ intro:"Vocabulari per decidir tu i entendre què et proposen. No és assessorament financer.",
+ blocks:[
+ {h:"Per què invertir",
+  p:["Perquè la inflació erosiona els diners quiets. Invertir no és fer-se ric ràpid: és, com a mínim, no perdre poder adquisitiu, i idealment fer créixer el patrimoni amb el temps."]},
+ {h:"Classes d'actius",
+  p:["Renda variable (accions): comprar una part d'una empresa. Alta rendibilitat esperada a llarg termini, alta volatilitat.",
+     "Renda fixa (bons): prestar diners a un estat o empresa a canvi d'interessos. Més previsible, menys rendible.",
+     "Immobiliari: poc líquid i sovint amb palanquejament (hipoteca).",
+     "Efectiu i dipòsits: segurs nominalment, però perden contra la inflació.",
+     "Or, criptomonedes, matèries primeres: molt volàtils i, sobretot, no generen cap flux de caixa — no paguen res per tenir-los, només valen el que un altre estigui disposat a pagar."]},
+ {h:"Risc, rendibilitat i volatilitat",
+  p:["Regla sense excepcions: més rendibilitat esperada implica més risc. Si algú t'ofereix alta rendibilitat sense risc, o no ho entén o t'està enganyant. És el senyal d'alerta número u de qualsevol estafa financera.",
+     "I una distinció que salva diners: volatilitat és que el preu puja i baixa; risc real és la pèrdua permanent. Un fons diversificat que cau un 30% i es recupera ha estat volàtil, no ruïnós — si no vas vendre. Vendre durant la caiguda és el que converteix la volatilitat en pèrdua real."]},
+ {h:"Gestió indexada, comissions i diversificació",
+  p:["La gestió activa intenta batre el mercat escollint valors i cobra comissions altes; històricament, la gran majoria de fons no ho aconsegueix de manera sostinguda. La indexació hi renuncia i simplement replica un índex amb comissions molt baixes.",
+     "Les comissions són l'enemic silenciós: la diferència entre un 0,3% i un 2% anual sembla petita, però a trenta anys es menja una part enorme del resultat, precisament perquè l'interès compost actua també sobre el que pagues. És l'únic factor que controles amb certesa.",
+     "Diversificar reparteix entre actius, sectors i geografies. No augmenta la rendibilitat esperada: redueix el risc d'un desastre concret."]},
+ {h:"Aportacions periòdiques i fiscalitat",
+  p:["El DCA consisteix a invertir una quantitat fixa cada mes en comptes d'intentar encertar el moment. Compres més quan els preus són baixos i, sobretot, t'estalvies el desgast de decidir. Automatitzar treu la decisió de les mans del teu jo impulsiu.",
+     "Fiscalitat a Espanya, en termes generals: guanys per venda i dividends tributen a la base de l'estalvi amb trams aproximats del 19% al 30% segons l'import. El traspàs entre fons d'inversió no tributa fins al reemborsament, cosa que permet diferir impostos. Els plans de pensions tenen avantatge fiscal a l'entrada però tributen com a renda del treball a la sortida i tenen liquiditat limitada. Comprova sempre la normativa vigent."],
+  note:"Errors habituals, tots ells biaixos amb corbata: intentar endevinar el moment del mercat, perseguir el que ja ha pujat molt (prova social), vendre en pànic (aversió a la pèrdua), copiar qui va encertar (biaix de supervivència) i pagar comissions altes sense adonar-se'n."}
+ ]},
+{id:"f-deute",label:"Deute, palanquejament i com viuen els rics",cat:"critica",
+ intro:"Els tres temes són el mateix mecanisme vist des de posicions oposades. Aquí amb els números fets.",
+ blocks:[
+ {h:"Per què amortitzar deute car és una rendibilitat garantida",
+  p:["La clau és que els diners són fungibles: valen el mateix vinguin d'on vinguin. Si tens 5.000 € estalviats i alhora un deute de 5.000 € al 18%, no són dues situacions separades — són dues opcions per als mateixos diners, i s'han de comparar directament.",
+     "OPCIÓ A, amortitzar. T'estalvies 900 € d'interessos el primer any (18% de 5.000). Diners que no surten de la teva butxaca.",
+     "OPCIÓ B, invertir. A un 7% anual guanyaries 350 € bruts. Menys impostos (19% del primer tram de la base de l'estalvi) et queden uns 283 € nets. I mentrestant segueixes pagant els 900 € d'interessos del deute que no has tocat.",
+     "Diferència real el primer any: 617 € a favor d'amortitzar. I encara hi ha una asimetria més important — l'opció B pot perdre diners; l'opció A no pot. El 18% d'estalvi és segur."],
+  note:"El detall que gairebé mai s'explica: l'estalvi d'interessos NO tributa. Els 900 € que no pagues són teus íntegres, mentre que els guanys d'inversió sí que passen per Hisenda. Per igualar un 18% de deute, una inversió hauria de donar-te aproximadament un 22% BRUT, sostingut i sense risc. Això, senzillament, no existeix."},
+ {h:"El mateix càlcul amb tres deutes diferents",
+  p:["TARGETA REVOLVING AL 18-20%. Amortitzar rendeix un 18-20% net i segur. No hi ha cap alternativa d'inversió que s'hi acosti. Prioritat absoluta, sempre.",
+     "PRÉSTEC DE COTXE AL 8%. Amortitzar rendeix un 8% net. Per superar-ho invertint necessitaries un ~10% brut sostingut, que és una expectativa optimista fins i tot per a la renda variable a llarg termini. Amortitzar segueix guanyant en la majoria d'escenaris, i a més sense volatilitat.",
+     "HIPOTECA AL 2%. Aquí la lògica s'inverteix del tot. Amortitzar et dona un rendiment del 2%. Una cartera diversificada a llarg termini té una expectativa clarament superior, així que probablement et convé més invertir i deixar córrer la hipoteca. A més, la inflació t'erosiona el deute a favor teu: un deute fix de 100.000 € val menys en termes reals cada any que passa."],
+  note:"O sigui: la regla NO és «amortitza sempre», que és com es repeteix. La regla és «compara el tipus del deute amb el que pots obtenir de manera realista, ja net d'impostos». Un mateix consell pot ser excel·lent al 18% i dolent al 2%."},
+ {h:"L'excepció d'ordre: el fons d'emergència va abans",
+  p:["Hi ha una trampa que sembla prudent i no ho és: posar fins a l'últim euro a amortitzar deixant-te sense coixí.",
+     "Imagina que amortitzes els 5.000 € sencers i al cap de dos mesos s'espatlla la caldera i costa 1.800 €. Com que no tens estalvi, tornes a la targeta al 18%. Has fet un cercle complet per acabar igual o pitjor, i havent perdut la flexibilitat pel camí.",
+     "L'ordre sensat és: coixí mínim de seguretat primer (encara que siguin només un o dos mesos de despeses), després amortització agressiva del deute car, i només després invertir."]},
+ {h:"Palanquejament: què és exactament",
+  p:["Palanquejar-se és fer servir diners prestats per controlar un actiu més gran del que podries pagar amb els teus. La idea essencial, i la que costa més d'interioritzar: NO canvia la rendibilitat de l'actiu. Canvia la rendibilitat sobre els TEUS diners.",
+     "El pis segueix pujant o baixant exactament igual. El que canvia és quina proporció d'aquest moviment recau sobre el capital que hi has posat tu."]},
+ {h:"El pis de 200.000 €, escenari per escenari",
+  p:["OPCIÓ A, al comptat: hi poses 200.000 € teus. OPCIÓ B, palanquejada: hi poses 40.000 € teus i demanes 160.000 € d'hipoteca. En tots dos casos controles el mateix pis.",
+     "EL PIS PUJA UN 10% (+20.000 €). Opció A: 20.000 sobre 200.000 = +10% sobre el teu capital. Opció B: 20.000 sobre 40.000 = +50% sobre el teu capital. Cinc vegades més, amb el mateix pis i la mateixa pujada.",
+     "EL PIS BAIXA UN 10% (−20.000 €). Opció A: −10%. Opció B: −50% del teu capital. La mateixa magia, en direcció contrària.",
+     "EL PIS BAIXA UN 20% (−40.000 €). Opció A: −20%, molest però sobreviscut. Opció B: has perdut EXACTAMENT tot el que hi vas posar. El teu capital és zero.",
+     "EL PIS BAIXA UN 30% (−60.000 €). Opció A: −30%. Opció B: el pis val 140.000 € i deus 160.000 €. Tens patrimoni net negatiu de 20.000 € i segueixes pagant quotes per una cosa que val menys del que deus. Això és el que va passar a milers de famílies el 2008."],
+  note:"Regla mnemotècnica: el palanquejament divideix per la teva entrada. Si poses el 20% (com aquí), multipliques els moviments per 5. Si poses el 10%, els multipliques per 10. Amb un 10% d'entrada, una caiguda del 10% ja t'ho menja tot."},
+ {h:"La regla d'or: el diferencial entre rendiment i cost",
+  p:["El palanquejament només afegeix valor si la rendibilitat de l'actiu supera el cost del deute. El que guanyes de veritat és aquesta diferència, multiplicada per la palanca.",
+     "HIPOTECA AL 3%, PIS QUE ES REVALORITZA UN 5%. Diferencial: +2%. Palanquejat, aquest 2% es converteix en un rendiment considerable sobre la teva entrada. Aquí el palanquejament treballa a favor teu.",
+     "HIPOTECA AL 3%, PIS QUE ES REVALORITZA UN 1%. Diferencial: −2%. Cada any perds diners en termes nets, però com que el pis «puja», t'ho expliques com un èxit. És la manera més silenciosa de perdre diners que existeix.",
+     "I compte amb un error de comptabilitat molt comú: quan calcules la rendibilitat d'un pis llogat, molta gent compara el lloguer amb el preu i s'oblida de l'IBI, la comunitat, les derrames, els mesos buits, les reparacions i els impostos. El diferencial real sovint és bastant més prim del que sembla."]},
+ {h:"Per què el palanquejament converteix volatilitat en risc",
+  p:["Recorda la distinció que ja tens: volatilitat és que el preu oscil·la; risc real és la pèrdua permanent. Un fons diversificat que cau un 30% i es recupera no t'ha arruïnat — sempre que no venguessis.",
+     "El palanquejament et pot treure aquesta opció. Quan un préstec està garantit amb actius i aquests cauen, el prestador pot exigir més garanties o liquidar la posició (el famós margin call). No decideixes tu si aguantes: ho decideix la caiguda.",
+     "Per això el palanquejament no «augmenta el risc» d'una manera vaga: converteix una caiguda temporal en una pèrdua permanent, precisament en el pitjor moment possible. És el mecanisme concret pel qual la gent es queda sense res."]},
+ {h:"Per què la hipoteca és el palanquejament bo",
+  p:["Per a la majoria de gent normal, la hipoteca serà l'únic palanquejament raonable de tota la seva vida, i val la pena entendre per què.",
+     "És barata (tipus molt inferiors a qualsevol altre crèdit al consum), és a molt llarg termini (dona temps a que els cicles es resolguin) i, sobretot, NO té ajustaments de garanties: si el pis baixa de valor, ningú et truca demanant diners mentre paguis les quotes. Pots aguantar la caiguda.",
+     "Cap altre instrument palanquejat accessible al petit inversor té aquesta propietat. Els CFDs, els futurs i els ETFs apalancats sí que liquiden posicions, i per això la gran majoria de particulars que els fan servir perden diners.",
+     "També et palanqueges sense adonar-te'n en situacions quotidianes: finançar el cotxe, comprar a terminis, o demanar un préstec per a formació. En el cas de la formació el diferencial pot ser molt bo (si millora els teus ingressos de manera duradora); en el del cotxe, un actiu que es deprecia finançat amb interès és el diferencial negatiu de manual."]},
+ {h:"Comprar, demanar prestat, morir",
+  p:["La frase «els rics viuen de crèdits» sona a conspiració de bar, però descriu una estratègia real, legal i ben documentada, coneguda en anglès com buy, borrow, die. Té tres potes.",
+     "POTA 1 — Vendre és el que et fa pagar impostos. Si tens 10 milions en accions i en vens 500.000 € per viure, tributes per la plusvàlia: a Espanya, entre el 19% i el 30%. Pots deixar-te pel camí uns 100.000-130.000 €.",
+     "POTA 2 — Demanar prestat no és ingrés, i per tant no tributa. En comptes de vendre, pignores la cartera (la poses com a garantia) i el banc et presta 500.000 €. Com que la garantia és de 10 milions, el risc per al banc és mínim i el tipus baixíssim: posem un 3%, o sigui 15.000 € l'any. Has obtingut els mateixos 500.000 € per gastar pagant 15.000 € en comptes de 130.000 €. I, crucialment, no has venut res: els 10 milions segueixen composant.",
+     "POTA 3 — Morir-se. Als EUA, el step-up in basis fa que en heretar el valor d'adquisició es reajusti al del dia de la mort, i tota la plusvàlia acumulada durant dècades desapareix fiscalment. A Espanya hi ha un mecanisme conceptualment similar (la coneguda com a «plusvàlua del mort»): el guany patrimonial generat fins a la defunció no tributa a l'IRPF. Hi ha Impost de Successions, que varia molt per comunitat autònoma, així que no és calcat al cas americà — però la lògica de fons és la mateixa: la plusvàlia mai arriba a tributar com a tal."],
+  note:"Per què funciona i no és màgia: perquè el cost del deute (3%) és molt inferior al creixement dels actius (posem un 7%). Aquesta diferència del 4% és el que permet viure a crèdit indefinidament sense descapitalitzar-se. Els actius creixen més ràpid del que els deutes s'acumulen."},
+ {h:"La part honesta: per què no ho pots copiar",
+  p:["Aquesta estratègia requereix ja tenir un patrimoni gran, i la peça essencial no és el crèdit: és la GARANTIA. Un banc et presta al 3% perquè té 10 milions al davant. A algú sense patrimoni li presta al 8-20%, o no li presta.",
+     "Aplicar «viu de crèdits» amb una targeta al 18% és exactament l'operació inversa: és el primer apartat d'aquesta secció, però des del costat que perd.",
+     "I tampoc és gratis per a ells: també és palanquejament, amb tots els seus riscos. Si la cartera cau prou, arriben els ajustaments de garanties i l'obligació de vendre en el pitjor moment. Hi ha hagut fortunes esfondrades exactament així."],
+  note:"El fil que uneix tota aquesta secció: hi ha qui paga un 18% pels diners i qui els obté al 3%, i el que determina de quin costat ets no és la teva intel·ligència ni el teu esforç, sinó si tens actius que serveixin de garantia. Qui té capital accedeix a deute barat que li permet mantenir el capital creixent; qui no en té paga deute car que li impedeix acumular-ne. Això és r > g amb nom i cognoms, i és molt més concret que la fórmula abstracta."}
+ ]}
+];
+
+const QUIZ = [
+{lvl:"Escalfament",multi:false,s:"Acceptes un projecte que t'ocuparà tots els dissabtes tres mesos. Paga bé, però ja no podràs fer sortides de fotografia ni family time.",q:"Què «pagues» de veritat?",opts:["Cost d'oportunitat","Cost enfonsat","Liquiditat","Externalitat"],answer:0,
+ fb:"El cost real d'una decisió no són només els diners que surten: és tot allò a què renuncies en triar-la. Aquí els dissabtes de fotografia i el temps en família són el preu autèntic del projecte, encara que no aparegui en cap factura. Per què no les altres: el cost enfonsat seria una despesa ja feta i irrecuperable, i aquí encara no has gastat res; la liquiditat parla de convertir actius en diners; l'externalitat és un cost que recau sobre tercers aliens a la decisió."},
+{lvl:"Escalfament",multi:false,s:"Un amic estalvia 50 €/mes des dels 25. Tu comences als 40 posant-hi més. Als 65, ell en té bastant més.",q:"Per què?",opts:["Interès compost","Inflació","Diversificació","Ancoratge"],answer:0,
+ fb:"Perquè els seus interessos han tingut quinze anys extra per generar més interessos. La bola de neu no creix de manera proporcional al temps, sinó exponencial: els últims anys aporten molt més que els primers, i per això qui comença abans construeix una base que després es multiplica sola. La lliçó pràctica: el temps pesa més que la quantitat. Per què no les altres: la inflació explicaria per què els diners perden valor, no per què un en té més; la diversificació és repartir el risc; l'ancoratge és un biaix de percepció de números."},
+{lvl:"Escalfament",multi:false,s:"Dos restaurants idèntics. Un és ple, l'altre buit. Entres al ple sense saber com cuinen.",q:"Quin concepte t'ha mogut?",opts:["Prova social","Efecte dotació","Efecte marc","Moat"],answer:0,
+ fb:"Has fet servir el comportament dels altres com a drecera per decidir en absència d'informació pròpia. Sovint funciona (la multitud sovint encerta) però és fàcilment manipulable: cues fabricades, xifres d'usuaris inflades o ressenyes filtrades exploten exactament aquest impuls. Per què no les altres: l'efecte dotació apareix quan JA posseeixes alguna cosa; l'efecte marc requereix que la mateixa informació es presenti de dues maneres; el moat és un avantatge competitiu d'un negoci."},
+{lvl:"Escalfament",multi:false,s:"Portes un any amb un projecte que no arrenca. Vols deixar-lo, però penses: «després de tot el temps que hi he posat, no puc plegar ara».",q:"Quina trampa és?",opts:["Cost enfonsat","Rendiments decreixents","Biaix de confirmació","Churn"],answer:0,
+ fb:"L'any invertit no torna decideixis el que decideixis, i per tant no hauria de pesar gens en la decisió. L'única pregunta vàlida és de futur: d'aquí endavant, aquest projecte rendeix més que les alternatives? El motor emocional que fa que costi tant és l'aversió a la pèrdua — abandonar se sent com «perdre» l'any, quan en realitat ja està perdut en qualsevol escenari. Per què no les altres: els rendiments decreixents descriurien que cada hora nova aporta menys, que és un altre fenomen; el biaix de confirmació seria filtrar la informació; el churn és la pèrdua de clients."},
+{lvl:"Nivell 2",multi:false,s:"Molts munten un blog de recursos d'anglès genèrics. El teu cobreix el currículum català de drets humans, cosa que gairebé ningú domina.",q:"Què tens tu?",opts:["Fossat competitiu (moat)","Economies d'escala","Cua llarga","Cost de transacció"],answer:0,
+ fb:"Tens un coneixement específic i difícil de replicar, que és la definició pràctica d'un moat: no protegeix perquè sigui millor, sinó perquè és costós de copiar. Un competidor amb més recursos pot igualar-te el disseny o la freqüència de publicació, però no el domini d'una normativa concreta. Per què no les altres: les economies d'escala apareixerien en produir molt a cost decreixent; la cua llarga descriuria vendre molts productes de nínxol alhora (relacionat, però no és el que et protegeix); el cost de transacció és la fricció de cada intercanvi."},
+{lvl:"Nivell 2",multi:false,s:"La teva newsletter guanya 80 subscriptors nous cada mes… però en perd 75.",q:"On és el problema?",opts:["Churn / retenció","Punt d'equilibri","Diversificació","Rendiments decreixents"],answer:0,
+ fb:"Estàs omplint una galleda foradada: la captació funciona bé, però el producte no reté. Invertir més en captar només accelera l'entrada d'aigua sense tapar el forat, i normalment surt molt més car que millorar el que ja tens. La pregunta útil no és «com aconsegueixo més subscriptors» sinó «per què se'n van els que ja tinc». Per què no les altres: el punt d'equilibri és un càlcul de costos i vendes; la diversificació és repartir risc; els rendiments decreixents descriurien un esforç que rendeix cada cop menys."},
+{lvl:"Nivell 2",multi:false,s:"Un iogurt diu «90% sense greix». L'altre, idèntic, diu «conté 10% de greix». El primer es ven molt més.",q:"Què hi juga?",opts:["Efecte marc (framing)","Ancoratge","Prova social","Asimetria d'informació"],answer:0,
+ fb:"La dada és matemàticament la mateixa, però una versió activa la idea de guany i l'altra la de pèrdua, i el nostre cervell no les processa igual. És la prova més neta que la forma de presentar la informació no és neutra: qui tria l'enquadrament està influint en la decisió sense mentir en cap moment. Per què no les altres: l'ancoratge necessitaria un número de referència previ que condicionés el judici; la prova social requeriria el comportament d'altres persones; l'asimetria d'informació seria que una part sap alguna cosa que l'altra desconeix, i aquí tots dos diuen exactament el mateix."},
+{lvl:"Nivell 2",multi:false,s:"Un vídeo: «vaig deixar la feina, vaig muntar una botiga online i ara soc lliure». Et convences que és el camí.",q:"De què has de desconfiar?",opts:["Biaix de supervivència","Prova social","Biaix del present","Efecte dotació"],answer:0,
+ fb:"Estàs veient una mostra filtrada: els milers de persones que van fer exactament el mateix i van fracassar no graven vídeos explicant-ho. La conclusió «això funciona» es basa només en els supervivents, i per tant no diu res sobre la probabilitat real d'èxit. L'antídot és preguntar-se sempre: quants ho van intentar, i on són? Per què no les altres: la prova social és seguir la multitud (present, però secundari aquí, perquè el problema central és la mostra esbiaixada); el biaix del present és preferir la recompensa immediata; l'efecte dotació requereix posseir alguna cosa."},
+{lvl:"Nivell 2",multi:false,s:"Puja el cost del gra i el preu del pa puja de seguida. Sis mesos després el gra torna a baixar, però el pa es queda igual.",q:"Què explica millor aquesta asimetria?",opts:["Preus administrats (markup)","Oferta i demanda pura","Deflació","Diversificació"],answer:0,
+ fb:"Si el preu sortís d'un equilibri automàtic entre oferta i demanda, hauria de baixar amb la mateixa facilitat amb què ha pujat. Que pugi ràpid i baixi lentament (o gens) apunta a preus decidits en un despatx amb un marge objectiu, que és el que Means i Kalecki van descriure. Aquesta asimetria és una de les evidències més citades que el model de manual no descriu bé els mercats concentrats. Per què no les altres: l'oferta i demanda pura prediria simetria, que és justament el que NO passa; la deflació és una caiguda general de preus a l'economia; la diversificació no té res a veure amb la formació de preus."},
+{lvl:"Nivell 2",multi:false,s:"T'ofereixen un producte «amb un 12% anual garantit i sense cap risc».",q:"Què hauries de pensar?",opts:["És impossible: risc i rendibilitat van units","Bona oportunitat, hi entro","Depèn de les comissions","Cal diversificar-hi més"],answer:0,
+ fb:"És el senyal d'alarma número u de qualsevol estafa financera. Si existís un 12% segur, ningú compraria deute públic al 3%, i el mercat corregiria la diferència immediatament. Per tant, o el risc existeix i no te l'expliquen, o la rendibilitat no és real. Que la promesa vingui d'algú de confiança no la fa més possible — les estafes piramidals es propaguen precisament per xarxes de confiança. Per què no les altres: entrar-hi és caure-hi; les comissions són un problema real però secundari davant d'una promesa impossible; diversificar dins d'un producte fraudulent no et protegeix de res."},
+{lvl:"Nivell 2",multi:false,s:"Tens 5.000 € estalviats i, alhora, un deute de targeta de 5.000 € al 18%. Un conegut et diu que inverteixis els estalvis en un fons que històricament fa un 7%.",q:"Què et convé més?",opts:["Amortitzar el deute","Invertir al 7%","Meitat i meitat","Deixar-ho al compte"],answer:0,
+ fb:"Amortitzar t'estalvia 900 € d'interessos segurs. Invertir et donaria 350 € bruts, uns 283 € nets després d'impostos, mentre segueixes pagant els 900 €. La diferència real és de més de 600 € el primer any, i a més una opció és certa i l'altra no. El detall decisiu que se sol oblidar: l'estalvi d'interessos no tributa, mentre que els guanys d'inversió sí — per igualar un deute al 18% caldria una inversió d'un ~22% brut, sostingut i sense risc, que no existeix. Per què no les altres: invertir al 7% perd contra el 18% garantit; repartir només dilueix l'error; deixar-ho quiet és el pitjor de tots, perquè no guanyes res i segueixes pagant el 18%."},
+{lvl:"Nivell 2",multi:false,s:"Tens una hipoteca al 2% i et sobren 20.000 €. Dubtes entre amortitzar anticipadament o invertir-los en una cartera diversificada a vint anys vista.",q:"Què diu la lògica financera?",opts:["Probablement compensa més invertir","Amortitzar sempre és millor","Són equivalents","Depèn només del banc"],answer:0,
+ fb:"Aquí la regla s'inverteix respecte a la pregunta anterior, i per això val la pena tenir-la ben entesa. Amortitzar una hipoteca al 2% et dona un «rendiment» del 2%; una cartera diversificada a vint anys té una expectativa raonablement superior. A més, la inflació erosiona el deute a favor teu: un deute fix val menys en termes reals cada any. La regla correcta no és «amortitza sempre», sinó «compara el tipus del deute amb el que pots obtenir de manera realista, ja net d'impostos». Per què no les altres: «amortitzar sempre» és el mantra repetit que falla precisament amb deute barat; equivalents no ho són, perquè les expectatives difereixen; el banc no canvia la lògica de fons."},
+{lvl:"Nivell 2",multi:false,s:"Compres un pis de 200.000 € posant-hi 40.000 € teus i 160.000 € d'hipoteca. El pis baixa un 20%.",q:"Què li ha passat al teu capital?",opts:["L'has perdut sencer","Ha baixat un 20%","Ha baixat un 10%","No li passa res fins que venguis"],answer:0,
+ fb:"El pis perd 40.000 € (el 20% de 200.000), i resulta que 40.000 € és exactament el que hi havies posat tu. El deute segueix sent de 160.000 € — el banc no comparteix pèrdues. Aquesta és la cara fosca del palanquejament: si hagués pujat un 20% hauries doblat els teus diners, i amb la mateixa mecànica una caiguda equivalent te'ls esborra. Regla mnemotècnica: posar el 20% d'entrada multiplica per 5 tots els moviments, tant amunt com avall. Per què no les altres: el −20% és el que li passa al PIS, no al teu capital; el −10% no correspon a cap magnitud del problema; i tot i que la pèrdua no es materialitza fins a la venda, el teu patrimoni net ja és zero i qualsevol imprevist et deixa sense marge."},
+{lvl:"Nivell 3 · tria'n DOS",multi:true,s:"Has invertit mesos en una idea. Cada senyal dolent el minimitzes i cada petit èxit el celebres com a prova que has d'insistir. Plegar et sembla impensable després de tant esforç.",q:"Quins DOS biaixos t'atrapen?",opts:["Cost enfonsat","Biaix de confirmació","Efecte dotació","Regressió a la mitjana"],answers:[0,1],
+ fb:"Dos biaixos que es retroalimenten. El cost enfonsat fa que els mesos ja invertits et semblin una raó per continuar, quan són irrellevants per a la decisió futura. El biaix de confirmació fa que filtris la informació: amplifiques el que confirma la teva aposta i minimitzes el que la contradiu, de manera que mai arribes a rebre el senyal que hauria de fer-te parar. És la combinació que allarga projectes morts durant anys. Per què no les altres: l'efecte dotació és sobrevalorar el que posseeixes (relacionat però es refereix a béns, no a esforç invertit); la regressió a la mitjana és un fenomen estadístic sobre resultats extrems."},
+{lvl:"Nivell 3 · tria'n DOS",multi:true,s:"Amb IA produeixes materials de nínxol a cost gairebé zero. Cadascun ven poquíssim, però en tens centenars publicats i, sumats, generen ingressos.",q:"Quins DOS conceptes ho expliquen?",opts:["Economies d'escala","Cua llarga","Efecte de xarxa","Liquiditat"],answers:[0,1],
+ fb:"Les economies d'escala (l'automatització fa que produir cada material addicional costi gairebé res) són el que fa VIABLE la cua llarga (molts productes de nínxol que venen poc però sumats compensen). L'ordre importa: sense el cost marginal proper a zero, la cua llarga no funciona, perquè cada producte que ven poc t'estaria costant temps i diners. Per què no les altres: l'efecte de xarxa requeriria que el valor creixés amb el nombre d'usuaris, i aquí els compradors no es beneficien els uns dels altres; la liquiditat és la facilitat de convertir actius en diners."},
+{lvl:"Nivell 3 · tria'n DOS",multi:true,s:"«Oferta només avui: de 300 € a 99 €. Ja l'han comprat 4.000 persones.» Sents la pressió de comprar ja.",q:"Quines DUES palanques t'empenyen?",opts:["Ancoratge","Prova social","Efecte dotació","Externalitat"],answers:[0,1],
+ fb:"L'ancoratge actua amb el 300 € tatxat: fixa un punt de referència arbitrari que fa que 99 € sembli una ganga, quan potser el preu real del producte sempre ha estat 99 €. La prova social actua amb els 4.000 compradors: delegues el judici en la multitud. Fixa't que cap de les dues et diu res sobre si el producte és bo — totes dues operen sobre la percepció, no sobre el valor. Per què no les altres: l'efecte dotació necessitaria que ja el tinguessis; l'externalitat és un efecte sobre tercers."},
+{lvl:"Nivell 3 · tria'n DOS",multi:true,s:"Els pisos d'un barri pugen sense que hi arribi ni un veí nou. Els compren fons que no hi viuran: els compren perquè creuen que d'aquí dos anys algú els pagarà més.",q:"Quins DOS conceptes hi actuen?",opts:["Financiarització","Concurs de bellesa (Keynes)","Economies d'escala","Rendiments decreixents"],answers:[0,1],
+ fb:"L'habitatge s'ha convertit en un producte financer (financiarització): el preu ja no el determina qui hi vol viure, sinó qui el vol revendre. I la valoració segueix la lògica del concurs de bellesa de Keynes: no compres pel que val la casa, sinó pel que creus que els altres creuran que valdrà. Un matís important per no passar-se de frenada en un debat: segueix havent-hi oferta i demanda, però la demanda ha canviat d'objecte — és especulativa, no d'ús. El mecanisme no s'ha trencat; el que s'ha trencat és el vincle del preu amb els fonaments. Per què no les altres: les economies d'escala i els rendiments decreixents descriuen costos de producció, que aquí no hi juguen."},
+{lvl:"Nivell 3 · tria'n DOS",multi:true,s:"Dues persones treballen igual d'intensament. Una hereta un pati d'immobles; l'altra només té el seu sou. Passats vint anys, la distància entre elles s'ha eixamplat molt.",q:"Quins DOS conceptes ho expliquen?",opts:["r > g (Piketty)","Capitalisme patrimonial","Prova social","Cost de transacció"],answers:[0,1],
+ fb:"Quan la rendibilitat del capital supera el creixement de l'economia (r > g), el patrimoni ja acumulat creix més ràpid que els ingressos del treball, per molt que aquest treball sigui intens i competent. El resultat social d'això és el capitalisme patrimonial: una societat on pesa més el que heretes que el que produeixes. La conclusió incòmoda és que la distància no s'explica per esforç ni per mèrit, sinó per l'estructura. Per què no les altres: la prova social i el cost de transacció són fenòmens de comportament i de fricció d'intercanvi, aliens a l'acumulació patrimonial."},
+{lvl:"Nivell 3 · tria'n DOS",multi:true,s:"Fa una dècada que no hi ha cap ensurt financer. Bancs i famílies accepten cada cop més deute perquè «tot va bé». De sobte, tot s'ensorra.",q:"Quins DOS conceptes hi ha en joc?",opts:["Hipòtesi de Minsky","Biaix de confirmació","Efecte marc","Liquiditat"],answers:[0,1],
+ fb:"Minsky va descriure exactament això: la calma prolongada fabrica la fragilitat, perquè com més temps passa sense que res falli, més risc s'accepta com a normal. I el biaix de confirmació és el greix que ho lubrica: cada any bo es llegeix com una prova més que el sistema és sòlid, i els avisos es descarten com a pessimisme. La lliçó és contraintuïtiva: el moment de més perill no és quan tothom té por, sinó quan ningú en té. Per què no les altres: l'efecte marc és sobre com es presenta la informació; la liquiditat sí que apareix en el moment del col·lapse, però no explica per què s'hi va arribar."},
+{lvl:"Nivell 3 · tria'n DOS",multi:true,s:"Un multimilionari no ven mai accions. Posa la cartera com a garantia, el banc li presta al 3% per viure, i els seus 10 milions segueixen composant sense pagar impostos per plusvàlues.",q:"Quins DOS conceptes hi ha en joc?",opts:["Crèdit garantit (pignoració)","Comprar, demanar prestat, morir","Cua llarga","Efecte dotació"],answers:[0,1],
+ fb:"La pignoració és el mecanisme concret: posar actius com a garantia permet obtenir crèdit molt barat sense vendre res. I la seqüència completa és l'estratègia buy, borrow, die: compres, vius del crèdit garantit (que no és ingrés i per tant no tributa) i, en heretar-se, la plusvàlia acumulada acaba no tributant com a tal. Funciona perquè el cost del deute (3%) és inferior al creixement dels actius (~7%), i aquest diferencial permet viure a crèdit indefinidament. El punt honest: el que dona accés al 3% no és ser llest, és la garantia — sense patrimoni, el mateix crèdit et costaria un 18%. Per què no les altres: la cua llarga és un model de vendes de nínxol; l'efecte dotació és un biaix de valoració personal."}
+];
+
+const CASES = [
+{title:"El company que ven apunts",
+ text:"Un company vol vendre els seus apunts a TES. Argument: «ja els tinc fets, així que són diners regalats». A més, com que hi ha professors que en venen molts, ell també ho farà. Diu que si en tres mesos no ven res ho deixa, però «seria una llàstima llençar tanta feina».",
+ points:["«Ja els tinc fets, diners regalats» → confon el cost enfonsat (la feina passada) amb el valor futur, i ignora el cost d'oportunitat del temps de màrqueting i manteniment.",
+ "«Altres en venen molts, jo també» → biaix de supervivència i prova social: veu els que triomfen, no els milers que no venen res.",
+ "«Seria una llàstima llençar tanta feina» → fal·làcia del cost enfonsat en estat pur.",
+ "Li falta: definir el punt d'equilibri (quantes vendes compensen el temps) i comprovar si el tema té demanda real i algun moat."]},
+{title:"On poso els estalvis",
+ text:"Vols decidir on inverteixes els estalvis. Un conegut ho va posar tot en una sola acció i s'ha fet ric; t'ho recomana. Mentrestant, tens els diners al compte «per si de cas», sense fer res, des de fa tres anys.",
+ points:["«Un conegut s'ha fet ric amb una acció» → biaix de supervivència (no veus qui va perdre-ho tot fent el mateix) i prova social.",
+ "«Tot en una sola acció» → falta de diversificació: màxim risc de pèrdua permanent.",
+ "«Diners quiets tres anys» → inflació (perden poder de compra) i cost d'oportunitat. «No fer res» també és una decisió amb cost.",
+ "Matís fi: risc vs. incertesa. Una única acció té incertesa genuïna, no un risc net i calculable."]},
+{title:"El blog que ningú troba",
+ text:"Tens un blog amb molt contingut però poques visites. Et venen ganes d'escriure encara més articles perquè és el que et surt bé i et fa sentir que avances. Un amic et diu que potser el problema no és el contingut sinó que ningú el troba, però tu penses que amb uns quants articles més la cosa arrencarà.",
+ points:["«Escriure més perquè em surt bé» → biaix de confirmació (t'expliques que la solució és el que ja domines) amb una punta de cost enfonsat.",
+ "«Potser ningú el troba» → el coll d'ampolla real és la distribució. Cost d'oportunitat: cada hora escrivint és una hora que no dediques a que et trobin.",
+ "Rendiments decreixents: si ningú hi arriba, l'article 50 aporta gairebé les mateixes visites que el 49 (gairebé cap).",
+ "Pista sana: pensa al marge. La propera hora, on rendeix més — escriure o distribuir?"]},
+{title:"«El mercat ho decideix»",
+ text:"En un debat, algú defensa que el preu del lloguer al teu barri és simplement el que marquen l'oferta i la demanda, i que si algú no pot pagar-lo és perquè no valora prou viure-hi. Assenyala que els pisos buits acabaran baixant de preu sols. Tu no ho veus clar però no saps com articular-ho.",
+ points:["Primer, sigues just amb l'argument: sí que hi ha oferta i demanda. Negar-ho és fàcil de rebatre. El bo és atacar QUIN tipus de demanda i QUI fixa el preu.",
+ "Financiarització: si bona part dels compradors són fons que no hi viuran, el preu reflecteix expectatives de revenda, no la necessitat d'allotjament. La demanda existeix, però ha canviat d'objecte.",
+ "Concurs de bellesa (Keynes): el preu es determina per què creuen els actors que creuran els altres. Per això els pisos buits poden NO baixar — mantenir-los buits és racional si esperes revalorització.",
+ "Preus administrats i algorítmics: en mercats concentrats i amb programari de fixació de preus compartit, el preu es decideix, no emergeix. Els pisos buits no pressionen a la baixa com faria un mercat de manual.",
+ "Piketty de fons: si la rendibilitat del capital supera el creixement, qui té patrimoni immobiliari s'allunya de qui viu del sou. La conclusió «no ho valores prou» tradueix un fenomen estructural en un judici moral individual — exactament el que Capital i ideologia descriu com el relat que justifica la jerarquia.",
+ "Conclusió honesta: el model no ha deixat de funcionar; ha deixat de ser informatiu. El preu ja no et diu «aquí falten pisos», et diu «aquí hi ha capital esperant revalorització»."]},
+{title:"«Fes com els rics: viu de crèdits»",
+ text:"Un conegut ha vist un vídeo sobre com els milionaris no venen mai actius i viuen de préstecs sense pagar impostos. Vol aplicar-ho: té 12.000 € en un fons indexat i un deute de targeta de 6.000 € al 19%. Diu que no pensa vendre res del fons perquè «vendre és el que et fa pagar a Hisenda», que anirà pagant el mínim de la targeta, i que a més està mirant un préstec al consum del 9% per posar-hi més diners al fons, «perquè el fons fa un 8% i així multiplico».",
+ points:[
+ "El deute al 19% és la peça que ho desmunta tot. Liquidar 6.000 € del fons li estalvia 1.140 € d'interessos segurs i no tributables. Mantenir-los invertits al 8% li dona 480 € bruts, uns 390 € nets, mentre paga els 1.140 €. Perd uns 750 € l'any per no voler «pagar a Hisenda» — el gest d'evitar l'impost li costa molt més que l'impost.",
+ "«Vendre és el que et fa pagar impostos» és cert, però només tributa la PLUSVÀLIA, no el capital, i al 19% del primer tram. Confondre l'impost sobre el guany amb un impost sobre tot el que retires és l'error de base del raonament.",
+ "El préstec al 9% per invertir en un fons que «fa un 8%» té el diferencial NEGATIU: paga 9 i espera 8, i el 8 ni tan sols està garantit mentre que el 9 sí. És la regla d'or del palanquejament aplicada al revés.",
+ "I encara pitjor: si el fons cau un 30% en algun moment (cosa perfectament normal), seguirà devent el préstec sencer. El palanquejament li treu la capacitat d'aguantar la caiguda, que era justament el que feia que la volatilitat no fos risc real.",
+ "El que el vídeo no explica: als rics el crèdit els costa un 3% perquè tenen una garantia enorme al darrere. Ell no té garantia, i per això el mercat li ofereix un 9% i un 19%. Copiar l'estratègia sense la garantia és copiar-ne només la part que perd.",
+ "Biaixos en joc: prova social i biaix de supervivència (el vídeo mostra qui va triomfar), i biaix del present (el mínim de la targeta és còmode avui i devastador a llarg termini).",
+ "Ordre sensat per a ell: coixí mínim d'emergència, liquidar el deute al 19%, oblidar el préstec, i llavors sí, aportacions periòdiques al fons."]}
+];
+
+/* =========================== ESTAT =========================== */
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem("gm_"+k); return v===null? d : JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem("gm_"+k, JSON.stringify(v)); }catch(e){} }
+};
+let mastered = new Set(store.get("mastered", []));
+let notes = store.get("notes", {});
+let tab = "apren";
+let filter = "tots";
+const cardStep = {};
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const catColor = c => CATS[c].color;
+
+document.getElementById("subtitle").textContent =
+  CONCEPTS.length + " idees d'economia, empresa, finances i psicologia — amb els matisos que el manual d'introducció es deixa. Primer el ganxo, després el nom.";
+
+/* =========================== TABS =========================== */
+const TABS = [["apren","Aprèn"],["fonaments","Fonaments"],["simuladors","Simuladors"],["prova","Posa't a prova"],["repte","Repte final"]];
+function renderTabs(){
+  document.getElementById("tabs").innerHTML = TABS.map(([k,l])=>
+    `<button class="${k===tab?'on':''}" data-tab="${k}">${l}</button>`).join("");
+}
+document.getElementById("tabs").addEventListener("click", e=>{
+  const b = e.target.closest("button[data-tab]"); if(!b) return;
+  tab = b.dataset.tab; renderTabs(); render(); window.scrollTo(0,0);
+});
+
+/* =========================== APRÈN =========================== */
+function cardHTML(c){
+  const step = cardStep[c.id] || 0;
+  const col = catColor(c.cat);
+  const done = mastered.has(c.id);
+  let inner;
+  if(step === 0){
+    inner = `<p class="hook">${esc(c.hook)}</p>` + (c.gut
+      ? `<p class="gutq">${esc(c.gut.q)}</p><div class="opts">` +
+        c.gut.a.map(o=>`<button class="opt" data-flip="${c.id}">${esc(o)}</button>`).join("") + `</div>`
+      : `<button class="reveal-btn" data-flip="${c.id}">Descobreix-ho</button>`);
+  } else {
+    inner = `<h3>${esc(c.name)}</h3><p class="what">${esc(c.what)}</p><p class="why">${esc(c.why)}</p>`;
+  }
+  return `<article class="card" style="--c:${col}">
+    <div class="top">
+      <div class="cat"><span class="dot"></span><span>${esc(CATS[c.cat].label)}</span>${done?'<span class="done">✓ dominat</span>':''}</div>
+      ${inner}
+    </div>
+    <div class="foot">
+      <button data-flip="${c.id}">${step===0?"veure resposta":"tornar a l'escena"}</button>
+      <button class="${done?'marked':''}" data-master="${c.id}">✓ ${done?"dominat":"ja el domino"}</button>
+    </div></article>`;
+}
+function renderLearn(){
+  const list = filter==="tots" ? CONCEPTS : CONCEPTS.filter(c=>c.cat===filter);
+  const chips = `<button class="chip ${filter==='tots'?'on':''}" data-f="tots"
+      style="${filter==='tots'?'background:var(--ink);border-color:var(--ink)':''}">Tots · ${CONCEPTS.length}</button>` +
+    Object.entries(CATS).map(([k,v])=>`<button class="chip ${filter===k?'on':''}" data-f="${k}"
+      style="${filter===k?`background:${v.color};border-color:${v.color}`:''}">${v.label}</button>`).join("");
+  return `<div class="filters">${chips}<span class="counter">${mastered.size}/${CONCEPTS.length} dominats</span></div>
+    <div class="grid">${list.map(cardHTML).join("")}</div>`;
+}
+
+/* =========================== FONAMENTS =========================== */
+const secOpen = {};
+function renderFoundations(){
+  return `<div class="narrow"><p class="lead">Les explicacions llargues. Els blocs amb l'etiqueta <b>matís crític</b> són coses que el manual d'introducció simplifica i que convé no repetir sense pensar-hi.</p>` +
+  FOUNDATIONS.map(s=>{
+    const col = catColor(s.cat);
+    const open = secOpen[s.id];
+    const blocks = s.blocks.map(b=>
+      `<div class="blk"><h4>${esc(b.h)}</h4>` +
+      b.p.map(t=>`<p>${esc(t)}</p>`).join("") +
+      (b.note?`<p class="note"><b>Matís crític</b>${esc(b.note)}</p>`:"") + `</div>`).join("");
+    return `<section class="sec ${open?'open':''}" style="--c:${col}">
+      <button class="head" data-sec="${s.id}">
+        <span class="t"><strong>${esc(s.label)}</strong><small>${esc(s.intro)}</small></span>
+        <span class="caret">▾</span></button>
+      <div class="bodyw">${blocks}</div></section>`;
+  }).join("") + `</div>`;
+}
+
+/* =========================== QUIZ =========================== */
+let qi=0, picked=[], locked=false, score=0, qdone=false;
+function quizCorrect(){
+  const q = QUIZ[qi];
+  if(q.multi) return q.answers.slice().sort().join()===picked.slice().sort().join();
+  return picked[0]===q.answer;
+}
+function renderQuiz(){
+  if(qdone){
+    const pct = score/QUIZ.length;
+    const msg = pct>=.9?"Domines els models mentals, matisos crítics inclosos."
+      :pct>=.7?"Molt bé: reconeixes els conceptes en estat salvatge."
+      :pct>=.45?"Bon punt de partida. Passa per Fonaments i torna."
+      :"Sense pressa: llegeix Fonaments i les cartes, i torna quan vulguis.";
+    return `<div class="result"><div class="score">${score}<span>/${QUIZ.length}</span></div>
+      <p style="margin:14px 0 20px">${msg}</p>
+      <button class="btn" data-qreset="1">↻ Torna a provar</button></div>`;
+  }
+  const q = QUIZ[qi];
+  const pips = QUIZ.map((_,k)=>`<span class="pip ${k<qi?'past':''} ${k===qi?'now':''}"></span>`).join("");
+  const opts = q.opts.map((o,i)=>{
+    const sel = picked.includes(i);
+    const corr = q.multi ? q.answers.includes(i) : i===q.answer;
+    let cls = "qopt";
+    if(locked){ if(corr) cls+=" ok"; else if(sel) cls+=" no"; }
+    else if(sel) cls+=" sel";
+    return `<button class="${cls}" data-qopt="${i}" ${locked?'disabled':''}>${
+      q.multi?`<span class="box">${sel?'✓':''}</span>`:''}${esc(o)}</button>`;
+  }).join("");
+  return `<div class="narrow" style="max-width:620px">
+    <div class="qtop"><span class="qlvl">${esc(q.lvl)}</span><span class="pips">${pips}</span></div>
+    <div class="qcard">
+      <p class="qs">${esc(q.s)}</p><p class="qq">${esc(q.q)}</p>
+      <div class="opts">${opts}</div>
+      ${q.multi&&!locked?`<button class="btn" data-qconfirm="1" style="margin-top:14px" ${picked.length!==2?'disabled':''}>Comprova (${picked.length}/2)</button>`:''}
+      ${locked?`<div class="fb ${quizCorrect()?'ok':'no'}">${quizCorrect()?'✓ ':'→ '}${esc(q.fb)}</div>`:''}
+    </div>
+    ${locked?`<div class="rowend"><button class="btn" data-qnext="1">${qi+1>=QUIZ.length?'Veure resultat':'Següent'} →</button></div>`:''}
+  </div>`;
+}
+
+/* =========================== REPTE =========================== */
+const caseOpen = {};
+function renderCases(){
+  return `<div class="narrow" style="max-width:680px">
+    <p class="lead">Aquí no hi ha opcions. Llegeix el cas, escriu quins conceptes hi detectes i després desplega la meva anàlisi per comparar. Pensar-ho tu abans de mirar és el que fixa la idea.</p>` +
+  CASES.map((c,i)=>`<div class="case">
+    <div><span class="tag">Cas ${i+1}</span><h3>${esc(c.title)}</h3></div>
+    <p class="txt">${esc(c.text)}</p>
+    <label for="ta${i}">Quins conceptes hi veus? (escriu-ho abans de mirar — no es corregeix, és per comparar)</label>
+    <textarea id="ta${i}" rows="3" data-note="${i}" placeholder="Ex.: aquí hi ha cost enfonsat perquè…">${esc(notes[i]||"")}</textarea>
+    <button class="btn ${caseOpen[i]?'ghost':'alt'}" data-case="${i}" style="margin-top:12px">${caseOpen[i]?"Amaga l'anàlisi":"Mostra la meva anàlisi"}</button>
+    <div class="analysis ${caseOpen[i]?'open':''}">${c.points.map(p=>`<p>${esc(p)}</p>`).join("")}</div>
+  </div>`).join("") + `</div>`;
+}
+
+/* =========================== SIMULADORS =========================== */
+const nf = new Intl.NumberFormat("ca-ES",{maximumFractionDigits:0});
+const nf1 = new Intl.NumberFormat("ca-ES",{maximumFractionDigits:1});
+const E = n => nf.format(Math.round(n)) + " €";
+const P = n => nf1.format(n) + "%";
+
+const SIM = {
+  compost:{initial:1000, monthly:100, rate:7, years:25},
+  amort:{amount:5000, debtRate:18, investRate:7, tax:19},
+  palanca:{price:200000, entrada:20, hipo:3, varia:-20},
+  comis:{capital:10000, monthly:150, rate:7, years:30, feeA:0.3, feeB:2},
+  bep:{fix:1200, preu:15, cvar:3, marketing:0},
+  rg:{capital:300000, r:6, sou:32000, estalvi:10, g:2, anys:30}
+};
+
+const SIMDEF = {
+compost:{c:"var(--finances)", n:"1", t:"La bola de neu de l'interès compost",
+ lead:"Mou els anys i fixa't en com canvia la proporció entre el que has posat tu i el que han generat els interessos. És el concepte més important de tots.",
+ ctrls:[
+  {p:"initial",l:"Capital inicial",min:0,max:50000,step:500,f:"eur"},
+  {p:"monthly",l:"Aportació mensual",min:0,max:1000,step:25,f:"eur"},
+  {p:"rate",l:"Rendibilitat anual",min:0,max:12,step:0.5,f:"pct"},
+  {p:"years",l:"Anys",min:1,max:45,step:1,f:"any"}]},
+amort:{c:"var(--negoci)", n:"2", t:"Amortitzar deute o invertir?",
+ lead:"Baixa el tipus del deute a poc a poc i mira on canvia el veredicte. Aquest és el punt de tall que quasi ningú calcula.",
+ ctrls:[
+  {p:"amount",l:"Diners disponibles (= deute)",min:1000,max:40000,step:500,f:"eur"},
+  {p:"debtRate",l:"Tipus del deute",min:0,max:25,step:0.5,f:"pct"},
+  {p:"investRate",l:"Rendibilitat esperada",min:0,max:12,step:0.5,f:"pct"},
+  {p:"tax",l:"Impost sobre guanys",min:0,max:30,step:1,f:"pct"}]},
+palanca:{c:"var(--decisio)", n:"3", t:"Palanquejament: el pis i el punt de ruïna",
+ lead:"Baixa l'entrada del 20% al 10% i mira com el punt de ruïna se't tira al damunt. La corba mostra la teva rendibilitat segons com es mogui el preu.",
+ ctrls:[
+  {p:"price",l:"Preu de l'immoble",min:50000,max:600000,step:10000,f:"eur"},
+  {p:"entrada",l:"Entrada (capital teu)",min:5,max:100,step:1,f:"pct"},
+  {p:"hipo",l:"Tipus de la hipoteca",min:0,max:8,step:0.25,f:"pct"},
+  {p:"varia",l:"Variació del preu",min:-40,max:40,step:1,f:"pctv"}]},
+comis:{c:"var(--psico)", n:"4", t:"El que se't menja una comissió",
+ lead:"Dos fons idèntics, l'únic que canvia és la comissió. La diferència després de dècades sol ser més gran del que sembla possible.",
+ ctrls:[
+  {p:"capital",l:"Capital inicial",min:0,max:100000,step:1000,f:"eur"},
+  {p:"monthly",l:"Aportació mensual",min:0,max:1000,step:25,f:"eur"},
+  {p:"rate",l:"Rendibilitat bruta",min:1,max:12,step:0.5,f:"pct"},
+  {p:"years",l:"Anys",min:1,max:45,step:1,f:"any"},
+  {p:"feeA",l:"Comissió fons A",min:0,max:3,step:0.05,f:"pct"},
+  {p:"feeB",l:"Comissió fons B",min:0,max:3,step:0.05,f:"pct"}]},
+bep:{c:"var(--macro)", n:"5", t:"Punt d'equilibri del teu projecte",
+ lead:"Quantes vendes necessites abans de guanyar el primer euro. Prova-ho amb els números reals d'algun projecte teu.",
+ ctrls:[
+  {p:"fix",l:"Costos fixos anuals",min:0,max:10000,step:50,f:"eur"},
+  {p:"preu",l:"Preu de venda",min:1,max:200,step:1,f:"eur"},
+  {p:"cvar",l:"Cost variable per venda",min:0,max:100,step:1,f:"eur"},
+  {p:"marketing",l:"Inversió extra en captació",min:0,max:5000,step:100,f:"eur"}]},
+rg:{c:"var(--critica)", n:"6", t:"r > g: capital contra sou",
+ lead:"Dues persones, trenta anys. Una viu del capital heretat, l'altra del seu sou. Mou r i g i mira quan la distància es dispara.",
+ ctrls:[
+  {p:"capital",l:"Patrimoni inicial (persona A)",min:0,max:1000000,step:25000,f:"eur"},
+  {p:"r",l:"Rendibilitat del capital (r)",min:0,max:10,step:0.25,f:"pct"},
+  {p:"sou",l:"Sou anual (persona B)",min:12000,max:80000,step:1000,f:"eur"},
+  {p:"estalvi",l:"Taxa d'estalvi de B",min:0,max:40,step:1,f:"pct"},
+  {p:"g",l:"Creixement de l'economia (g)",min:0,max:6,step:0.25,f:"pct"},
+  {p:"anys",l:"Anys",min:5,max:45,step:1,f:"any"}]}
+};
+
+function fmtVal(f,v){
+  if(f==="eur") return E(v);
+  if(f==="pct") return nf1.format(v)+"%";
+  if(f==="pctv") return (v>0?"+":"")+nf1.format(v)+"%";
+  if(f==="any") return v+(v==1?" any":" anys");
+  return v;
+}
+
+/* --- generador de gràfics SVG (sense llibreries) --- */
+function chart(series, o){
+  o = o||{};
+  const W=340, H=o.h||150, pl=4, pr=4, pt=10, pb=16;
+  let all=[]; series.forEach(s=>all=all.concat(s.v));
+  let max=Math.max.apply(null,all), min=Math.min.apply(null,all);
+  if(min>0) min=0;
+  if(max===min) max=min+1;
+  const n=series[0].v.length;
+  const X=i=> pl + i*(W-pl-pr)/((n-1)||1);
+  const Y=v=> pt + (max-v)*(H-pt-pb)/(max-min);
+  let s='<svg viewBox="0 0 '+W+' '+H+'" class="chart" preserveAspectRatio="none">';
+  const y0=Y(Math.max(min,0));
+  if(min<0) s+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+Y(0).toFixed(1)+'" y2="'+Y(0).toFixed(1)+'" stroke="#c9c2b4" stroke-width="1" stroke-dasharray="3 3"/>';
+  series.forEach(sr=>{
+    const pts=sr.v.map((v,i)=>X(i).toFixed(1)+","+Y(v).toFixed(1)).join(" ");
+    if(sr.fill) s+='<polygon points="'+X(0).toFixed(1)+","+y0.toFixed(1)+" "+pts+" "+X(n-1).toFixed(1)+","+y0.toFixed(1)+'" fill="'+sr.color+'" opacity="0.16"/>';
+    s+='<polyline points="'+pts+'" fill="none" stroke="'+sr.color+'" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"'+(sr.dash?' stroke-dasharray="4 3"':'')+'/>';
+  });
+  if(o.marker){
+    const mx=X(o.marker.i), my=Y(o.marker.v);
+    s+='<line x1="'+mx.toFixed(1)+'" x2="'+mx.toFixed(1)+'" y1="'+pt+'" y2="'+(H-pb)+'" stroke="#8b8577" stroke-width="1" stroke-dasharray="2 3"/>';
+    s+='<circle cx="'+mx.toFixed(1)+'" cy="'+my.toFixed(1)+'" r="4.5" fill="#fff" stroke="'+o.marker.color+'" stroke-width="2.5"/>';
+  }
+  if(o.xlab){
+    s+='<text x="'+pl+'" y="'+(H-3)+'" font-size="9" fill="#8b8577">'+o.xlab[0]+'</text>';
+    s+='<text x="'+(W-pr)+'" y="'+(H-3)+'" font-size="9" fill="#8b8577" text-anchor="end">'+o.xlab[1]+'</text>';
+  }
+  return s+'</svg>';
+}
+function legend(items){
+  return '<div class="legend">'+items.map(i=>'<span><i style="background:'+i.c+'"></i>'+i.l+'</span>').join("")+'</div>';
+}
+function bar(label, val, pct, color){
+  return '<div class="bar"><div class="t"><span>'+label+'</span><b>'+val+'</b></div>'+
+    '<div class="track"><div class="fill" style="width:'+Math.max(0,Math.min(100,pct))+'%;background:'+color+'"></div></div></div>';
+}
+
+/* --- càlculs --- */
+function growth(initial, monthly, annualRate, years){
+  const r=annualRate/100/12; const out=[initial]; let v=initial;
+  for(let y=1;y<=years;y++){
+    for(let m=0;m<12;m++){ v = v*(1+r) + monthly; }
+    out.push(v);
+  }
+  return out;
+}
+
+const SIMUPD = {
+compost(){
+  const s=SIM.compost;
+  const serie=growth(s.initial,s.monthly,s.rate,s.years);
+  const aport=[]; for(let y=0;y<=s.years;y++) aport.push(s.initial + s.monthly*12*y);
+  const fin=serie[serie.length-1], put=aport[aport.length-1], gen=fin-put;
+  const lateYears=Math.max(0,s.years-10);
+  const late=growth(s.initial,s.monthly,s.rate,lateYears);
+  const finLate=late[late.length-1];
+  const pctGen = fin>0 ? gen/fin*100 : 0;
+  return '<div class="kpis">'+
+   '<div class="kpi"><small>Hi has posat tu</small><strong>'+E(put)+'</strong></div>'+
+   '<div class="kpi"><small>Ho han generat els interessos</small><strong class="pos">'+E(gen)+'</strong></div>'+
+   '<div class="kpi wide"><small>Total al cap de '+s.years+(s.years==1?" any":" anys")+'</small><strong>'+E(fin)+'</strong></div>'+
+   '</div>'+
+   legend([{c:"#1E8E5A",l:"Total acumulat"},{c:"#9A5B12",l:"Només el que hi poses tu"}])+
+   chart([{v:serie,color:"#1E8E5A",fill:true},{v:aport,color:"#9A5B12",dash:true}],{xlab:["avui","any "+s.years]})+
+   '<p class="verdict">Els interessos són ja el <b>'+nf1.format(pctGen)+'%</b> del total. '+
+   'Si comencessis 10 anys més tard fent exactament el mateix, acabaries amb '+E(finLate)+
+   ' — o sigui <b>'+E(fin-finLate)+' menys</b>. Aquests deu anys no els recuperes posant-hi més diners després: el que perds és temps de composició.</p>';
+},
+amort(){
+  const s=SIM.amort;
+  const estalvi=s.amount*s.debtRate/100;
+  const brut=s.amount*s.investRate/100;
+  const net=brut*(1-s.tax/100);
+  const dif=estalvi-net;
+  const tall=s.investRate*(1-s.tax/100);
+  const brutNecessari = s.tax<100 ? s.debtRate/(1-s.tax/100) : 0;
+  const mx=Math.max(estalvi,net,1);
+  const guanya = dif>0;
+  return '<div class="bars">'+
+   bar("Amortitzar: interessos estalviats", E(estalvi)+" /any", estalvi/mx*100, "#1E8E5A")+
+   bar("Invertir: guany net d'impostos", E(net)+" /any", net/mx*100, "#C0392B")+
+   '</div>'+
+   '<div class="kpis">'+
+   '<div class="kpi"><small>Diferència el primer any</small><strong class="'+(guanya?'pos':'neg')+'">'+
+     (guanya?"+":"")+E(dif)+'</strong></div>'+
+   '<div class="kpi"><small>Punt de tall del deute</small><strong>'+P(tall)+'</strong></div>'+
+   '</div>'+
+   '<p class="verdict">'+
+   (guanya
+    ? 'Amb un deute al '+P(s.debtRate)+', <b>amortitzar guanya</b>. I no només pels números: el '+P(s.debtRate)+' és segur, mentre que el '+P(s.investRate)+' és una expectativa que pot no complir-se.'
+    : 'Amb un deute al '+P(s.debtRate)+', <b>compensa més invertir</b>. Aquí es veu per què «amortitza sempre» és un mal consell: amb deute barat, la balança canvia de costat.')+
+   ' El punt de tall és <b>'+P(tall)+'</b>: per sobre d\'aquest tipus convé amortitzar, per sota convé invertir. '+
+   'I fixa\'t en l\'asimetria fiscal: per igualar un deute al '+P(s.debtRate)+' caldria una inversió del <b>'+P(brutNecessari)+' brut</b>, perquè l\'estalvi d\'interessos no tributa i el guany sí.</p>';
+},
+palanca(){
+  const s=SIM.palanca;
+  const capital=s.price*s.entrada/100, deute=s.price-capital;
+  const valorFinal=s.price*(1+s.varia/100);
+  const interes=deute*s.hipo/100;
+  const net=valorFinal-deute;
+  const guany=net-capital-interes;
+  const roe=capital>0?guany/capital*100:0;
+  const ruina=-s.entrada;
+  const curve=[], xs=[];
+  for(let v=-50;v<=50;v+=2){
+    const vf=s.price*(1+v/100);
+    const g=(vf-deute)-capital-interes;
+    curve.push(capital>0?g/capital*100:0); xs.push(v);
+  }
+  let mi=0, best=1e9;
+  xs.forEach((v,i)=>{const d=Math.abs(v-s.varia); if(d<best){best=d;mi=i;}});
+  const mult = s.entrada>0 ? 100/s.entrada : 0;
+  return '<div class="kpis">'+
+   '<div class="kpi"><small>Capital teu</small><strong>'+E(capital)+'</strong></div>'+
+   '<div class="kpi"><small>Deute</small><strong>'+E(deute)+'</strong></div>'+
+   '<div class="kpi"><small>Patrimoni net final</small><strong class="'+(net<0?'neg':'')+'">'+E(net)+'</strong></div>'+
+   '<div class="kpi"><small>Rendibilitat sobre el teu capital</small><strong class="'+(roe>=0?'pos':'neg')+'">'+
+     (roe>=0?"+":"")+nf1.format(roe)+'%</strong></div>'+
+   '</div>'+
+   legend([{c:"#2947D4",l:"La teva rendibilitat segons com es mogui el preu"}])+
+   chart([{v:curve,color:"#2947D4"}],{marker:{i:mi,v:curve[mi],color:"#2947D4"},xlab:["preu −50%","preu +50%"]})+
+   '<p class="verdict">Amb una entrada del '+P(s.entrada)+', tots els moviments del preu es multipliquen per <b>'+nf1.format(mult)+'</b> sobre el teu capital. '+
+   'El <b>punt de ruïna és una caiguda del '+nf1.format(Math.abs(ruina))+'%</b>: arribat aquí, el teu capital val zero. '+
+   (s.varia<=ruina ? 'Ara mateix ja hi ets: has perdut tot el que hi vas posar i segueixes devent el préstec sencer.' :
+    'El diferencial també compta: si el pis no es revaloritza per damunt del '+P(s.hipo)+' de la hipoteca, perds diners mentre sembla que guanyes.')+
+   '</p>';
+},
+comis(){
+  const s=SIM.comis;
+  const A=growth(s.capital,s.monthly,s.rate-s.feeA,s.years);
+  const B=growth(s.capital,s.monthly,s.rate-s.feeB,s.years);
+  const fa=A[A.length-1], fb=B[B.length-1], dif=fa-fb;
+  const put=s.capital+s.monthly*12*s.years;
+  const pct=fa>0?dif/fa*100:0;
+  return '<div class="kpis">'+
+   '<div class="kpi"><small>Fons A ('+nf1.format(s.feeA)+'%)</small><strong class="pos">'+E(fa)+'</strong></div>'+
+   '<div class="kpi"><small>Fons B ('+nf1.format(s.feeB)+'%)</small><strong>'+E(fb)+'</strong></div>'+
+   '<div class="kpi wide"><small>El que se t\'ha menjat la diferència de comissions</small><strong class="neg">'+E(dif)+'</strong></div>'+
+   '</div>'+
+   legend([{c:"#7C3AA6",l:"Fons A (comissió baixa)"},{c:"#C0392B",l:"Fons B (comissió alta)"}])+
+   chart([{v:A,color:"#7C3AA6",fill:true},{v:B,color:"#C0392B"}],{xlab:["avui","any "+s.years]})+
+   '<p class="verdict">Una diferència de només <b>'+nf1.format(s.feeB-s.feeA)+' punts</b> de comissió t\'ha costat <b>'+E(dif)+'</b>, '+
+   'que és el <b>'+nf1.format(pct)+'%</b> del que hauries tingut. Sobre uns '+E(put)+' aportats de la teva butxaca. '+
+   'Passa perquè l\'interès compost actua també sobre el que pagues: cada any la comissió es cobra sobre un capital més gran. '+
+   'És l\'únic factor que pots controlar amb certesa — la rendibilitat futura no la tries, la comissió sí.</p>';
+},
+bep(){
+  const s=SIM.bep;
+  const marge=s.preu-s.cvar;
+  const totalFix=s.fix+s.marketing;
+  const unitats= marge>0 ? Math.ceil(totalFix/marge) : Infinity;
+  const viable = marge>0;
+  const maxU = viable ? Math.max(4, Math.ceil(unitats*2)) : 100;
+  const ing=[], cost=[];
+  for(let i=0;i<=20;i++){
+    const u=maxU*i/20;
+    ing.push(u*s.preu); cost.push(totalFix+u*s.cvar);
+  }
+  const perMes = viable ? unitats/12 : 0;
+  return '<div class="kpis">'+
+   '<div class="kpi"><small>Marge per venda</small><strong class="'+(marge>0?'pos':'neg')+'">'+E(marge)+'</strong></div>'+
+   '<div class="kpi"><small>Costos totals a cobrir</small><strong>'+E(totalFix)+'</strong></div>'+
+   '<div class="kpi wide"><small>Vendes necessàries per no perdre-hi diners</small><strong>'+
+     (viable? nf.format(unitats)+" a l'any  ·  "+nf1.format(perMes)+" al mes" : "mai: el marge és negatiu")+'</strong></div>'+
+   '</div>'+
+   legend([{c:"#0E6E7A",l:"Ingressos"},{c:"#C0392B",l:"Costos totals"}])+
+   chart([{v:ing,color:"#0E6E7A"},{v:cost,color:"#C0392B"}],{xlab:["0 vendes",nf.format(maxU)+" vendes"]})+
+   '<p class="verdict">'+
+   (viable
+    ? 'On es creuen les dues línies és el punt d\'equilibri: <b>'+nf.format(unitats)+' vendes l\'any</b>, unes '+nf1.format(perMes)+' al mes. Abans d\'aquest punt estàs recuperant costos; a partir d\'aquí, cada venda et deixa '+E(marge)+' nets. Fes-te la pregunta honesta: aquest número és realista amb el teu tràfic actual?'
+    : 'Amb aquest preu i aquest cost variable perds diners en cada venda, així que vendre més empitjora la situació. Cal apujar el preu o abaixar el cost per unitat abans de pensar en volum.')+
+   '</p>';
+},
+rg(){
+  const s=SIM.rg;
+  const A=[], B=[];
+  let a=s.capital, b=0, sou=s.sou;
+  A.push(a); B.push(b);
+  for(let y=1;y<=s.anys;y++){
+    a = a*(1+s.r/100);
+    b = b*(1+s.g/100) + sou*s.estalvi/100;
+    sou = sou*(1+s.g/100);
+    A.push(a); B.push(b);
+  }
+  const fa=A[A.length-1], fb=B[B.length-1];
+  const ratio = fb>0 ? fa/fb : 0;
+  const gap = fa-fb;
+  return '<div class="kpis">'+
+   '<div class="kpi"><small>A · viu del capital</small><strong>'+E(fa)+'</strong></div>'+
+   '<div class="kpi"><small>B · viu del sou</small><strong>'+E(fb)+'</strong></div>'+
+   '<div class="kpi wide"><small>Distància al cap de '+s.anys+' anys</small><strong class="neg">'+E(gap)+
+     (fb>0? '  ·  A té '+nf1.format(ratio)+'× el de B' : '')+'</strong></div>'+
+   '</div>'+
+   legend([{c:"#9A5B12",l:"Persona A (capital)"},{c:"#0E6E7A",l:"Persona B (sou i estalvi)"}])+
+   chart([{v:A,color:"#9A5B12",fill:true},{v:B,color:"#0E6E7A"}],{xlab:["avui","any "+s.anys]})+
+   '<p class="verdict">'+
+   (s.r>s.g
+    ? 'Amb r ('+P(s.r)+') per damunt de g ('+P(s.g)+'), la distància <b>s\'eixampla sola</b> i cap esforç de B la tanca: B estalvia el '+P(s.estalvi)+' del seu sou i tot i així es queda enrere. Aquesta és la tesi de Piketty en una imatge — no és una qüestió de mèrit, és estructural.'
+    : 'Aquí has posat r ('+P(s.r)+') per sota o igual a g ('+P(s.g)+'), i la distància deixa de disparar-se. Segons Piketty, això va passar de debò al segle XX — però per causes excepcionals: guerres, depressió i impostos altíssims, no per una tendència natural del sistema.')+
+   ' Prova de pujar r un punt i mira l\'efecte: petites diferències sostingudes durant dècades produeixen resultats enormes.</p>';
+}
+};
+
+function renderSims(){
+  let out='<div class="narrow" style="max-width:640px"><p class="lead">Mou els controls i mira com canvien els números en temps real. No cal que siguin realistes: la gràcia és portar-los a l\'extrem i veure què passa.</p>';
+  Object.keys(SIMDEF).forEach(k=>{
+    const d=SIMDEF[k];
+    out+='<section class="sim" style="--c:'+d.c+'"><h3>'+d.n+' · '+d.t+'</h3><p class="simlead">'+d.lead+'</p>';
+    d.ctrls.forEach(c=>{
+      out+='<div class="ctrl"><div class="lab"><span>'+c.l+'</span><b id="v-'+k+'-'+c.p+'"></b></div>'+
+        '<input type="range" min="'+c.min+'" max="'+c.max+'" step="'+c.step+'" value="'+SIM[k][c.p]+'" '+
+        'data-sim="'+k+'" data-p="'+c.p+'" data-f="'+c.f+'" aria-label="'+c.l+'"></div>';
+    });
+    out+='<div class="out" id="out-'+k+'"></div></section>';
+  });
+  return out+'</div>';
+}
+function refreshSim(k){
+  const d=SIMDEF[k];
+  d.ctrls.forEach(c=>{
+    const el=document.getElementById('v-'+k+'-'+c.p);
+    if(el) el.textContent=fmtVal(c.f, SIM[k][c.p]);
+  });
+  const box=document.getElementById('out-'+k);
+  if(box) box.innerHTML=SIMUPD[k]();
+}
+function refreshAllSims(){ Object.keys(SIMDEF).forEach(refreshSim); }
+
+/* =========================== RENDER =========================== */
+function render(){
+  const v = document.getElementById("view");
+  v.innerHTML = tab==="apren" ? renderLearn()
+    : tab==="fonaments" ? renderFoundations()
+    : tab==="simuladors" ? renderSims()
+    : tab==="prova" ? renderQuiz()
+    : renderCases();
+  if(tab==="simuladors") refreshAllSims();
+}
+
+document.getElementById("view").addEventListener("click", e=>{
+  const t = e.target;
+  const flip = t.closest("[data-flip]");
+  if(flip){ const id=flip.dataset.flip; cardStep[id] = (cardStep[id]||0)===0?1:0; render(); return; }
+  const m = t.closest("[data-master]");
+  if(m){ const id=m.dataset.master; mastered.has(id)?mastered.delete(id):mastered.add(id);
+    store.set("mastered",[...mastered]); render(); return; }
+  const f = t.closest("button.chip[data-f]");
+  if(f){ filter=f.dataset.f; render(); window.scrollTo(0,0); return; }
+  const s = t.closest("[data-sec]");
+  if(s){ const id=s.dataset.sec; secOpen[id]=!secOpen[id]; render(); return; }
+  const qo = t.closest("[data-qopt]");
+  if(qo && !locked){
+    const i = +qo.dataset.qopt, q = QUIZ[qi];
+    if(q.multi){
+      if(picked.includes(i)) picked = picked.filter(x=>x!==i);
+      else if(picked.length<2) picked.push(i);
+    } else { picked=[i]; locked=true; if(i===q.answer) score++; }
+    render(); return;
+  }
+  if(t.closest("[data-qconfirm]")){ if(picked.length===2){ locked=true; if(quizCorrect()) score++; render(); } return; }
+  if(t.closest("[data-qnext]")){
+    if(qi+1>=QUIZ.length){ qdone=true; } else { qi++; picked=[]; locked=false; }
+    render(); window.scrollTo(0,0); return;
+  }
+  if(t.closest("[data-qreset]")){ qi=0;picked=[];locked=false;score=0;qdone=false; render(); return; }
+  const cs = t.closest("[data-case]");
+  if(cs){ const i=cs.dataset.case; caseOpen[i]=!caseOpen[i]; render(); return; }
+});
+
+document.getElementById("view").addEventListener("input", e=>{
+  const ta = e.target.closest("[data-note]");
+  if(ta){ notes[ta.dataset.note] = ta.value; store.set("notes", notes); return; }
+  const sl = e.target.closest("input[data-sim]");
+  if(sl){ SIM[sl.dataset.sim][sl.dataset.p] = parseFloat(sl.value); refreshSim(sl.dataset.sim); }
+});
+
+renderTabs(); render();
+</script>
+</body>
+</html>
