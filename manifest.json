@@ -1,0 +1,20 @@
+{
+  "name": "Aprenent nous conceptes",
+  "short_name": "Aprenent",
+  "description": "Gimnàs mental i MBA Essencial: economia, empresa, finances i psicologia en dos programes interactius.",
+  "id": "/aprenent-nous-conceptes/",
+  "start_url": "/aprenent-nous-conceptes/index.html",
+  "scope": "/aprenent-nous-conceptes/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F1EEE6",
+  "theme_color": "#F1EEE6",
+  "lang": "ca",
+  "dir": "ltr",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
