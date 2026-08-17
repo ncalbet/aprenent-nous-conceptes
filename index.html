@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EEE6">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Aprenent nous conceptes</title>
+<style>
+  :root{
+    --paper:#F1EEE6; --card:#FFFFFF; --ink:#23212C; --muted:#6B6875; --line:#E4DFD3;
+    --accent:#2947D4;
+    --serif:Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;height:100%;}
+  body{
+    background:var(--paper); color:var(--ink); font-family:var(--sans);
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    padding:24px; -webkit-text-size-adjust:100%;
+  }
+  .wrap{width:100%; max-width:420px;}
+  .eyebrow{font-family:var(--mono); font-size:10.5px; letter-spacing:1.6px; text-transform:uppercase;
+    color:var(--muted); display:block; text-align:center; margin-bottom:10px;}
+  h1{font-family:var(--serif); font-size:28px; font-weight:400; text-align:center; margin:0 0 8px; letter-spacing:-0.3px;}
+  .sub{font-size:13.5px; color:var(--muted); text-align:center; margin:0 0 28px; line-height:1.5;}
+
+  /* pantalla de codi */
+  #gate{background:var(--card); border:1px solid var(--line); border-radius:6px; padding:26px 22px;}
+  #gate label{display:block; font-family:var(--mono); font-size:11px; letter-spacing:.6px; text-transform:uppercase;
+    color:var(--muted); margin-bottom:10px; text-align:center;}
+  #code{
+    display:block; width:100%; text-align:center; font-family:var(--mono); font-size:32px; letter-spacing:14px;
+    padding:14px 0 14px 14px; border:1.5px solid var(--line); border-radius:5px; background:var(--paper);
+    color:var(--ink); outline:none; margin-bottom:16px;
+  }
+  #code:focus{border-color:var(--accent);}
+  button{
+    width:100%; font-family:var(--mono); font-size:13px; letter-spacing:.4px; color:#fff;
+    background:var(--ink); border:none; padding:13px; border-radius:5px; cursor:pointer;
+  }
+  button:active{opacity:.85;}
+  #err{color:#B23A2E; font-size:12.5px; text-align:center; margin-top:12px; min-height:16px; font-family:var(--mono);}
+
+  /* menú de destinacions */
+  #menu{display:none;}
+  #menu.on{display:block;}
+  .card{
+    display:block; background:var(--card); border:1px solid var(--line); border-radius:6px;
+    padding:20px 20px; margin-bottom:14px; text-decoration:none; color:var(--ink);
+    border-left:4px solid var(--c);
+  }
+  .card b{display:block; font-family:var(--serif); font-size:20px; font-weight:400; margin-bottom:5px; letter-spacing:-0.2px;}
+  .card span{display:block; font-size:13px; color:var(--muted); line-height:1.5;}
+  .card .arrow{display:inline-block; margin-top:10px; font-family:var(--mono); font-size:11px; color:var(--c);}
+
+  footer{margin-top:20px; text-align:center; font-family:var(--mono); font-size:10px; color:var(--muted); line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">Aprenent nous conceptes</span>
+
+  <div id="gate">
+    <h1>Codi d'accés</h1>
+    <p class="sub">Introdueix les dues xifres per entrar</p>
+    <label for="code">Codi</label>
+    <input id="code" inputmode="numeric" pattern="[0-9]*" maxlength="2" autocomplete="off" autofocus>
+    <button id="enter">Entra</button>
+    <div id="err"></div>
+  </div>
+
+  <div id="menu">
+    <h1 style="margin-top:0">Tria un document</h1>
+    <p class="sub">Els dos funcionen offline un cop carregats</p>
+
+    <a class="card" style="--c:#1E8E5A" href="gimnas-mental-1.html">
+      <b>Gimnàs mental</b>
+      <span>Economia, empresa, finances i psicologia. Cartes, fonaments, simuladors i posa't a prova.</span>
+      <span class="arrow">Obre →</span>
+    </a>
+
+    <a class="card" style="--c:#5B3E86" href="mba-essencial-2.html">
+      <b>MBA Essencial</b>
+      <span>Vuit mòduls, dos casos amb decisions (Aula Viva i Bioma), calculadores executives i diagnòstics.</span>
+      <span class="arrow">Obre →</span>
+    </a>
+  </div>
+
+  <footer>Codi desat en aquest dispositiu · no cal tornar-lo a introduir</footer>
+</div>
+
+<script>
+const CODE = "98";
+const KEY = "anc_unlocked";
+const gate = document.getElementById("gate");
+const menu = document.getElementById("menu");
+const input = document.getElementById("code");
+const err = document.getElementById("err");
+
+function unlock(){
+  gate.style.display = "none";
+  menu.classList.add("on");
+}
+
+function tryCode(){
+  if(input.value.trim() === CODE){
+    try{ localStorage.setItem(KEY, "1"); }catch(e){}
+    unlock();
+  } else {
+    err.textContent = "Codi incorrecte";
+    input.value = "";
+    input.focus();
+  }
+}
+
+document.getElementById("enter").addEventListener("click", tryCode);
+input.addEventListener("keydown", e => { if(e.key === "Enter") tryCode(); });
+input.addEventListener("input", () => { err.textContent = ""; });
+
+try{
+  if(localStorage.getItem(KEY) === "1") unlock();
+}catch(e){}
+</script>
+</body>
+</html>
