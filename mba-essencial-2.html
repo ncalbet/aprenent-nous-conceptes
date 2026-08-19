@@ -46,6 +46,58 @@ nav.tabs button.on{color:var(--ink);border-bottom-color:var(--ink);}
 .fw .trap{background:var(--soft);border-left:3px solid var(--c);padding:10px 12px;border-radius:3px;}
 .fw .ex{background:var(--soft);padding:10px 12px;border-radius:3px;font-size:13.8px;line-height:1.6;color:var(--muted);}
 .fw .ex b{color:var(--c);}
+/* embut */
+.funnel{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:15px 14px;margin-bottom:14px;}
+.fs{margin-bottom:3px;}
+.fs .lb{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13px;margin-bottom:4px;}
+.fs .lb b{font-family:var(--mono);font-size:13.5px;}
+.fs .tr{height:22px;border-radius:3px;background:var(--soft);overflow:hidden;}
+.fs .tr i{display:block;height:100%;border-radius:3px;background:var(--c);opacity:.75;}
+.fs.neck .lb{color:var(--cli);font-weight:600;}
+.fs.neck .tr i{background:var(--cli);opacity:.9;}
+.conv{font-family:var(--mono);font-size:10.5px;color:var(--muted);text-align:right;padding:3px 0 6px;}
+.conv b{color:var(--ink);font-weight:400;}
+.conv.bad b{color:var(--cli);}
+.neckmsg{background:var(--soft);border-left:3px solid var(--cli);border-radius:3px;padding:11px 13px;
+  font-size:13.5px;line-height:1.6;margin:10px 0 0;}
+.neckmsg b{color:var(--cli);}
+.lever{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:13px 14px;margin-bottom:9px;
+  cursor:pointer;display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;font-family:inherit;}
+.lever.sel{border-color:var(--ink);border-width:2px;padding:12px 13px;}
+.lever.dis{opacity:.45;}
+.lever .ic{font-family:var(--mono);font-size:11px;color:var(--c);flex:0 0 auto;padding-top:2px;}
+.lever b{display:block;font-size:15px;margin-bottom:2px;}
+.lever small{display:block;font-size:12.5px;color:var(--muted);line-height:1.45;}
+.pill{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.5px;text-transform:uppercase;
+  background:var(--soft);color:var(--muted);border-radius:3px;padding:2px 6px;margin-top:5px;}
+.pill.on{background:var(--cli);color:#fff;}
+/* repartiment d'hores */
+.period{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:4px;
+  padding:13px 15px;margin-bottom:14px;}
+.period b{font-family:var(--serif);font-size:18px;font-weight:400;display:block;margin-bottom:3px;}
+.period small{display:block;font-size:13px;color:var(--muted);line-height:1.5;}
+.budget{display:flex;align-items:baseline;justify-content:space-between;margin:14px 0 10px;}
+.budget span{font-family:var(--mono);font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);}
+.budget b{font-family:var(--serif);font-size:22px;font-weight:400;}
+.budget b.over{color:var(--cli);}
+.alloc{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:12px 13px;margin-bottom:9px;}
+.alloc .top{display:flex;align-items:center;gap:10px;}
+.alloc .nm{flex:1;}
+.alloc .nm b{display:block;font-size:15px;font-weight:600;margin-bottom:2px;}
+.alloc .nm small{display:block;font-size:12.3px;color:var(--muted);line-height:1.45;}
+.stp{display:flex;align-items:center;gap:7px;flex:0 0 auto;}
+.stp button{width:34px;height:34px;border-radius:6px;border:1px solid var(--line);background:var(--soft);
+  font-size:18px;line-height:1;cursor:pointer;color:var(--ink);font-family:var(--sans);padding:0;}
+.stp button:disabled{opacity:.3;cursor:default;}
+.stp .v{font-family:var(--mono);font-size:15px;min-width:38px;text-align:center;}
+.alloc .bar{height:5px;border-radius:3px;background:var(--soft);margin-top:9px;overflow:hidden;}
+.alloc .bar i{display:block;height:100%;border-radius:3px;background:var(--c);}
+.res{background:var(--soft);border-radius:4px;padding:13px 14px;margin-top:4px;}
+.res p{font-size:14.2px;line-height:1.6;margin:0 0 9px;}
+.res p:last-child{margin-bottom:0;}
+.endcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:4px;padding:20px 18px;}
+.endcard .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.7px;text-transform:uppercase;color:var(--c);margin-bottom:6px;}
+.endcard h3{font-family:var(--serif);font-size:23px;font-weight:400;margin:0 0 12px;}
 /* glossari */
 .gl{border-bottom:1.5px dotted var(--val);cursor:pointer;}
 .gl:active{background:var(--soft);}
@@ -456,7 +508,7 @@ const MODS = [
 
 /* ============================ EL CAS ============================ */
 const CASES = {
-aula:{name:"Aula Viva", tag:"EdTech · actius lleugers",
+aula:{name:"Aula Viva", tag:"EdTech · decisions guiades",
  intro:"Una EdTech catalana: marge alt, capex baix, el problema és trobar clients i retenir-los. A cada punt tries una decisió, en veus la conseqüència i després pots obrir l'anàlisi completa amb les tres opcions comparades.",
  steps:[
 {mod:"Estratègia", c:"var(--est)", t:"On plantar la bandera",
@@ -836,6 +888,277 @@ arbre:{name:"Additiva Vallès", tag:"Fabricació additiva · model d'estat", typ
     ef:{caixa:-8000, reput:2, capac:-3},
     o:"Us permet vendre redisseny de peça, que és el servei de més marge i el que us allunya de competir per hores de màquina. Triga més a rendir que un comercial, però mou el negoci cap amunt a la cadena de valor."}
   ]}
+ ]},
+aulasim:{name:"Aula Viva · simulador", tag:"EdTech · repartir hores", type:"alloc",
+ intro:"Ets docent de secundària i has fet una eina que genera materials curriculars alineats amb la LOMLOE i el currículum de la teva comunitat. Aquí no tries entre tres opcions: cada període reparteixes les hores que tens, i les hores són poques. La tensió central és real — el moment en què el mercat docent està més receptiu (setembre) és exactament el moment en què tu tens menys temps. Vuit períodes, dos cursos. Toca els termes subratllats per veure'n l'explicació.",
+ turns:8, preu:6,
+ init:{mrr:0, aud:60, prod:20, churn:14, caixa:6000, energia:85, jornada:"docent", torn:1},
+ periods:[
+  {n:"Setembre · curs 1", hm:0.55, rec:1.7, nota:"Inici de curs: els docents busquen materials com mai. També és quan tu tens el centre desbordat i menys hores lliures."},
+  {n:"Novembre · curs 1", hm:1.0, rec:1.0, nota:"Període estable. Ni pic de demanda ni pic de feina al centre."},
+  {n:"Gener · curs 1", hm:0.85, rec:1.15, nota:"Segona avaluació i propòsits nous. Hi ha receptivitat, però les juntes i les notes et mengen hores."},
+  {n:"Març · curs 1", hm:1.0, rec:0.9, nota:"Període llarg i pla. Bon moment per construir coses que no donen fruit immediat."},
+  {n:"Juny · curs 1", hm:0.5, rec:0.25, nota:"Col·lapse estacional: exàmens, notes i tancament. El mercat docent desapareix fins al setembre. Aquest període existeix cada any i molta gent no el preveu."},
+  {n:"Setembre · curs 2", hm:0.55, rec:1.7, nota:"El segon setembre. Ara arribes amb producte i, si l'has cuidada, amb audiència pròpia — i això ho canvia tot."},
+  {n:"Novembre · curs 2", hm:1.0, rec:1.0, nota:"Els números ja no són una promesa: són una tendència. El que has construït es nota o no es nota."},
+  {n:"Març · curs 2", hm:1.0, rec:0.9, nota:"Últim període. El que hi hagi ara és el que t'emportes."}
+ ],
+ cats:[
+  {id:"prod", l:"Producte", c:"var(--est)", d:"Construir i millorar l'eina. Redueix el churn i fa que la resta funcioni millor, però per si sol no porta ni un client."},
+  {id:"dist", l:"Distribució", c:"var(--fin)", d:"Que et trobin: contingut, SEO, comunitat docent, xarxes. Fa créixer l'audiència pròpia, que es composa amb el temps."},
+  {id:"vend", l:"Conversió", c:"var(--cli)", d:"Convertir audiència en subscriptors: proves, correus, oferta, parlar amb gent. Sense audiència, no té gairebé cap efecte."},
+  {id:"mant", l:"Manteniment", c:"var(--org)", d:"Suport, incidències, atendre qui ja paga. No creix res, però si l'abandones el churn es dispara."}
+ ],
+ events:[
+  {id:"crema", cond:st=>st.energia<=38, mod:"Persones", c:"var(--per)", t:"El senyal d'alerta",
+   set:["Fa setmanes que dorms poc, has discutit a casa dues vegades pel projecte i has començat a corregir exàmens amb el portàtil obert al costat. La feina del centre se'n ressent i tu ho saps.",
+        "Aquest és el punt on la majoria de projectes paral·lels es moren, i rarament per raons de mercat."],
+   q:"Com hi reacciones?",
+   opts:[
+    {l:"Aguantar aquest període i ja frenaràs després",
+     ef:{energiaX:-15}, o:"«Després» sol ser un lloc que no arriba mai: sempre hi ha un motiu per estirar un període més. L'energia funciona com la caixa — quan s'esgota del tot, no importa que el negoci fos bo."},
+    {l:"Frenar el ritme i acceptar créixer més lent",
+     ef:{energiaX:32, audX:-20}, o:"Perds tracció i et fa ràbia veure el creixement plà. Però un projecte que dura cinc anys a mig gas bat qualsevol projecte que brilla vuit mesos i s'apaga: la composició necessita temps, i el temps necessita que hi siguis."},
+    {l:"Automatitzar i eliminar la meitat de les tasques",
+     ef:{energiaX:18, prodX:6, audX:-8}, o:"Aplicar-te a tu mateix el que vens: eliminar feina en comptes de fer-la més ràpid. Costa unes hores ara i te'n torna cada període. És la resposta amb millor retorn, tot i que no soluciona sola el problema de fons."}
+   ]},
+  {id:"estiu", cond:st=>st.torn===5, mod:"Operacions", c:"var(--ope)", t:"Els dos mesos morts",
+   set:["S'acosta l'estiu. El mercat docent desapareix: ningú prepara materials al juliol i a l'agost no hi ha ni consultes. Els subscriptors segueixen pagant, però alguns aprofiten per donar-se de baixa.",
+        "Tens, per primera vegada, temps de veritat."],
+   q:"Què fas amb l'estiu?",
+   opts:[
+    {l:"Aprofitar per construir el gran salt de producte",
+     ef:{prodX:20, energiaX:-20}, o:"Arribes al setembre amb un producte molt millor, just quan el mercat torna a estar receptiu. El risc és arribar-hi també esgotat, precisament al període que més exigeix i menys hores et deixa."},
+    {l:"Preparar la campanya de setembre i descansar",
+     ef:{audX:70, energiaX:22}, o:"Arribes al setembre amb energia i amb la campanya llesta per al pic de demanda. És el que faria algú que ha entès que el setembre es guanya al juliol i que l'energia és un recurs finit com la caixa."},
+    {l:"Desconnectar del tot: dos mesos sense tocar res",
+     ef:{energiaX:30, audX:-30, churnX:2}, o:"Recuperes energia de veritat, que no és poca cosa en un projecte paral·lel de llarg recorregut. El cost és que arribes al setembre amb l'audiència una mica freda i sense res preparat per al millor moment de l'any."}
+   ]},
+  {id:"gratis", cond:st=>st.torn>=2, mod:"Estratègia", c:"var(--est)", t:"El competidor que ho regala tot",
+   set:["Una plataforma internacional amb més de seixanta eines per a docents consolida el seu pla gratuït, i el pla gratuït és prou complet perquè la majoria de docents no necessitin pagar mai. A sobre, hi ha un banc de recursos de disseny que és gratis per a qualsevol docent verificat.",
+        "Dos subscriptors t'escriuen preguntant per què haurien de pagar el teu."],
+   q:"Com hi respons?",
+   opts:[
+    {l:"Baixar el preu per competir amb el gratuït",
+     ef:{mrrMul:0.7, prod:0}, o:"Contra un competidor que regala el producte com a captació d'un altre negoci, competir en preu és una guerra que no pots guanyar: el seu cost marginal és zero i el teu és tot el teu ingrés. Baixar el preu redueix ingressos sense treure't del terreny on ell és fort."},
+    {l:"Especialitzar-te en el currículum real de la teva comunitat",
+     ef:{prod:12, churn:-3, reput:1}, o:"És el moviment defensable. Les eines internacionals no incorporen el currículum espanyol, i les genèriques encara menys: treballar amb els decrets reals de la teva comunitat és costós de replicar per a algú que ven a trenta països. Redueixes mercat teòric i guanyes una posició que ningú et disputa per preu."},
+    {l:"Afegir més funcionalitats per igualar el seu catàleg",
+     ef:{prod:6, energiaX:-12}, o:"Competir en nombre d'eines contra qui en té seixanta i un equip finançat és córrer una cursa que no has triat tu. Cremes hores en amplitud quan el teu avantatge possible era la profunditat en un currículum concret."}
+   ]},
+  {id:"centre", cond:st=>st.torn>=3, mod:"Clients", c:"var(--cli)", t:"El primer institut que vol llicència",
+   set:["La direcció d'un institut públic vol una llicència de centre per a tot el claustre. El tiquet seria d'uns 900 € l'any, molt més que la suma dels docents individuals que tens ara.",
+        "El coordinador et diu que la decisió passa per direcció, després pel consell escolar, i que el pressupost s'aprova al juny per al curs següent. Estem al gener."],
+   q:"Com ho gestiones?",
+   opts:[
+    {l:"Anar-hi a fons: adaptar el producte al que demana el centre",
+     ef:{prodX:8, energiaX:-15, caixaX:0}, o:"Dediques hores a una venda que, si arriba, arribarà d'aquí sis mesos i pot no arribar. El cicle de venda institucional és llarg i té diversos decisors: qui decideix, qui influeix, qui paga i qui pot vetar sovint són persones diferents. Mentrestant, els docents individuals que et donen ingressos ara reben menys atenció."},
+    {l:"Acceptar-ho però sense frenar la venda a docents",
+     ef:{energiaX:-8, audX:40}, o:"Mantens les dues vies obertes. El centre trigarà el que trigui, i mentrestant el flux d'individuals continua. A més, els docents d'aquell claustre et coneixen ara: encara que la llicència no s'aprovi, alguns et subscriuran pel seu compte."},
+    {l:"Declinar: el cicle institucional no encaixa amb la teva realitat",
+     ef:{audX:10}, o:"Decisió defensable amb hores tan escasses. Però tanques la porta al model que a la llarga dona tiquets grans i estables — i que és cap on han acabat pivotant altres eines del sector, deixant fins i tot de registrar docents individuals."}
+   ]},
+  {id:"curriculum", cond:st=>st.prod>=45 && st.torn>=3, mod:"Estratègia", c:"var(--val)", t:"La inversió que ningú pot copiar de pressa",
+   set:["Pots dedicar un bloc gros d'hores a digitalitzar el currículum oficial de la teva comunitat: decrets, sabers bàsics, criteris d'avaluació, i els RA i CE de formació professional. És feina lenta, sense res de brillant i sense retorn immediat.",
+        "El que en resultaria és una base que una eina internacional no té cap incentiu per construir per a un mercat com el teu."],
+   q:"Hi dediques el temps?",
+   opts:[
+    {l:"Sí: sis setmanes de feina poc lluïda",
+     ef:{prodX:18, churnX:-4, energiaX:-18}, o:"Cremes hores i energia en una cosa que no es veu i que aquest període no et donarà ni un subscriptor. El que compres és cost de canvi: un docent que ha construït la seva programació anual sobre la teva base no marxa per un competidor genèric encara que sigui gratis."},
+    {l:"Fer-ne només una part, la del teu nivell i matèria",
+     ef:{prodX:9, churnX:-2, energiaX:-8}, o:"Compres part del benefici amb part del cost, i sobretot compres informació: si els docents de la teva matèria ho valoren, saps que val la pena estendre-ho. És una opció real ben plantejada."},
+    {l:"No: prefereixes hores en captació",
+     ef:{audX:60}, o:"Guanyes creixement immediat i visible, que sempre és més satisfactori. Però el teu producte segueix sent substituïble, i el creixement damunt d'un producte substituïble s'escapa per l'altre extrem en forma de churn."}
+   ]},
+  {id:"salt", cond:st=>st.mrr>=350 && st.torn>=4 && st.jornada==="docent", mod:"Decisió", c:"var(--dec)", t:"Reduir jornada?",
+   set:["Els números comencen a ser reals i les hores són el teu coll d'ampolla evident. Pots demanar reducció de jornada al centre i comprar-te temps, però el sou baixa immediatament i els ingressos del projecte encara no el compensen.",
+        "És una decisió difícil de desfer a curt termini: la plaça i l'horari no es recuperen a mig curs."],
+   q:"Què fas amb la teva jornada?",
+   opts:[
+    {l:"Mantenir la jornada completa al centre",
+     ef:{}, o:"Conserves la seguretat i el projecte creix al ritme que permeten les hores que et sobren. És el camí lent, i també el que et permet equivocar-te sense conseqüències greus: la teva BATNA segueix intacta."},
+    {l:"Reduir a mitja jornada",
+     ef:{jornada:"mitja", caixaX:-3600}, o:"Dobles les hores disponibles i el sou baixa uns 900 € al mes. El projecte ha de créixer prou ràpid per cobrir el forat abans que la caixa s'aprimi: acabes de convertir temps en una carrera contra la teva pròpia tresoreria."},
+    {l:"Demanar excedència i dedicar-t'hi del tot",
+     ef:{jornada:"complet", caixaX:-7600, energiaX:-10}, o:"Multipliques les hores i elimines el sou de cop. Amb el MRR actual, el compte enrere és curt. La visió exterior és clara: la majoria de projectes en aquesta situació no arriben a cobrir el sou abans que la caixa s'esgoti, i la pressió empitjora les decisions."}
+   ]},
+  {id:"soci", cond:st=>st.aud>=500 && st.torn>=4, mod:"Persones", c:"var(--per)", t:"El company que vol entrar",
+   set:["Un company de departament, bon docent i millor comunicador, et proposa entrar al projecte. Ell portaria distribució i comunitat; tu, producte i currículum.",
+        "Vol un 40% i no pot posar diners: aportaria hores."],
+   q:"Què decideixes?",
+   opts:[
+    {l:"Acceptar el 40% a canvi d'hores",
+     ef:{audX:120, energiaX:12, mrrMul:1.0}, o:"Guanyes distribució, que era precisament el teu coll d'ampolla, i alleugereixes la càrrega. Però has cedit gairebé la meitat del projecte sense cap aportació de capital i sense cap període de prova: si al cap de sis mesos no encaixa, el 40% ja no torna."},
+    {l:"Acceptar amb vesting: el percentatge es guanya amb el temps",
+     ef:{audX:100, energiaX:10}, o:"Mateixa aportació, però la propietat es consolida per trams al llarg de dos o tres anys. Si la cosa no funciona o ell ho deixa, no et quedes amb un soci absent amb mig projecte. És la manera estàndard de fer-ho i costa una conversa incòmoda de vint minuts."},
+    {l:"Col·laboració pagada, sense entrar al capital",
+     ef:{audX:55, caixaX:-1200}, o:"Preserves la propietat i pagues per la feina. És més car en caixa i probablement obtindràs menys implicació: qui cobra per hores no es lleva a les sis del matí pel projecte."}
+   ]},
+      {id:"editorial", cond:st=>st.mrr>=700, mod:"Valoració", c:"var(--val)", t:"L'oferta de l'editorial",
+   set:["Una editorial educativa et proposa integrar la teva eina dins la seva plataforma amb la seva marca. T'ofereix un pagament fix anual i accés a la seva xarxa comercial, que arriba a milers de centres.",
+        "La condició és exclusivitat: deixaries de vendre directament als docents."],
+   q:"Què fas?",
+   opts:[
+    {l:"Acceptar: xarxa comercial i ingrés estable",
+     ef:{mrrMul:1.5, audX:-150, churnX:2}, o:"Els ingressos pugen i deixes de patir per la captació. Però perds la relació directa amb el docent, que era el teu actiu real, i passes a dependre d'un sol canal que controla el preu, la marca i l'accés al client. Sobre el paper creixes; en poder de negociació, encongeixes."},
+    {l:"Negociar sense exclusivitat, encara que pagui menys",
+     ef:{mrrMul:1.25, audX:20}, o:"Cobres menys però mantens el canal directe viu. Si l'editorial canvia de prioritats d'aquí dos anys — i les editorials canvien de prioritats — segueixes tenint una relació pròpia amb els teus docents i una llista que és teva."},
+    {l:"Rebutjar i seguir sol",
+     ef:{audX:40, energiaX:-6}, o:"Conserves el control complet i el ritme és teu. El cost és l'opcionalitat: aquesta porta concreta pot no tornar-se a obrir, i la xarxa comercial d'una editorial és una cosa que no es construeix sol en cinc anys."}
+   ]}
+ ],
+ endings:[
+  {id:"burnout", cond:st=>st.energia<=0, tag:"Final · esgotament", c:"var(--cli)", t:"T'has cremat",
+   ps:["El projecte no ha mort per falta de mercat ni per una decisió estratègica dolenta: ha mort perquè has esgotat el recurs que el sostenia, que eres tu. És, de llarg, la causa més freqüent de mort dels projectes paral·lels, i la que menys apareix als llibres de negoci.",
+       "La lliçó operativa: l'energia funciona exactament com la caixa. Pots operar amb pèrdues una temporada, però si arribes a zero s'acaba la partida, per bo que fos el negoci. Un projecte al 60% sostingut cinc anys bat un projecte al 120% que dura vuit mesos, perquè la composició (d'audiència, de producte, de reputació) necessita temps i el temps necessita que hi siguis.",
+       "Torna-hi vigilant el mesurador d'energia com vigilaries la tresoreria: quan baixi de la meitat, frena abans que et freni."]},
+  {id:"sensecaixa", cond:st=>st.caixa<0, tag:"Final · sense caixa", c:"var(--cli)", t:"T'has quedat sense caixa",
+   ps:["El projecte creixia i tot i així s'ha acabat, i val la pena entendre exactament per què: has deixat sou abans que el MRR el cobrís, i la tresoreria no aguanta el desfasament. És l'error més car que es pot cometre amb un projecte que anava bé.",
+       "Rendibilitat i liquiditat no són el mateix. Un projecte pot tenir una tendència excel·lent i morir igualment perquè els diners s'acaben abans que la corba arribi on havia d'arribar. La caixa no és el marcador de l'èxit: és el que et permet seguir jugant prou temps perquè l'èxit arribi.",
+       "La regla prudent quan es planteja el salt: tenir cobert el sou que deixes durant almenys dotze mesos entre MRR i caixa, no sis. I recorda que és una decisió amb molt poca reversibilitat a curt termini — la plaça i l'horari no es recuperen a mig curs."]},
+  {id:"abandonat", cond:st=>st.mrr<45, tag:"Final · no ha arrencat", c:"var(--cli)", t:"No ha arribat a arrencar",
+   ps:["Dos cursos després, els ingressos recurrents no arriben a cobrir ni el cost de mantenir-ho. No és un fracàs moral: és el resultat més probable estadísticament, i val la pena mirar-lo de cara en comptes d'explicar-lo com a mala sort.",
+       "Mira on van anar les hores. Si la major part va a producte, has construït alguna cosa que ningú ha trobat — el coll d'ampolla d'un projecte digital gairebé mai és el producte, i és el lloc més còmode per invertir-hi perquè és el que se't dona bé. Si la major part va a captació amb un producte fluix, has omplert una galleda foradada.",
+       "El que sí que tens, i no és poc, és informació que abans no tenies: saps quin canal portava gent, quin missatge ressonava i quin no. Això no apareix a la caixa però és el que fa que el segon intent sigui radicalment més barat que el primer."]},
+  {id:"hobby", cond:st=>st.mrr<220, tag:"Final · hobby rendible", c:"var(--org)", t:"Un hobby que es paga sol",
+   ps:["Has construït alguna cosa que funciona i que es paga sola, però que no arriba a ser un negoci. És un lloc perfectament digne on quedar-se, i molta gent hi és feliç — sempre que sigui una decisió i no una resignació.",
+       "El diagnòstic important és si això és un sostre estructural o un sostre d'hores. Si el mercat és petit i el competidor regala el producte, potser és estructural. Si simplement no hi has pogut dedicar prou temps sostingut, aleshores el que has provat no és el negoci: has provat el negoci amb quatre hores per setmana, que és una altra cosa.",
+       "La pregunta honesta per fer-se aquí és de cost d'oportunitat: aquestes hores, en la millor alternativa disponible, haurien rendit més? Si la resposta és sí i tot i així t'ho estimes, està bé — però que sigui una elecció conscient."]},
+  {id:"complement", cond:st=>st.mrr<520, tag:"Final · complement sòlid", c:"var(--fin)", t:"Un complement que aguanta",
+   ps:["Tens un ingrés recurrent real, prou estable per notar-lo cada mes i prou petit per no dependre'n. És exactament el punt on més gent decideix malament, en les dues direccions: uns ho deixen córrer quan estava a punt de composar-se, i altres fan el salt a temps complet amb números que encara no ho aguanten.",
+       "El que decideix si això pot ser més gran no és el MRR d'avui: és si l'audiència creix sola i si el churn és prou baix perquè cada mes parteixis de més amunt. Un negoci recurrent amb churn alt és una cinta de córrer; amb churn baix, és una bola de neu.",
+       "Si consideres el salt, la regla prudent és tenir cobert el sou que deixes durant almenys dotze mesos entre MRR i caixa, no sis. La pressió de tresoreria empitjora totes les decisions que hauràs de prendre justament quan més importen."]},
+  {id:"viable", cond:st=>true, tag:"Final · negoci viable", c:"var(--fin)", t:"Això ja és un negoci",
+   ps:["Has arribat a un nivell d'ingressos recurrents que sosté una activitat de veritat, i ho has fet amb la restricció més dura que hi ha: hores comptades i un mercat estacional on un competidor internacional regala el producte.",
+       "Val la pena entendre per què ha funcionat, perquè no és el producte. És la combinació de dues coses que es composen: una audiència pròpia que creix sola i no depèn de cap algorisme, i una especialització (currículum real, compliment normatiu) que un competidor global no té incentius per replicar en un mercat com aquest. Això és un fossat, i és el que separa un negoci d'una temporada bona.",
+       "El risc a partir d'aquí canvia de naturalesa: deixa de ser «arrencarà?» i passa a ser concentració i dependència. Un sol canal, un sol client gran o una sola editorial poden desfer en una renovació el que has trigat dos cursos a construir."]}
+ ]},
+mesa:{name:"Mesa Docente", tag:"LatAm · embut i coll d'ampolla", type:"funnel",
+ intro:"Escrius des de Catalunya per a docents de Mèxic. Hi ha més de dos milions de docents al país i el teu contingut és bo, però ara mateix no et troba gairebé ningú. Aquí la mecànica és una altra: veus l'embut sencer i cada període només pots intervenir en UNA etapa. Si intervens on no és el coll d'ampolla, els números gairebé no es mouen — i ho veuràs. Vuit períodes.",
+ turns:10, benchmark:{abast:60000, r1:0.050, r2:0.034, r3:0.42, r4:0.085},
+ init:{abast:15000, r1:0.020, r2:0.009, r3:0.25, r4:0.0, subs:300, credib:2,
+       pagament:"cap", model:null, preu:0, caixa:1500, mrr:0, torn:1},
+ stages:[
+  {id:"abast", l:"Abast", d:"Gent que et veu cada període"},
+  {id:"visites", l:"Visites", d:"Arriben al lloc"},
+  {id:"subs", l:"Subscriptors", d:"Deixen el correu"},
+  {id:"actius", l:"Lectors actius", d:"Obren i llegeixen"},
+  {id:"pagadors", l:"Pagadors", d:"Paguen cada mes"}
+ ],
+ levers:[
+  {id:"abast", l:"Ampliar l'abast", c:"var(--fin)", d:"SEO, xarxes, col·laboracions amb docents mexicans. Fa que més gent et vegi, però no millora cap conversió."},
+  {id:"r1", l:"Millorar la conversió a visita", c:"var(--est)", d:"Titulars, posicionament de cerques reals, càrrega ràpida al mòbil. Que qui et veu, hi entri."},
+  {id:"r2", l:"Capturar el correu", c:"var(--cli)", d:"Recurs descarregable, formulari visible, motiu clar per subscriure's. Convertir visites en llista pròpia."},
+  {id:"r3", l:"Retenir i activar", c:"var(--org)", d:"Cadència constant, contingut útil de veritat, respondre. Que la llista no es refredi."},
+  {id:"r4", l:"Monetitzar", c:"var(--val)", d:"Oferta, preu i mètode de pagament. Només funciona si ja tens lectors actius i un model definit.", need:st=>st.model!==null}
+ ],
+ events:[
+  {id:"model", cond:st=>st.torn>=2 && st.model===null, mod:"Estratègia", c:"var(--est)", t:"Com penses cobrar",
+   set:["Tens una llista petita però real i has de decidir el model abans de poder monetitzar res. El context importa: el salari d'un docent d'educació bàsica a Mèxic ronda els 16.800 pesos al mes després de la pujada del 9% del 2026, i segons l'INEGI bona part del magisteri es mou entre 7.000 i 10.500 pesos.",
+        "Convertir 6 € al canvi i posar-ho com a preu seria un error de principiant: el preu s'ha de pensar en pesos i en proporció al que guanya qui el paga."],
+   q:"Quin model tries?",
+   opts:[
+    {l:"Subscripció de pagament a 99 pesos/mes",
+     ef:{model:"subs", preu:4.6}, o:"Uns 99 pesos són aproximadament l'1% del sou mensual d'un docent de bàsica i és un preu que es pot defensar si el valor és clar. El model és net i previsible, però et limita a qui pot i vol pagar cada mes."},
+    {l:"Gratuït amb productes puntuals i patrocinis",
+     ef:{model:"obert", preu:2.1}, o:"Mantens l'audiència creixent sense fricció d'entrada i monetitzes amb materials solts i patrocinadors del sector. L'ingrés per lector és molt més baix i irregular, però el creixement no es frena i tens més superfície comercial."},
+    {l:"Mixt: gratuït ampli i un nivell de pagament petit",
+     ef:{model:"mixt", preu:3.4}, o:"El model més comú en publicacions independents: la major part gratuïta per créixer i un nivell de pagament per a qui vol més. Més complex de mantenir, però no sacrifica ni creixement ni ingressos del tot."}
+   ]},
+  {id:"pagament", cond:st=>st.model!==null && st.torn>=3, mod:"Operacions", c:"var(--ope)", t:"La gent vol pagar i no pot",
+   set:["Comences a rebre missatges que et desconcerten: docents que volen subscriure's i que et diuen que el pagament els falla. La causa no és el preu ni el producte.",
+        "A Mèxic conviuen les targetes amb les transferències SPEI i el pagament en efectiu a OXXO, que representa al voltant del 14% del comerç electrònic nacional. Si només acceptes targeta internacional, estàs deixant fora una part important del mercat sense adonar-te'n."],
+   q:"Què fas amb els mitjans de pagament?",
+   opts:[
+    {l:"Seguir només amb targeta: és el més senzill",
+     ef:{}, o:"T'estalvies feina d'integració i segueixes perdent la mateixa gent cada mes. És una fuita a l'última etapa de l'embut, que és la més cara de totes: has pagat abast, conversió i retenció per acabar perdent-los quan ja volien pagar."},
+    {l:"Afegir SPEI i OXXO amb una passarel·la local",
+     ef:{pagament:"local", caixaX:-250}, o:"Costa integració i una comissió superior (OXXO ronda el 4% i SPEI l'1-1,8%), però desbloqueges l'etapa final de l'embut. És l'exemple més clar del cas: la millora no és de màrqueting, és de fricció — i la fricció no es veu enlloc si no la busques."},
+    {l:"Acceptar targeta i transferència, però no efectiu",
+     ef:{pagament:"targeta", caixaX:-120}, o:"Millores respecte a només targeta i t'estalvies la comissió alta de l'efectiu. Segueixes deixant fora qui no té producte bancari, tot i que el 76,5% de la població de 18 a 70 anys ja en té algun."}
+   ]},
+  {id:"credib", cond:st=>st.torn>=3 && st.credib<=5, mod:"Estratègia", c:"var(--val)", t:"«Tú no das clase aquí»",
+   set:["Un comentari en un grup de docents mexicans es fa viral entre els teus lectors: algú assenyala que escrius des d'Espanya sobre la Nueva Escuela Mexicana sense haver trepitjat mai una aula mexicana, i que es nota en els exemples.",
+        "Té part de raó, i tu ho saps."],
+   q:"Com hi respons?",
+   opts:[
+    {l:"Ignorar-ho i seguir publicant",
+     ef:{credib:-1}, o:"El comentari no desapareix: es repeteix cada cop que algú nou et descobreix. La credibilitat no és un adorn en un mercat on la teva única defensa és que els docents et creguin: sense ella, la conversió a subscriptor i a pagador es queda plana per molt bon contingut que facis."},
+    {l:"Incorporar docents mexicans com a coautors i revisors",
+     ef:{credib:3, caixaX:-300}, o:"Pagues a docents locals perquè revisin i coescriguin. És una despesa real i el guany és estructural: el contingut deixa de sonar a traducció, i qui et llegeix reconeix el seu context. Compres el que no tens i no pots fabricar des d'aquí."},
+    {l:"Reposicionar-te com a mirada externa comparada",
+     ef:{credib:1}, o:"Deixes de fingir que ets d'allà i converteixes la distància en angle: què fan a Europa amb els mateixos problemes. És honest i defensable, però redueix l'audiència possible: passes de ser útil per a la feina diària a ser interessant, que ven bastant menys."}
+   ]},
+  {id:"plataforma", cond:st=>st.subs>=450, mod:"Risc", c:"var(--cli)", t:"El canvi d'algorisme",
+   set:["Una part important del teu abast venia d'una sola xarxa social on compartien els teus continguts. Un canvi d'algorisme redueix la teva visibilitat a la meitat en dues setmanes, sense avís i sense apel·lació.",
+        "Els subscriptors per correu, en canvi, segueixen exactament allà on eren."],
+   q:"Quina conclusió n'extreus?",
+   opts:[
+    {l:"Adaptar-te al nou algorisme i recuperar abast",
+     ef:{abastMul:1.15}, o:"Recuperes part del que has perdut i tornes a dependre exactament del mateix. L'estratègia funciona fins al proper canvi, que arribarà, i llavors tornaràs a començar."},
+    {l:"Traslladar l'esforç a canals que controles tu",
+     ef:{r2:0.006, credib:1}, o:"Cerques i correu creixen més lent i no depenen de ningú. La llista pròpia és l'únic actiu d'un negoci d'audiència que no et pot retirar un tercer, i per això val molt més per subscriptor que qualsevol seguidor."},
+    {l:"Diversificar en tres xarxes diferents",
+     ef:{abastMul:1.25, r3:-0.03}, o:"Redueixes el risc de dependre d'una sola plataforma però multipliques la feina de publicació, i la qualitat i la cadència del contingut principal se'n ressenten. Diversificar canals no és gratis: es paga en atenció."}
+   ]},
+  {id:"patrocini", cond:st=>st.subs>=750, mod:"Clients", c:"var(--cli)", t:"El primer patrocinador",
+   set:["Una empresa que ven material didàctic t'ofereix patrocinar la newsletter durant sis mesos. L'import cobriria de sobres tots els teus costos.",
+        "La condició no escrita és que no parlis malament de productes com els seus."],
+   q:"Acceptes el patrocini?",
+   opts:[
+    {l:"Acceptar: cobreix costos i dona estabilitat",
+     ef:{caixaX:1400, credib:-2}, o:"Entra caixa i respires. Però has venut, sense dir-ho enlloc, la independència editorial que era exactament el motiu pel qual els docents et llegien. En una publicació independent, la credibilitat i l'ingrés poden ser el mateix actiu vist des de dos costats."},
+    {l:"Acceptar amb transparència i dret de crítica per escrit",
+     ef:{caixaX:1000, credib:1}, o:"Cobres una mica menys i ho declares públicament, amb la clàusula que la línia editorial no es toca. És més incòmode de negociar i és el que et permet cobrar i seguir sent creïble."},
+    {l:"Rebutjar i seguir depenent dels lectors",
+     ef:{credib:2}, o:"Renuncies a caixa immediata i reforces la relació amb qui et llegeix. És sostenible només si els lectors acaben pagant: la independència sense model de negoci és una temporada, no una estratègia."}
+   ]},
+  {id:"curriculum", cond:st=>st.torn>=5, mod:"Operacions", c:"var(--ope)", t:"Canvia el pla d'estudis",
+   set:["La SEP actualitza materials i orientacions de la Nueva Escuela Mexicana. Una part del teu arxiu queda desactualitzat de cop, i és justament el contingut que més visites et portava des de cercadors.",
+        "Refer-ho és feina sense glamur i sense audiència nova."],
+   q:"Què fas amb l'arxiu?",
+   opts:[
+    {l:"Actualitzar tot l'arxiu que encara porta trànsit",
+     ef:{r1:0.010, credib:1}, o:"Feina ingrata que no genera cap titular, però recupera i consolida la font de trànsit més estable que tens. En un negoci de contingut, l'arxiu actualitzat és un actiu que treballa sol; desactualitzat és un passiu que et resta credibilitat."},
+    {l:"Publicar contingut nou sobre el canvi i deixar l'arxiu",
+     ef:{abastMul:1.2, credib:-1}, o:"El contingut d'actualitat dona un pic d'abast immediat i satisfactori. L'arxiu antic segueix rebent visites que ara troben informació obsoleta signada per tu, cosa que erosiona la confiança justament entre els que et descobreixen."},
+    {l:"Actualitzar només el que més trànsit porta",
+     ef:{r1:0.006, abastMul:1.08}, o:"Repartiment raonable: ataques el 20% de l'arxiu que porta el 80% del trànsit i publiques alguna cosa nova. No brilla en cap direcció i és probablement el que faria algú amb el temps comptat."}
+   ]},
+  {id:"editorial", cond:st=>st.mrr>=110, mod:"Valoració", c:"var(--val)", t:"L'oferta d'una editorial mexicana",
+   set:["Una editorial educativa mexicana et proposa comprar Mesa Docente: un pagament d'uns 18.000 € i quedar-te com a autor durant un any amb un sou modest.",
+        "És més diner del que has vist mai amb això, i alhora és el múltiple d'uns tres anys d'ingressos actuals."],
+   q:"Què fas?",
+   opts:[
+    {l:"Vendre i quedar-te com a autor",
+     ef:{caixaX:18000, mrrMul:0.15, credib:-1}, o:"Cobres una xifra que canvia el teu any. El que has venut, però, és l'actiu que composava: la llista, la marca i la relació amb els lectors. Passes de propietari a col·laborador d'una cosa que abans era teva, i el múltiple de tres anys és baix per a un actiu que creix."},
+    {l:"Negociar una llicència de continguts sense vendre la marca",
+     ef:{caixaX:5000, mrrMul:1.2}, o:"Cobres menys de cop i conserves la propietat, la llista i la capacitat de fer-ho créixer. Vens l'ús del que produeixes, no el que ets. Sol ser la millor decisió quan l'actiu encara està en corba ascendent."},
+    {l:"Rebutjar i seguir sol",
+     ef:{credib:1}, o:"Mantens el control complet. El cost és l'opcionalitat i la certesa: una oferta concreta a la mà val més que dues hipotètiques, i les editorials no truquen dues vegades."}
+   ]}
+ ],
+ endings:[
+  {id:"abandonat", cond:st=>st.subs<300, tag:"Final · no ha arrelat", c:"var(--cli)", t:"No ha arribat a arrelar",
+   ps:["Dos anys després, la llista no arriba ni a tres-cents correus. El contingut potser era bo, però el negoci d'audiència té una condició d'entrada que no perdona: si no et troba prou gent, res de la resta importa.",
+       "Mira on has invertit els períodes. Si has anat repartint millores per etapes que no eren el coll d'ampolla, has fet feina real que no ha mogut el resultat — que és exactament el que passa quan s'optimitza un procés sense identificar-ne la restricció.",
+       "Val la pena una lectura honesta: escriure des de fora sobre un currículum que no és el teu, sense xarxa local i sense presència, és un desavantatge estructural, no una qüestió d'esforç. Es pot compensar, però s'ha de compensar activament."]},
+  {id:"audiencia", cond:st=>st.subs>=400 && st.mrr<45, tag:"Final · audiència sense ingressos", c:"var(--org)", t:"Molta audiència i cap ingrés",
+   ps:["Has construït una llista de "+"veritat i no en surt gairebé cap euro. És un dels finals més frustrants perquè, vist des de fora, sembla un èxit: la gent et llegeix i t'ho agraeix.",
+       "La causa sol ser una de dues. O no has definit mai el model prou aviat i has anat ajornant la conversa incòmoda dels diners, o l'has definit i la fricció de l'última etapa se t'ha menjat la conversió sense que ho veiessis.",
+       "La bona notícia és real: una llista pròpia amb lectors actius és l'actiu difícil de construir, i la monetització és el problema fàcil comparativament. La dolenta és que cada mes que passa sense monetitzar és un mes de cost d'oportunitat que no torna."]},
+  {id:"friccio", cond:st=>st.pagament==="cap" && st.mrr<90, tag:"Final · mort per fricció", c:"var(--cli)", t:"S'ha mort a l'últim pas",
+   ps:["Tenies abast, tenies lectors i tenies gent disposada a pagar. I l'embut s'ha buidat a l'última baula, que és la més cara de totes: has pagat visibilitat, conversió i retenció per perdre'ls justament quan ja havien decidit que sí.",
+       "Acceptar només targeta internacional en un mercat on el pagament en efectiu a OXXO representa al voltant del 14% del comerç electrònic no és una decisió tècnica: és una decisió comercial presa sense saber-ho.",
+       "La lliçó general va més enllà de Mèxic: la fricció no apareix a cap panell de mètriques. No la veus com una caiguda, la veus com una absència — gent que simplement no completa, i que no t'escriu per dir-t'ho."]},
+  {id:"petit", cond:st=>st.mrr<120, tag:"Final · petit però real", c:"var(--fin)", t:"Petit, però funciona",
+   ps:["Tens un ingrés recurrent modest i una llista que creix. No és un negoci encara, però ja no és un experiment: has demostrat que hi ha gent disposada a pagar-te des de l'altra banda de l'Atlàntic, que era la incògnita real.",
+       "A partir d'aquí el creixement d'un negoci d'audiència sol ser multiplicatiu, no additiu: si millores un 30% l'entrada de l'embut i un 30% la conversió final, el resultat no puja un 60%, puja un 69% — i aquestes millores es composen període rere període.",
+       "La pregunta següent no és quant creixerà, sinó si les etapes que has deixat fluixes aguantaran més volum. Un embut amb una baula estreta no millora abocant-hi més gent per dalt."]},
+  {id:"real", cond:st=>true, tag:"Final · negoci d'audiència", c:"var(--fin)", t:"Això ja se sosté",
+   ps:["Has arribat a un ingrés recurrent que sosté el projecte, i ho has fet en un mercat on parties amb tots els desavantatges: distància, currículum aliè, cap xarxa local i un ecosistema de pagaments que no és el teu.",
+       "El que ho ha fet possible no és cap etapa concreta sinó haver anat movent l'esforç allà on era la restricció en cada moment. És la diferència entre treballar molt i treballar on toca, i és probablement el concepte d'aquest simulador que més es transfereix a qualsevol altre projecte.",
+       "El risc canvia de forma a partir d'aquí: concentració de canal, dependència d'un patrocinador i erosió de la credibilitat si el creixement passa per davant de la relació amb qui et llegeix. En una publicació independent, la confiança és alhora el producte i el fossat."]}
  ]}
 };
 
@@ -1076,8 +1399,10 @@ function openGl(id){
 const store={get(k,d){try{const v=localStorage.getItem("mba_"+k);return v===null?d:JSON.parse(v);}catch(e){return d;}},
  set(k,v){try{localStorage.setItem("mba_"+k,JSON.stringify(v));}catch(e){}}};
 let picks=store.get("picks",{}), dnotes=store.get("dnotes",{}), caseSel=store.get("caseSel","aula");
-let arbreState=store.get("arbre",{});
-function saveArbre(){store.set("arbre",arbreState);}
+let simAll=store.get("simall",{});
+function simGet(){ if(!simAll[caseSel]) simAll[caseSel]={}; return simAll[caseSel]; }
+let arbreState=null;
+function saveArbre(){store.set("simall",simAll);}
 let tab="moduls", modOpen={}, anOpen={}, diagOpen={};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 document.getElementById("sub").textContent="Vuit mòduls amb el nucli d'una escola de negocis, dos casos reals que els travessen tots i les eines de càlcul que es fan servir de veritat. Rigorós, aplicat i sense pretendre que substitueix un màster: el que dona un MBA i això no dona és la xarxa de contactes i la credencial.";
@@ -1156,9 +1481,312 @@ function stSynth(cs,st){
  return ps;
 }
 
+function allocInit(cs){return {st:Object.assign({},cs.init), alloc:{prod:0,dist:0,vend:0,mant:0},
+  phase:"alloc", seen:[], ev:null, epick:null, res:null, prev:null, done:false, log:[]};}
+function budgetOf(cs,st){
+ const per=cs.periods[st.torn-1];
+ const jm={docent:1, mitja:2.1, complet:3.6}[st.jornada]||1;
+ const en=0.55+st.energia/220;
+ return Math.max(4, Math.round(26*per.hm*jm*en));
+}
+function allocResolve(cs,stt){
+ const st=stt.st, a=stt.alloc, per=cs.periods[st.torn-1];
+ const used=a.prod+a.dist+a.vend+a.mant, bud=budgetOf(cs,st);
+ const n=Object.assign({},st);
+ const notes=[];
+ // producte
+ n.prod=Math.min(100, n.prod + a.prod*1.5);
+ if(a.prod===0) notes.push("No has tocat el producte aquest període. No passa res immediatament, però el producte és el que sosté tota la resta: quan es queda enrere, el churn puja de manera silenciosa.");
+ // distribució → audiència
+ const gain = a.dist*(3.1 + n.prod/16)*per.rec;
+ if(a.dist===0){ n.aud=Math.round(n.aud*0.94); notes.push("Sense hores a distribució, l'audiència s'ha refredat una mica. Una llista pròpia no es manté sola: es degrada si ningú la cuida."); }
+ else { n.aud=Math.round(n.aud+gain); }
+ // conversió
+ const cap=n.aud*0.055;
+ let conv=Math.min(cap, a.vend*(1.0+n.prod/40)*per.rec);
+ conv=Math.max(0,conv);
+ const newMrr=conv*cs.preu;
+ if(a.vend>0 && cap<a.vend*0.5) notes.push("Has dedicat hores a convertir amb una audiència encara petita: la conversió està limitada per la gent que et coneix, no per l'esforç. Sense audiència, vendre és empènyer una paret.");
+ // churn
+ n.churn=Math.max(3, Math.min(22, 15 - n.prod/9 - a.mant*0.55));
+ if(a.mant===0 && n.mrr>60) notes.push("Ningú ha atès els subscriptors actuals aquest període, i el churn ho ha notat. Retenir sempre surt més barat que captar.");
+ // MRR (2 mesos de període)
+ n.mrr = Math.round(n.mrr*Math.pow(1-n.churn/100,2) + newMrr);
+ // caixa
+ const cost=190;
+ const sou={docent:0, mitja:-1800, complet:-3800}[n.jornada]||0;
+ n.caixa=Math.round(n.caixa + n.mrr*2 - cost + sou*2/2);
+ // energia
+ const esf=bud>0?used/bud:0;
+ if(esf>0.86) n.energia-= (esf-0.86)*52;
+ else if(esf<0.62) n.energia+=14;
+ else n.energia+=6;
+ n.energia=Math.max(0,Math.min(100,Math.round(n.energia)));
+ if(per.rec<0.4 && (a.vend>0||a.dist>0)) notes.push("Has invertit hores en captar i convertir en un període on el mercat docent pràcticament no existeix. L'estacionalitat no és un detall: les mateixes hores rendeixen tres vegades més al setembre.");
+ if(esf>0.95) notes.push("Has esgotat el pressupost d'hores sencer. Es paga en energia, i l'energia condiciona les hores que tindràs el període vinent.");
+ stt.res={notes, gain:Math.round(gain), conv:Math.round(conv), newMrr:Math.round(newMrr), before:Object.assign({},st)};
+ stt.prev=Object.assign({},st);
+ stt.st=n;
+}
+function pickAllocEvent(cs,stt){
+ const c=cs.events.filter(e=>!stt.seen.includes(e.id) && (!e.cond||e.cond(stt.st)));
+ return c.length?c[0]:null;
+}
+function applyEv(st,ef){
+ const n=Object.assign({},st);
+ if(ef.mrrMul) n.mrr=Math.round(n.mrr*ef.mrrMul);
+ if(ef.prodX) n.prod=Math.min(100,n.prod+ef.prodX);
+ if(ef.prod) n.prod=Math.min(100,n.prod+ef.prod);
+ if(ef.audX) n.aud=Math.max(0,n.aud+ef.audX);
+ if(ef.churnX) n.churn=Math.max(3,n.churn+ef.churnX);
+ if(ef.churn) n.churn=Math.max(3,n.churn+ef.churn);
+ if(ef.energiaX) n.energia=Math.max(0,Math.min(100,n.energia+ef.energiaX));
+ if(ef.caixaX) n.caixa=n.caixa+ef.caixaX;
+ if(ef.jornada) n.jornada=ef.jornada;
+ return n;
+}
+function allocDash(st){
+ return '<div class="dash">'+
+  '<div class="m"><small>MRR</small><b>'+fmtE(st.mrr)+'</b></div>'+
+  '<div class="m"><small>Audiència</small><b>'+nf.format(st.aud)+'</b></div>'+
+  '<div class="m"><small>Churn</small><b>'+nf1.format(st.churn)+'%</b></div>'+
+  '<div class="m"><small>Caixa</small><b>'+fmtE(st.caixa)+'</b></div>'+
+  '</div>'+
+  '<div class="dash" style="grid-template-columns:1fr 1fr">'+
+  '<div class="m"><small>Producte</small><b>'+Math.round(st.prod)+'/100</b><div class="bar"><i style="width:'+st.prod+'%;background:var(--est)"></i></div></div>'+
+  '<div class="m"><small>Energia</small><b>'+Math.round(st.energia)+'/100</b><div class="bar"><i style="width:'+st.energia+'%;background:'+(st.energia<40?"var(--cli)":"var(--fin)")+'"></i></div></div>'+
+  '</div>';
+}
+function funInit(cs){return {st:Object.assign({},cs.init), lever:null, phase:"pick", seen:[], ev:null, epick:null,
+ res:null, prev:null, done:false, log:[]};}
+function funCalc(cs,st){
+ const credM=0.45+st.credib/14;
+ const payM={cap:0.3, targeta:0.62, local:1}[st.pagament]||0.3;
+ const visites=st.abast*st.r1;
+ const newSubs=visites*st.r2*credM;
+ const actius=st.subs*st.r3;
+ const pagadors=actius*st.r4*credM*payM;
+ return {visites, newSubs, actius, pagadors, credM, payM};
+}
+function funNeck(cs,st){
+ const b=cs.benchmark;
+ const sc={abast:st.abast/b.abast, r1:st.r1/b.r1, r2:st.r2/b.r2, r3:st.r3/b.r3,
+           r4:(st.model===null?99:st.r4/b.r4)};
+ let mk=null,mv=1e9;
+ for(const k in sc){ if(sc[k]<mv){mv=sc[k];mk=k;} }
+ return {k:mk, sc};
+}
+function funResolve(cs,stt){
+ const st=stt.st, lev=stt.lever, neck=funNeck(cs,st);
+ const n=Object.assign({},st);
+ const hit = (lev===neck.k);
+ const m = hit?1.0:0.28;
+ const notes=[];
+ if(lev==="abast") n.abast=Math.round(n.abast*(1+1.05*m));
+ if(lev==="r1") n.r1=+(n.r1+0.024*m).toFixed(4);
+ if(lev==="r2") n.r2=+(n.r2+0.023*m).toFixed(4);
+ if(lev==="r3") n.r3=+(n.r3+0.095*m).toFixed(4);
+ if(lev==="r4") n.r4=+(n.r4+0.034*m).toFixed(4);
+ const f=funCalc(cs,n);
+ n.subs=Math.round(n.subs*0.982 + f.newSubs);
+ n.mrr=Math.round(f.pagadors*(n.preu||0));
+ n.caixa=Math.round(n.caixa + n.mrr*2 - 60);
+ const nm={abast:"l'abast",r1:"la conversió a visita",r2:"la captura de correu",r3:"la retenció",r4:"la monetització"};
+ if(hit) notes.push("Has intervingut justament al coll d'ampolla ("+nm[neck.k]+"), i per això la millora s'ha propagat a tot l'embut. Quan desencalles la restricció, el guany no és local: és de tot el sistema.");
+ else notes.push("Has millorat "+nm[lev]+", però el coll d'ampolla era "+nm[neck.k]+". La millora és real i el resultat gairebé no s'ha mogut: en un procés en cadena, optimitzar una etapa que no és la restricció no augmenta el rendiment global — només acumula capacitat que no es fa servir.");
+ if(n.model===null && st.torn>=3) notes.push("Segueixes sense model d'ingressos definit, així que l'última etapa de l'embut està tancada per definició: pots acumular tots els lectors que vulguis, que no en sortirà cap euro.");
+ if(n.pagament==="cap" && n.model!==null && n.r4>0.02) notes.push("La conversió a pagador està limitada per la fricció de pagament, no per l'oferta. Amb només targeta internacional estàs perdent bona part dels qui ja havien decidit pagar.");
+ stt.res={notes, hit, neck:neck.k, f:funCalc(cs,n), before:Object.assign({},st)};
+ stt.prev=Object.assign({},st);
+ stt.st=n;
+}
+function funEv(st,ef){
+ const n=Object.assign({},st);
+ if(ef.model){n.model=ef.model;} if(ef.preu){n.preu=ef.preu;}
+ if(ef.pagament){n.pagament=ef.pagament;}
+ if(ef.credib){n.credib=Math.max(0,Math.min(10,n.credib+ef.credib));}
+ if(ef.abastMul){n.abast=Math.round(n.abast*ef.abastMul);}
+ if(ef.r1){n.r1=+(n.r1+ef.r1).toFixed(4);} if(ef.r2){n.r2=+(n.r2+ef.r2).toFixed(4);}
+ if(ef.r3){n.r3=Math.max(0.05,+(n.r3+ef.r3).toFixed(4));}
+ if(ef.mrrMul){n.mrr=Math.round(n.mrr*ef.mrrMul);}
+ if(ef.caixaX){n.caixa=n.caixa+ef.caixaX;}
+ return n;
+}
+function funnelView(cs,st){
+ const f=funCalc(cs,st), neck=funNeck(cs,st).k;
+ const rows=[
+  {k:"abast", l:"Abast", v:st.abast, c:"var(--fin)"},
+  {k:"r1", l:"Visites", v:f.visites, c:"var(--est)"},
+  {k:"r2", l:"Subscriptors", v:st.subs, c:"var(--cli)"},
+  {k:"r3", l:"Lectors actius", v:f.actius, c:"var(--org)"},
+  {k:"r4", l:"Pagadors", v:f.pagadors, c:"var(--val)"}
+ ];
+ const mx=Math.max(st.abast,1);
+ let o='<div class="funnel">';
+ rows.forEach((r,i)=>{
+  const w=Math.max(2, Math.pow(r.v/mx,0.42)*100);
+  o+=`<div class="fs ${neck===r.k?'neck':''}" style="--c:${r.c}"><div class="lb"><span>${r.l}</span><b>${nf.format(Math.round(r.v))}</b></div>
+   <div class="tr"><i style="width:${w}%"></i></div></div>`;
+  if(i<rows.length-1){
+   const rate=[st.r1, (st.r2*f.credM), st.r3, (st.r4*f.credM*f.payM)][i];
+   const bm=[cs.benchmark.r1,cs.benchmark.r2,cs.benchmark.r3,cs.benchmark.r4][i];
+   o+=`<div class="conv ${rate<bm*0.6?'bad':''}">conversió <b>${nf1.format(rate*100)}%</b> · referència ${nf1.format(bm*100)}%</div>`;
+  }
+ });
+ const nm={abast:"l'abast: no et veu prou gent",r1:"la conversió a visita: et veuen i no entren",
+  r2:"la captura de correu: entren i no deixen el correu",r3:"la retenció: es subscriuen i no llegeixen",
+  r4:"la monetització: et llegeixen i no paguen"};
+ o+=`<p class="neckmsg"><b>Coll d'ampolla actual:</b> ${nm[neck]}. Mentre això no es desencalli, millorar la resta de l'embut tindrà un efecte molt petit sobre el resultat final.</p>`;
+ return o+'</div>';
+}
+function funDash(st){
+ const mo={subs:"subscripció",obert:"obert",mixt:"mixt"}[st.model]||"per definir";
+ const pa={cap:"només targeta",targeta:"targeta i SPEI",local:"SPEI i OXXO"}[st.pagament];
+ return '<div class="dash">'+
+  '<div class="m"><small>MRR</small><b>'+fmtE(st.mrr)+'</b></div>'+
+  '<div class="m"><small>Llista</small><b>'+nf.format(st.subs)+'</b></div>'+
+  '<div class="m"><small>Credibilitat</small><b>'+st.credib+'/10</b><div class="bar"><i style="width:'+(st.credib*10)+'%;background:var(--fin)"></i></div></div>'+
+  '<div class="m"><small>Caixa</small><b>'+fmtE(st.caixa)+'</b></div>'+
+  '</div><div class="delta" style="margin-top:-6px;margin-bottom:14px">Model: <b>'+mo+'</b> · Pagaments: <b>'+pa+'</b></div>';
+}
+function renderFunnel(cs){
+ let stt=simGet();
+ if(!stt.st){ stt=funInit(cs); simAll[caseSel]=stt; }
+ let o='<div class="narrow"><div class="casesel">'+
+  Object.keys(CASES).map(k=>`<button class="cbtn ${k===caseSel?'on':''}" data-case="${k}"><b>${esc(CASES[k].name)}</b><span>${esc(CASES[k].tag)}</span></button>`).join("")+
+  '</div>';
+ o+=`<p class="lead">${G(cs.intro)}</p>`;
+
+ if(stt.done){
+  const end=cs.endings.find(e=>e.cond(stt.st));
+  o+=funDash(stt.st)+funnelView(cs,stt.st);
+  o+=`<div class="endcard" style="--c:${end.c}"><div class="tag">${esc(end.tag)}</div><h3>${esc(end.t)}</h3>`;
+  o+='<div class="analysis open">'+end.ps.map(x=>`<p>${G(x)}</p>`).join("")+'</div>';
+  const cnt={};stt.log.forEach(l=>cnt[l]=(cnt[l]||0)+1);
+  const nm={abast:"Abast",r1:"Conversió a visita",r2:"Captura de correu",r3:"Retenció",r4:"Monetització"};
+  o+='<div class="delta" style="margin-top:14px">On has intervingut: '+Object.keys(cnt).map(k=>nm[k]+" <b>×"+cnt[k]+"</b>").join(" · ")+'</div>';
+  o+='<div class="endpath"><button class="btn" data-treset="1">↻ Torna a jugar atacant altres etapes</button></div></div></div>';
+  return o;
+ }
+
+ o+=`<div class="turn">Període ${stt.st.torn} de ${cs.turns}</div>`;
+ o+=funDash(stt.st);
+ o+=funnelView(cs,stt.st);
+
+ if(stt.phase==="pick"){
+  o+='<p class="q" style="font-family:var(--serif);font-size:17px;margin:16px 0 12px">On intervens aquest període?</p>';
+  cs.levers.forEach(lv=>{
+   const dis=lv.need && !lv.need(stt.st);
+   o+=`<button class="lever ${stt.lever===lv.id?'sel':''} ${dis?'dis':''}" ${dis?'disabled':''} data-lever="${lv.id}" style="--c:${lv.c}">
+    <span class="ic">▸</span><span><b>${esc(lv.l)}</b><small>${G(lv.d)}</small>${dis?'<span class="pill on">cal definir el model d\'ingressos</span>':''}</span></button>`;
+  });
+  o+=`<div style="margin-top:14px"><button class="btn" style="width:100%" data-fconfirm="1" ${stt.lever?'':'disabled'}>Confirma la intervenció</button></div>`;
+ }
+
+ if(stt.phase==="result"){
+  const r=stt.res, b=stt.prev, n=stt.st;
+  o+='<div class="res">';
+  o+=`<p>La llista passa de ${nf.format(b.subs)} a ${nf.format(n.subs)} subscriptors i el MRR de ${fmtE(b.mrr)} a ${fmtE(n.mrr)}.</p>`;
+  r.notes.forEach(x=>o+=`<p>${G(x)}</p>`);
+  o+='</div>';
+  o+=`<div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn" data-fresult="1">Continua →</button></div>`;
+ }
+
+ if(stt.phase==="event" && stt.ev){
+  const ev=cs.events.find(x=>x.id===stt.ev);
+  o+=`<section class="step" style="--c:${ev.c}"><div class="meta"><span class="badge">Situació</span><span class="modlab">${esc(ev.mod)}</span></div><h3>${esc(ev.t)}</h3>`;
+  ev.set.forEach(pp=>o+=`<p class="set">${G(pp)}</p>`);
+  o+=`<p class="q">${esc(ev.q)}</p><div class="choices">`;
+  ev.opts.forEach((op,k)=>{
+   o+=`<button class="choice ${stt.epick===k?'picked':''}" data-fepick="${k}"><span class="k">${"ABC"[k]}</span><span>${esc(op.l)}</span></button>`;
+  });
+  o+='</div>';
+  if(stt.epick!==null){
+   o+=`<div class="outcome"><b>Conseqüència</b>${G(ev.opts[stt.epick].o)}</div>`;
+   o+=`<div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn" data-fenext="1">${stt.st.torn>=cs.turns?"Veure el resultat":"Període següent →"}</button></div>`;
+  }
+  o+='</section>';
+ }
+ return o+'</div>';
+}
+
+function renderAlloc(cs){
+ let stt=simGet();
+ if(!stt.st){ stt=allocInit(cs); simAll[caseSel]=stt; }
+ let o='<div class="narrow"><div class="casesel">'+
+  Object.keys(CASES).map(k=>`<button class="cbtn ${k===caseSel?'on':''}" data-case="${k}"><b>${esc(CASES[k].name)}</b><span>${esc(CASES[k].tag)}</span></button>`).join("")+
+  '</div>';
+ o+=`<p class="lead">${G(cs.intro)}</p>`;
+
+ if(stt.done){
+  const end=cs.endings.find(e=>e.cond(stt.st));
+  o+=allocDash(stt.st);
+  o+=`<div class="endcard" style="--c:${end.c}"><div class="tag">${esc(end.tag)}</div><h3>${esc(end.t)}</h3>`;
+  o+='<div class="analysis open">'+end.ps.map(x=>`<p>${G(x)}</p>`).join("")+'</div>';
+  const tot=stt.log.reduce((a,l)=>{for(const k in l)a[k]=(a[k]||0)+l[k];return a;},{});
+  const sum=Object.values(tot).reduce((a,b)=>a+b,0)||1;
+  o+='<div class="delta" style="margin-top:14px">On han anat les teves hores: '+
+   cs.cats.map(c=>esc(c.l)+" <b>"+Math.round((tot[c.id]||0)/sum*100)+"%</b>").join(" · ")+'</div>';
+  o+='<div class="endpath"><button class="btn" data-treset="1">↻ Torna a jugar amb un altre repartiment</button></div></div></div>';
+  return o;
+ }
+
+ const per=cs.periods[stt.st.torn-1];
+ o+=`<div class="turn">Període ${stt.st.torn} de ${cs.turns}${stt.st.jornada!=="docent"?" · jornada "+esc(stt.st.jornada):""}</div>`;
+ o+=`<div class="period" style="--c:var(--est)"><b>${esc(per.n)}</b><small>${G(per.nota)}</small></div>`;
+ o+=allocDash(stt.st);
+
+ if(stt.phase==="alloc"){
+  const bud=budgetOf(cs,stt.st);
+  const used=stt.alloc.prod+stt.alloc.dist+stt.alloc.vend+stt.alloc.mant;
+  o+=`<div class="budget"><span>Hores disponibles aquest període</span><b class="${used>bud?'over':''}">${used} / ${bud} h</b></div>`;
+  cs.cats.forEach(c=>{
+   const v=stt.alloc[c.id];
+   o+=`<div class="alloc" style="--c:${c.c}"><div class="top"><div class="nm"><b>${esc(c.l)}</b><small>${G(c.d)}</small></div>
+    <div class="stp"><button data-alloc="${c.id}" data-d="-1" ${v<=0?'disabled':''}>−</button>
+    <span class="v">${v} h</span>
+    <button data-alloc="${c.id}" data-d="1" ${used>=bud?'disabled':''}>+</button></div></div>
+    <div class="bar"><i style="width:${bud?Math.round(v/bud*100):0}%"></i></div></div>`;
+  });
+  o+=`<div style="margin-top:14px"><button class="btn" style="width:100%" data-aconfirm="1" ${used===0?'disabled':''}>Confirma el repartiment</button></div>`;
+ }
+
+ if(stt.phase==="result"){
+  const r=stt.res, b=stt.prev, n=stt.st;
+  o+='<div class="res">';
+  o+=`<p><b>Han entrat ${nf.format(r.gain)} persones noves a l'audiència</b> i s'han convertit ${nf.format(r.conv)} subscriptors, que sumen ${fmtE(r.newMrr)} de MRR nou. Després d'aplicar un churn del ${nf1.format(n.churn)}%, el MRR passa de ${fmtE(b.mrr)} a ${fmtE(n.mrr)}.</p>`;
+  r.notes.forEach(x=>o+=`<p>${G(x)}</p>`);
+  o+='</div>';
+  let dl=[];
+  if(n.mrr!==b.mrr) dl.push("MRR <b class='"+(n.mrr>b.mrr?"up":"down")+"'>"+(n.mrr>b.mrr?"+":"−")+fmtE(Math.abs(n.mrr-b.mrr))+"</b>");
+  if(n.aud!==b.aud) dl.push("Audiència <b class='"+(n.aud>b.aud?"up":"down")+"'>"+(n.aud>b.aud?"+":"")+nf.format(n.aud-b.aud)+"</b>");
+  if(Math.round(n.energia)!==Math.round(b.energia)) dl.push("Energia <b class='"+(n.energia>b.energia?"up":"down")+"'>"+(n.energia>b.energia?"+":"")+Math.round(n.energia-b.energia)+"</b>");
+  if(n.caixa!==b.caixa) dl.push("Caixa <b class='"+(n.caixa>b.caixa?"up":"down")+"'>"+(n.caixa>b.caixa?"+":"−")+fmtE(Math.abs(n.caixa-b.caixa))+"</b>");
+  if(dl.length) o+=`<div class="delta">${dl.join(" · ")}</div>`;
+  o+=`<div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn" data-aresult="1">Continua →</button></div>`;
+ }
+
+ if(stt.phase==="event" && stt.ev){
+  const ev=cs.events.find(x=>x.id===stt.ev);
+  o+=`<section class="step" style="--c:${ev.c}"><div class="meta"><span class="badge">Situació</span><span class="modlab">${esc(ev.mod)}</span></div><h3>${esc(ev.t)}</h3>`;
+  ev.set.forEach(pp=>o+=`<p class="set">${G(pp)}</p>`);
+  o+=`<p class="q">${esc(ev.q)}</p><div class="choices">`;
+  ev.opts.forEach((op,k)=>{
+   o+=`<button class="choice ${stt.epick===k?'picked':''}" data-epick="${k}"><span class="k">${"ABC"[k]}</span><span>${esc(op.l)}</span></button>`;
+  });
+  o+='</div>';
+  if(stt.epick!==null){
+   o+=`<div class="outcome"><b>Conseqüència</b>${G(ev.opts[stt.epick].o)}</div>`;
+   o+=`<div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn" data-enext="1">${stt.st.torn>=cs.turns?"Veure el resultat":"Període següent →"}</button></div>`;
+  }
+  o+='</section>';
+ }
+ return o+'</div>';
+}
+
 function renderTree(cs){
- let stt=arbreState;
- if(!stt.st){ stt={st:Object.assign({},cs.init,{torn:1}), seen:[], picked:null, log:[], prev:null, done:false}; arbreState=stt; }
+ let stt=simGet();
+ if(!stt.st){ stt={st:Object.assign({},cs.init,{torn:1}), seen:[], picked:null, log:[], prev:null, done:false}; simAll[caseSel]=stt; }
  let o='<div class="narrow"><div class="casesel">'+
   Object.keys(CASES).map(k=>`<button class="cbtn ${k===caseSel?'on':''}" data-case="${k}"><b>${esc(CASES[k].name)}</b><span>${esc(CASES[k].tag)}</span></button>`).join("")+
   '</div>';
@@ -1207,6 +1835,8 @@ function renderTree(cs){
 
 function renderCase(){
  const cs=CASES[caseSel];
+ if(cs.type==="funnel") return renderFunnel(cs);
+ if(cs.type==="alloc") return renderAlloc(cs);
  if(cs.type==="tree"||cs.type==="state") return renderTree(cs);
  let o='<div class="narrow"><div class="casesel">'+
   Object.keys(CASES).map(k=>`<button class="cbtn ${k===caseSel?'on':''}" data-case="${k}"><b>${esc(CASES[k].name)}</b><span>${esc(CASES[k].tag)}</span></button>`).join("")+
@@ -1433,9 +2063,62 @@ document.getElementById("view").addEventListener("click",e=>{
  const m=t.closest("[data-mod]"); if(m){modOpen[m.dataset.mod]=!modOpen[m.dataset.mod];render();return;}
  const cse=t.closest("[data-case]"); if(cse){caseSel=cse.dataset.case;store.set("caseSel",caseSel);render();window.scrollTo(0,0);return;}
  const gg=t.closest("[data-gl]"); if(gg){openGl(gg.dataset.gl);return;}
- const sp=t.closest("[data-spick]"); if(sp){arbreState.picked=+sp.dataset.spick;saveArbre();render();return;}
+ const lv=t.closest("[data-lever]"); if(lv){simGet().lever=lv.dataset.lever;saveArbre();render();return;}
+ const fc=t.closest("[data-fconfirm]"); if(fc){
+  const cs=CASES[caseSel], stt=simGet();
+  stt.log.push(stt.lever); funResolve(cs,stt); stt.phase="result"; saveArbre(); render(); window.scrollTo(0,0); return;
+ }
+ const fr=t.closest("[data-fresult]"); if(fr){
+  const cs=CASES[caseSel], stt=simGet();
+  const ev=cs.events.filter(e=>!stt.seen.includes(e.id)&&(!e.cond||e.cond(stt.st)))[0];
+  if(ev && stt.st.torn<cs.turns){ stt.ev=ev.id; stt.epick=null; stt.phase="event"; }
+  else if(stt.st.torn>=cs.turns){ stt.done=true; }
+  else { stt.st.torn++; stt.lever=null; stt.phase="pick"; }
+  saveArbre(); render(); window.scrollTo(0,0); return;
+ }
+ const fep=t.closest("[data-fepick]"); if(fep){simGet().epick=+fep.dataset.fepick;saveArbre();render();return;}
+ const fen=t.closest("[data-fenext]"); if(fen){
+  const cs=CASES[caseSel], stt=simGet();
+  const ev=cs.events.find(x=>x.id===stt.ev);
+  stt.st=funEv(stt.st, ev.opts[stt.epick].ef||{});
+  stt.seen.push(ev.id); stt.ev=null; stt.epick=null;
+  if(stt.st.torn>=cs.turns){ stt.done=true; } else { stt.st.torn++; stt.lever=null; stt.phase="pick"; }
+  saveArbre(); render(); window.scrollTo(0,0); return;
+ }
+ const al=t.closest("[data-alloc]"); if(al){
+  const cs=CASES[caseSel], stt=simGet(), k=al.dataset.alloc, dd=+al.dataset.d;
+  const bud=budgetOf(cs,stt.st);
+  const used=stt.alloc.prod+stt.alloc.dist+stt.alloc.vend+stt.alloc.mant;
+  if(dd>0 && used>=bud) return;
+  stt.alloc[k]=Math.max(0,stt.alloc[k]+dd); saveArbre(); render(); return;
+ }
+ const ac=t.closest("[data-aconfirm]"); if(ac){
+  const cs=CASES[caseSel], stt=simGet();
+  stt.log.push(Object.assign({},stt.alloc));
+  allocResolve(cs,stt); stt.phase="result"; saveArbre(); render(); window.scrollTo(0,0); return;
+ }
+ const ar=t.closest("[data-aresult]"); if(ar){
+  const cs=CASES[caseSel], stt=simGet();
+  if(stt.st.energia<=0){ stt.done=true; saveArbre(); render(); window.scrollTo(0,0); return; }
+  const ev=pickAllocEvent(cs,stt);
+  if(ev && stt.st.torn<cs.turns){ stt.ev=ev.id; stt.epick=null; stt.phase="event"; }
+  else if(stt.st.torn>=cs.turns){ stt.done=true; }
+  else { stt.st.torn++; stt.alloc={prod:0,dist:0,vend:0,mant:0}; stt.phase="alloc"; }
+  saveArbre(); render(); window.scrollTo(0,0); return;
+ }
+ const ep=t.closest("[data-epick]"); if(ep){simGet().epick=+ep.dataset.epick;saveArbre();render();return;}
+ const en=t.closest("[data-enext]"); if(en){
+  const cs=CASES[caseSel], stt=simGet();
+  const ev=cs.events.find(x=>x.id===stt.ev);
+  stt.st=applyEv(stt.st, ev.opts[stt.epick].ef||{});
+  stt.seen.push(ev.id); stt.ev=null; stt.epick=null;
+  if(stt.st.energia<=0 || stt.st.torn>=cs.turns){ stt.done=true; }
+  else { stt.st.torn++; stt.alloc={prod:0,dist:0,vend:0,mant:0}; stt.phase="alloc"; }
+  saveArbre(); render(); window.scrollTo(0,0); return;
+ }
+ const sp=t.closest("[data-spick]"); if(sp){simGet().picked=+sp.dataset.spick;saveArbre();render();return;}
  const sn=t.closest("[data-snext]"); if(sn){
-  const cs=CASES[caseSel]; const stt=arbreState;
+  const cs=CASES[caseSel]; const stt=simGet();
   const ev=pickEvent(cs,stt.st,stt.seen); const op=ev.opts[stt.picked];
   stt.prev=Object.assign({},stt.st);
   stt.st=stApply(stt.st,op.ef||{});
@@ -1443,14 +2126,14 @@ document.getElementById("view").addEventListener("click",e=>{
   if(stt.st.torn>=cs.turns){ stt.done=true; } else { stt.st.torn++; }
   stt.picked=null; saveArbre(); render(); window.scrollTo(0,0); return;
  }
- const tp=t.closest("[data-tpick]"); if(tp){arbreState.picked=+tp.dataset.tpick;saveArbre();render();return;}
+ 
  const tc=t.closest("[data-tcontinue]"); if(tc){
   const cs=CASES[caseSel]; const nodeId=arbreState.node||cs.root; const node=cs.nodes[nodeId];
   const op=node.opts[arbreState.picked];
   arbreState.path.push({title:node.t, label:op.l});
   arbreState.node=tc.dataset.tcontinue; arbreState.picked=null; saveArbre(); render(); window.scrollTo(0,0); return;
  }
- const tr=t.closest("[data-treset]"); if(tr){arbreState={};saveArbre();render();window.scrollTo(0,0);return;}
+ const tr=t.closest("[data-treset]"); if(tr){simAll[caseSel]={};saveArbre();render();window.scrollTo(0,0);return;}
  const p=t.closest("[data-pick]"); if(p){picks[p.dataset.pick]=+p.dataset.k;store.set("picks",picks);render();return;}
  const a=t.closest("[data-an]"); if(a){anOpen[a.dataset.an]=!anOpen[a.dataset.an];render();return;}
  const d=t.closest("[data-diag]"); if(d){diagOpen[d.dataset.diag]=!diagOpen[d.dataset.diag];render();return;}
